@@ -31,6 +31,9 @@ function User() {
         <strong>Username</strong> {user.username}
       </li>
       <li>
+        <strong>name</strong> {user.name}
+      </li>
+      <li>
         <strong>Email</strong> {user.email}
       </li>
     </ul>

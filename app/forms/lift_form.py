@@ -19,4 +19,4 @@ def lift_exists(form, field):
 class LiftForm(FlaskForm):
     title = StringField('title', validators=[DataRequired(), lift_exists, Length(max=50, message="title must be less than %(max)d characters long")])
     description = StringField('description', validators=[DataRequired(), Length(max=255, message="description must be less than %(max)d characters long")])
-    body_part = SelectField('body part', choices=['shoulders', 'abs', 'arms', 'chest', 'back', 'legs'], validators=[DataRequired()])
+    body_part = SelectField('body part', choices=['Shoulders', 'Abs', 'Arms', 'Chest', 'Back', 'Legs'], validators=[DataRequired()])

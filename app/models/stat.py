@@ -10,7 +10,7 @@ class Stat(db.Model):
     weight = db.Column(db.Integer, nullable=False)
     date = db.Column(db.Date, nullable=False)
     difficulty = db.Column(db.String, nullable=False)
-    notes = db.Column(db.String(255), nullable=False)
+    notes = db.Column(db.String(255))
     lift_id = db.Column(db.Integer, db.ForeignKey('lifts.id'), nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, server_default=db.func.now())
