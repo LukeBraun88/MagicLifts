@@ -79,16 +79,15 @@ export const logoutSessionUser = () => async (dispatch) => {
 
 // Reducer configuration
 
-const reducer = (state = {}, action) => {
+const reducer = (state = {user:null}, action) => {
     let newState;
     switch (action.type) {
         case NORMALIZE_USER_DATA:
-            newState = { ...state, ...action.payload }
+            newState = { ...state, user: action.payload }
             return newState
-        // case REMOVE_USER:
-        //     newState = Object.assign({}, state);
-        //     newState.user = null;
-        //     return newState;
+        case LOGOUT_SESSION_USER:
+            newState = {...state, user: null}
+            return newState
         default:
             return state;
     }
@@ -101,8 +100,7 @@ const reducer = (state = {}, action) => {
 //         case LOGIN_SESSION_USER:
 //             return { user: { ...state.user, ...payload } };
 
-//         case LOGOUT_SESSION_USER:
-//             return { user: { ...state.user, ...payload } };
+//         ;
 
 //         default:
 //             return state;

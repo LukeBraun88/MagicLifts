@@ -9,18 +9,18 @@ export const setCurrentLiftsCreator = (payload) => ({
 });
 
 
-// export const setCurrentLift = ({ liftId }) => async (dispatch) => {
-//   const res = await fetch(
-//     `/api/lift/${liftId}`,
-//     {
-//       method: "GET",
-//     }
-//   );
-//   const { data } = res.data;
+export const setCurrentLifts = ({ bodyPartId }) => async (dispatch) => {
+  const res = await fetch(
+    `/api/body_parts/${bodyPartId}`,
+    {
+      method: "GET",
+    }
+  );
+  const { data } = res.data;
 
-//   dispatch(setCurrentLiftCreator(data));
-//   return data;
-// };
+  dispatch(setCurrentLiftsCreator(data));
+  return data;
+};
 
 
 export const currentLifts = (state = {}, action) => {

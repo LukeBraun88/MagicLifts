@@ -10,7 +10,7 @@ const LogoutButton = ({setAuthenticated}) => {
   const onLogout = async (e) => {
     await logout();
     setAuthenticated(false);
-    // dispatch(logoutSessionUser());
+    dispatch(logoutSessionUser());
     return <Redirect to="/" />
   };
 

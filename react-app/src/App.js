@@ -24,7 +24,7 @@ function App() {
       const user = await authenticate();
       if (!user.errors) {
         setAuthenticated(true);
-        dispatch(sessionActions.setSessionUser(user));
+        dispatch(sessionActions.normalizeUserData(user))
       }
       setLoaded(true);
     })();
