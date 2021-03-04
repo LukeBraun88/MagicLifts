@@ -13,8 +13,8 @@ class User(db.Model, UserMixin):
   created_at = db.Column(db.DateTime, server_default=db.func.now())
   updated_at = db.Column(db.DateTime, server_default=db.func.now())
 
-  _lifts = db.relationship(
-        "Lift", backref="users", cascade="all, delete-orphan")
+  _body_parts = db.relationship(
+        "BodyPart", backref="users", cascade="all, delete-orphan")
 
   @property
   def password(self):
@@ -30,14 +30,14 @@ class User(db.Model, UserMixin):
     return check_password_hash(self.password, password)
 
   @property
-  def lifts(self):
-      return [x.to_dict() for x in self._lifts]
+  def body_parts(self):
+      return [x.to_dict() for x in self._body_parts]
 
   def to_dict(self):
     return {
       "id": self.id,
       "username": self.username,
       "name": self.name,
-      "lifts":self.lifts,
+      "bodyParts":self.body_parts,
       "email": self.email
     }

@@ -1,22 +1,40 @@
 import React, { useState } from "react";
+import {useDispatch} from 'react-redux'
 import { Redirect, useHistory } from "react-router-dom";
 import { login } from "../../services/auth";
+import * as sessionActions from "../../store/reducers/session"
 
 const LoginForm = ({ authenticated, setAuthenticated }) => {
   const [errors, setErrors] = useState([]);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
 
+  let dispatch = useDispatch()
+  let history = useHistory()
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const user = await login(email, password);
+    const user = await login({email, password});
+    sessionActions.normalizeUserData()
     if (!user.errors) {
       setAuthenticated(true);
     } else {
       setErrors(user.errors);
     }
   };
+
+  const onDemoLogin = async (e) => {
+    e.preventDefault();
+    const user = await login({email:"demo@user.com", password:"DemoUser"});
+    if (!user.errors) {
+      await dispatch(sessionActions.normalizeUserData({ id: user["id"] }))
+      setAuthenticated(true);
+    } else {
+      setErrors(user.errors);
+    }
+  };
+
+
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -62,7 +80,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
 
       <div className="buttons-login">
         <button className="login-button" type="submit">LOGIN</button>
-        <button className="login-button" type="submit">DEMO</button>
+          <button className="login-button" type="button" onClick={(e) => onDemoLogin(e)}>DEMO</button>
       </div>
         <div className="errors-login">
           {errors.map((error) => (

@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useParams, Redirect, useHistory } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
-
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import LoginForm from './auth/LoginForm'
 import triangleRightIcon from "../images/icons/triangle-right.png"
 import triangleLeftIcon from "../images/icons/triangle-left.png"
@@ -11,6 +10,9 @@ import triangleUpIcon from "../images/icons/triangle-up.png"
 import loginIcon from "../images/icons/login.png"
 import signupIcon from "../images/icons/signup.png"
 
+import { logout } from "../services/auth.js";
+import { logoutSessionUser } from "../store/reducers/session"
+import * as liftActions from "../store/reducers/lifts"
 
 import deadliftIcon from "../images/icons/deadlift-hollow.png"
 import deadlift_filled from "../images/icons/deadlift-filled.png"
@@ -53,6 +55,26 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
 
   const history = useHistory()
 
+  const user = useSelector((x) => x.session.user)
+  // const userBodyParts = useSelector((x) => x.session.user.bodyParts)
+
+
+  // logout
+  const dispatch = useDispatch();
+  const onLogout = async (e) => {
+    await logout();
+    setAuthenticated(false);
+    // dispatch(logoutSessionUser());
+    return <Redirect to="/" />
+  };
+
+  const goToBodyPart = (lift) => {
+    // dispatch(liftActions.setCurrentLift(lift))
+    // alert(lift)
+    // dispatch(liftActions.setCurrentLiftsCreator(lift))
+    // then history.push to page that displays current lift
+  }
+
   useEffect(() => {
     setMenuHeight(dropdownRef.current?.firstChild.offsetHeight)
   }, [])
@@ -68,7 +90,7 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
       <a href="#" className="menu-item" style={{width: 280}} >
         {props.leftIcon && <span onClick={()=> props.goToLeftMenu && setActiveMenu(props.goToLeftMenu)} className="icon-button">{props.leftIcon}</span>}
         {props.children}
-        {props.rightIcon && <span onClick={() => props.goToRightMenu && setActiveMenu(props.goToRightMenu)}className="icon-right">{props.rightIcon}</span>}
+        {props.rightIcon && <span onClick={() =>{ props.goToRightMenu && setActiveMenu(props.goToRightMenu); props.callFunc && props.callFunc()}}className="icon-right">{props.rightIcon}</span>}
       </a>
     )
   }
@@ -94,6 +116,7 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
 
     <div className="dropdown" style={{height: menuHeight}} ref={dropdownRef}>
         {authenticated ?
+// ----------------------------- AUTHENTICATED --------------------------
       <CSSTransition
         in={activeMenu === 'main'}
         unmountOnExit
@@ -101,6 +124,7 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
         classNames="menu-primary"
         //callback as soon as enter class is added to element
         onEnter={calcDimensions}
+        // onExit={calcDimensions}
         >
           <div className="menu">
         <DropDownItem
@@ -115,11 +139,15 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
       </DropDownItem>
         <DropDownItem
           leftIcon={<img src={logoutIcon} alt="logout" />}
+              rightIcon={<img src={triangleRightIcon} alt="logout are you sure?" />}
+              goToRightMenu="main"
+              callFunc={onLogout}
           ><p className="dropdownitem_text">LOGOUT</p>
       </DropDownItem>
         </div>
       </CSSTransition>
       :
+// ------------------------- UN-AUTHENTICATED ----------------------------
         <CSSTransition
           in={activeMenu === 'main'}
           unmountOnExit
@@ -145,6 +173,7 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
           </div>
         </CSSTransition>
         }
+{/* ----------------------- LIFTS -------------------------------- */}
       <CSSTransition
         in={activeMenu === 'lifts'}
         unmountOnExit
@@ -159,10 +188,17 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
             goToLeftMenu="main"
           ><p className="dropdownitem_text"></p>
       </DropDownItem>
-      <DropDownItem>list lifts here with links</DropDownItem>
+      {/* add showing categories. possibly have a state change when you create a new lift */}
+          {/* {userBodyParts.map((bodyPart) => (
+            <DropDownItem
+              rightIcon={<img src={triangleRightIcon} alt={`go to ${bodyPart.title}`} />}
+              callFunc={()=>goToBodyPart(bodyPart)}
+            ><p className="dropdownitem_text">{bodyPart.title}</p>
+            </DropDownItem>
+          ))} */}
         </div>
       </CSSTransition>
-
+{/* --------------------- LOGIN --------------------------------- */}
       <CSSTransition
         in={activeMenu === 'login'}
         unmountOnExit
@@ -181,7 +217,26 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
       </DropDownItem>
         </div>
       </CSSTransition>
+{/* -------------------------- LOGOUT -------------------------- */}
+      {/* <CSSTransition
+        in={activeMenu === 'logout'}
+        unmountOnExit
+        timeout={500}
+        classNames="menu-secondary"
+        onEnter={calcDimensions}
+        >
+          <div className="menu">
+        <DropDownItem
+          leftIcon={<img src={triangleLeftIcon} alt="back to main menu" />}
+            // rightIcon={<img src={triangleRightIcon} alt="more lifts" />}
+          goToLeftMenu="main"
+          >
+            <LogoutButton setAuthenticated={setAuthenticated}/>
+      </DropDownItem>
+        </div>
+      </CSSTransition> */}
 
+{/* ---------------- SIGNUP ----------------------- */}
       <CSSTransition
         in={activeMenu === 'signup'}
         unmountOnExit

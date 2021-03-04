@@ -10,13 +10,12 @@ const LogoutButton = ({setAuthenticated}) => {
   const onLogout = async (e) => {
     await logout();
     setAuthenticated(false);
-    dispatch(logoutSessionUser());
+    // dispatch(logoutSessionUser());
     return <Redirect to="/" />
   };
 
-  return <Link className="hb_link" to="/" onClick={onLogout}>
-
-    <span className="hb_link_text">Logout</span>
+  return <Link className="link-logout" to="/" onClick={onLogout}>
+    <span className="text-logout">Logout</span>
   </Link>;
 };
 

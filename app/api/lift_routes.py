@@ -1,7 +1,7 @@
 from flask import Blueprint, session, request
 from flask_login import login_required, current_user
 
-from app.models import db, Lift
+from app.models import db, Lift, BodyPart
 from app.forms.lift_form import LiftForm, LiftForm
 
 lift_routes = Blueprint('lifts', __name__)
@@ -25,11 +25,15 @@ def new_lift():
     # 4. If valid then extract useful data from form
     title = form.data['title']
     description = form.data['description']
-    body_part = form.data['body_part']
+    body_part_title = form.data['body_part']
+
+    body_part = BodyPart.query.filter(
+        BodyPart.user_id == user.id,
+        BodyPart.title == body_part_title)
 
     # 5. Create the lift
-    lift = Lift(user_id=user.id, title=title,
-                        description=description, body_part=body_part)
+    lift = Lift(title=title,
+                        description=description, body_part_id=body_part.id)
 
     # 6. Add and commit the lift
     db.session.add(lift)
@@ -40,18 +44,35 @@ def new_lift():
 
 
 # READ LIFTS FOR CURRENT USER
-@lift_routes.route('', methods=['GET'])
-@login_required
-def get_lifts():
-    # 1. gets user from session
-    user = current_user
+# @lift_routes.route('', methods=['GET'])
+# @login_required
+# def get_lifts():
+#     # 1. gets user from session
+#     user = current_user
 
-    # 2. finds lifts based off of user.id
-    user_lifts = Lift.query.filter(
-        Lift.user_id == user.id)
+#     # 2. finds lifts based off of user.id
+#     user_lifts = Lift.query.filter(
+#         Lift.user_id == user.id)
 
-    # 3. returns users lifts
-    return {"message": "success", "data": [lift.to_dict() for lift in user_lifts]}, 200
+#     # 3. returns users lifts
+#     return {"message": "success", "data": [lift.to_dict() for lift in user_lifts]}, 200
+
+# READ CURRENT LIFT FROM ID
+
+
+# @lift_routes.route('/<int:id>', methods=['GET'])
+# @login_required
+# def get_lift_by_id(id):
+#     # 1. gets user from session
+#     user = current_user
+
+#     # 2. finds lifts based off of user.id
+#     current_lift = Lift.query.filter(
+#         Lift.user_id == user.id,
+#         Lift.id == id)
+
+#     # 3. returns users lifts
+#     return {"message": "success", "data": [current_lift.to_dict()]}, 200
 
 
 # UPDATE LIFT
@@ -65,7 +86,13 @@ def update_lift(id):
 
     # 2. find lift by id and add body part
     lift = Lift.query.get(id)
-    form['body_part'].data = lift.body_part
+    body_part_title = form['body_part'].data
+
+    user = current_user
+
+    body_part = BodyPart.query.filter(
+        BodyPart.user_id == user.id,
+        BodyPart.title == body_part_title)
 
     # 3. Validate form data; if invalid return 400 bad request to user
     if not form.validate_on_submit():
@@ -76,6 +103,7 @@ def update_lift(id):
     description = form.data['description']
 
     # 5. update lift title and commit changes to database
+    lift.body_part_id = body_part.id
     lift.title = title
     lift.description = description
     db.session.commit()

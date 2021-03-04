@@ -7,7 +7,7 @@ export const authenticate = async() => {
   return await response.json();
 }
 
-export const login = async (email, password) => {
+export const login = async ({email, password}) => {
   const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
