@@ -14,6 +14,12 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     if (!user.errors) {
       setAuthenticated(true);
     } else {
+      let errorsArray = []
+      for (let key in user.errors){
+        errorsArray.push(user.errors[key].concat("\n"))
+      }
+      console.log()
+      alert(errorsArray.join(","))
       setErrors(user.errors);
     }
   };
@@ -30,15 +36,16 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     return <Redirect to="/" />;
   }
 
+
   return (
-    <form onSubmit={onLogin}>
+    <div className="login-container">
+    <form className="form-login" onSubmit={onLogin}>
+
+        {/* <label htmlFor="email">Email</label> */}
+        <div className="inputs-login">
+
+
       <div>
-        {errors.map((error) => (
-          <div>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
         <input
           name="email"
           type="text"
@@ -47,8 +54,8 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
           onChange={updateEmail}
         />
       </div>
+        {/* <label htmlFor="password">Password</label> */}
       <div>
-        <label htmlFor="password">Password</label>
         <input
           name="password"
           type="password"
@@ -56,9 +63,21 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
           value={password}
           onChange={updatePassword}
         />
-        <button type="submit">Login</button>
       </div>
+
+        </div>
+      <div className="buttons-login">
+        <button className="login-button" type="submit">LOGIN</button>
+        <button className="login-button" type="submit">DEMO</button>
+      </div>
+        <div className="errors-login">
+          {/* {errors.map((error) => (
+            <div>{error}</div>
+          ))} */}
+        </div>
+
     </form>
+    </div>
   );
 };
 

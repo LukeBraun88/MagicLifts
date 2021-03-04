@@ -3,12 +3,16 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
-import NavBar from "./components/NavBar";
+import {NavBar, NavItem, DropDownMenu } from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./services/auth";
 import * as sessionActions from "./store/reducers/session";
+import LandingPage from "./components/LandingPage";
+import triangleDownIcon from "./images/icons/triangle-down.png"
+import {CSSTransition} from 'react-transition-group'
+
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -33,8 +37,18 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar authenticated={authenticated} //this didn't have authenticated. do we need it?
-      setAuthenticated={setAuthenticated} />
+        setAuthenticated={setAuthenticated}>
+
+        <NavItem >
+          <DropDownMenu authenticated={authenticated} //this didn't have authenticated. do we need it?
+            setAuthenticated={setAuthenticated}/>
+      </NavItem>
+
+      </NavBar>
       <Switch>
+        {/* <Route path="/" exact={true}>
+          <LandingPage />
+        </Route> */}
         <Route path="/login" exact={true}>
           <LoginForm
             authenticated={authenticated}

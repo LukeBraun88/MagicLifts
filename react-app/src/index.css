@@ -1,1 +1,236 @@
-/* TODO Add site wide styles */
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier', monospace;
+}
+
+/* global css variables --> custom properties (our theme) */
+
+:root {
+    --bg: #242546;
+    --bg-accent: #484a4d;
+    --text-color: #dadce1;
+    --nav-size: 60px;
+    --border: 1px solid #474a4d;
+    --border-radius: 8px;
+    --speed: 500ms;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.navbar {
+    height: var(--nav-size);
+    background-color: var(--bg);
+    padding: 0 1rem;
+    border-bottom: var(--border);
+}
+
+.navbar-nav {
+    max-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-item {
+    width: calc(var(--nav-size) * 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-button {
+    --button-size: calc(var(--nav-size) * 0.5);
+    width: var(--button-size);
+    height: var(--button-size);
+    background-color: #484a4d;
+    border-radius: 50%;
+    padding: 5px;
+    margin: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 300ms;
+}
+
+.icon-button:hover {
+    filter: brightness(1.6)
+}
+
+.icon-button img {
+    fill: var(--text-color);
+    width: 100%;
+}
+
+.icon-right img {
+    fill: var(--text-color);
+    width: 100%;
+}
+
+.icon-right {
+    margin-left: auto;
+    --button-size: calc(var(--nav-size) * 0.5);
+    width: var(--button-size);
+    height: var(--button-size);
+    background-color: #484a4d;
+    border-radius: 50%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 300ms;
+}
+
+.icon-right:hover {
+    filter: brightness(1.6);
+}
+
+.dropdown {
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    top: 58px;
+    width: 300px;
+    transform: translateX(-45%);
+    background-color: var(--bg);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    overflow: hidden;
+    transition: height var(--speed) ease;
+}
+
+.menu-item {
+    /* height: 50px; */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: var(--border-radius);
+    transition: background var(--speed);
+    padding: 0.5rem;
+}
+
+.menu-item:hover {
+    background-color: #525357;
+}
+
+/*-------- css transitions ------*/
+
+/* when class is active */
+
+.menu-primary-enter {
+    position: absolute;
+    transform: translateX(-110%);
+}
+
+/* after timeout of 500ms */
+
+.menu-primary-enter-active {
+    transform: translateX(0%);
+    transition: all var(--speed) ease;
+}
+
+/* when class deactivates */
+
+.menu-primary-exit {
+    position: absolute;
+}
+
+/* after class deactivates */
+
+.menu-primary-exit-active {
+    transform: translateX(-110%);
+    transition: all var(--speed) ease;
+}
+
+/* when class is active */
+
+.menu-secondary-enter {
+    /* position: absolute; */
+    transform: translateX(110%);
+}
+
+/* after timeout of 500ms */
+
+.menu-secondary-enter-active {
+    transform: translateX(0%);
+    transition: all var(--speed) ease;
+}
+
+/* when class deactivates */
+
+.menu-secondary-exit {
+    /* position: absolute; */
+}
+
+/* after class deactivates */
+
+.menu-secondary-exit-active {
+    transform: translateX(110%);
+    transition: all var(--speed) ease;
+}
+
+.dropdownitem_text {
+    margin-left: 10px;
+}
+
+/* .dropdownitem_text-login {
+    display: border-box;
+    margin-left: 10%;
+    padding:20px 100px 20px 0;
+} */
+
+/* .form-login {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: 200px;
+    /* align-items: center; */
+
+/* justify-content: center;
+} */
+
+.login-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+}
+
+.inputs-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50px;
+}
+
+.form-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+}
+
+.buttons-login {
+    display: flex;
+    justify-content: space-between;
+    width: 165px;
+}
+
+.login-button {
+    padding: 7px;
+    margin: 5px 0px;
+    width: 80px;
+}
+
+
