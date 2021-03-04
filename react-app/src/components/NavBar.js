@@ -106,7 +106,7 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
         <DropDownItem
           leftIcon={<img src={deadliftIcon} alt="lifts" />}
           rightIcon={<img src={triangleRightIcon} alt="more lifts" />}
-          goToLeftMenu="lifts"
+          goToRightMenu="lifts"
         ><p className="dropdownitem_text">LIFTS</p>
       </DropDownItem>
         <DropDownItem
@@ -176,7 +176,8 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
           goToLeftMenu="main"
           >
 
-            <LoginForm />
+            <LoginForm authenticated={authenticated}
+              setAuthenticated={setAuthenticated}/>
       </DropDownItem>
         </div>
       </CSSTransition>
@@ -193,7 +194,8 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
           leftIcon={<img src={triangleLeftIcon} alt="back to main menu" />}
             goToLeftMenu="main"
           >
-            <SignUpForm />
+            <SignUpForm authenticated={authenticated}
+              setAuthenticated={setAuthenticated}/>
       </DropDownItem>
         </div>
       </CSSTransition>

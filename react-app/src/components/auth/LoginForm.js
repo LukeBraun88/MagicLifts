@@ -14,12 +14,6 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     if (!user.errors) {
       setAuthenticated(true);
     } else {
-      let errorsArray = []
-      for (let key in user.errors){
-        errorsArray.push(user.errors[key].concat("\n"))
-      }
-      console.log()
-      alert(errorsArray.join(","))
       setErrors(user.errors);
     }
   };
@@ -64,19 +58,20 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
           onChange={updatePassword}
         />
       </div>
+</div>
 
-        </div>
       <div className="buttons-login">
         <button className="login-button" type="submit">LOGIN</button>
         <button className="login-button" type="submit">DEMO</button>
       </div>
         <div className="errors-login">
-          {/* {errors.map((error) => (
+          {errors.map((error) => (
             <div>{error}</div>
-          ))} */}
-        </div>
+          ))}
 
-    </form>
+        </div>
+          </form>
+
     </div>
   );
 };

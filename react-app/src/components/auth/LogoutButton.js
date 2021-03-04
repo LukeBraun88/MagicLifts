@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { logout } from "../../services/auth";
-
 import { useDispatch } from "react-redux";
 import { logoutSessionUser } from "../../store/reducers/session"
 
@@ -15,9 +14,9 @@ const LogoutButton = ({setAuthenticated}) => {
     return <Redirect to="/" />
   };
 
-  return <Link className="" to="/" onClick={onLogout}>
-    <img src="" alt="logout" />
-    <span className="">Logout</span>
+  return <Link className="hb_link" to="/" onClick={onLogout}>
+
+    <span className="hb_link_text">Logout</span>
   </Link>;
 };
 
