@@ -62,7 +62,6 @@ ul {
 a {
     color: var(--text-color);
     text-decoration: none;
-
 }
 
 .navbar {
@@ -155,7 +154,6 @@ a {
     border-radius: var(--border-radius);
     transition: background var(--speed);
     padding: 0.5rem;
-
 }
 
 .menu-item:hover {
@@ -276,6 +274,8 @@ a {
 /* justify-content: center;
 } */
 
+/* ------------------------ LOG IN ------------------------ */
+
 .login-container {
     display: flex;
     align-items: center;
@@ -315,6 +315,47 @@ a {
 }
 
 .errors-login {
+    width: 165px;
+    /* padding: 0;
+    margin: auto; */
+}
+
+/* ------------------------- SIGN UP -------------------------- */
+
+.signup-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+    height: 250px;
+}
+
+.inputs-signup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 135px;
+}
+
+.form-signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    position: relative;
+    /* left: 10px; */
+}
+
+
+.signup-button {
+    padding: 7px;
+    margin: 7px 0px;
+    width: 80px;
+}
+
+.errors-signup {
     width: 165px;
     /* padding: 0;
     margin: auto; */

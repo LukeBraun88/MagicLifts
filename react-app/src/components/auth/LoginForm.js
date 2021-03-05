@@ -16,8 +16,8 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
   const onLogin = async (e) => {
     e.preventDefault();
     const user = await login({email, password});
-    // sessionActions.normalizeUserData()
     if (!user.errors) {
+      dispatch(sessionActions.toggleMenu(false))
       setAuthenticated(true);
     } else {
       setErrors(user.errors);
@@ -29,8 +29,6 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     const user = await login({email:"demo@user.com", password:"DemoUser"});
     if (!user.errors) {
       dispatch(sessionActions.toggleMenu(false))
-      // await dispatch(sessionActions.normalizeUserData({ id: user["id"] }))
-      // setShowDropDown(false)
       setAuthenticated(true);
     } else {
       setErrors(user.errors);
