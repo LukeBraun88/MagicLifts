@@ -60,19 +60,20 @@ def new_lift():
 # READ CURRENT LIFT FROM ID
 
 
-# @lift_routes.route('/<int:id>', methods=['GET'])
-# @login_required
-# def get_lift_by_id(id):
-#     # 1. gets user from session
-#     user = current_user
+@lift_routes.route('/<int:id>', methods=['GET'])
+@login_required
+def get_lift_by_id(id):
+    # 1. gets user from session
+    user = current_user
 
-#     # 2. finds lifts based off of user.id
-#     current_lift = Lift.query.filter(
-#         Lift.user_id == user.id,
-#         Lift.id == id)
+    # 2. finds lifts based off of user.id
+    current_lift = Lift.query.filter(
+        Lift.id == id)
 
-#     # 3. returns users lifts
-#     return {"message": "success", "data": [current_lift.to_dict()]}, 200
+    print(current_lift, "lift--------------------------")
+
+    # 3. returns users lifts
+    return {"message": "success", "data": [lift.to_dict() for lift in current_lift]}, 200
 
 
 # UPDATE LIFT

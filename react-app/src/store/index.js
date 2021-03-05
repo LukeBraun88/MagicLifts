@@ -3,14 +3,15 @@ import { createStore, combineReducers } from 'redux';
 
 import enhancer from './enhancer';
 import session from './reducers/session';
-import currentLifts from './reducers/lifts';
+import {currentLifts, shownLifts} from './reducers/lifts';
 
 
 
 // Define reducers in root reducer
 const rootReducer = combineReducers({
     session,
-    currentLifts
+    currentLifts,
+    shownLifts
 });
 
 // Store config for export

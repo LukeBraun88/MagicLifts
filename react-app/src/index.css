@@ -148,7 +148,7 @@ a {
 
 .menu-item {
     /* height: 50px; */
-    height: 100%;
+    height: 40px;
     display: flex;
     align-items: center;
     border-radius: var(--border-radius);
@@ -216,8 +216,45 @@ a {
     transition: all var(--speed) ease;
 }
 
+.menu-middle-enter {
+    /* position: absolute; */
+    transform: translateX(110%);
+}
+
+/* after timeout of 500ms */
+
+.menu-middle-enter-active {
+    transform: translateX(0%);
+    transition: all var(--speed) ease;
+}
+
+/* when class deactivates */
+
+.menu-middle-exit {
+    /* position: absolute; */
+}
+
+/* after class deactivates */
+
+/* .menu-middle-exit-active {
+    transform: translateX(110%);
+    transition: all var(--speed) ease;
+} */
+
 .dropdownitem_text {
     margin-left: 10px;
+}
+
+.dropdown_category {
+    color: rgb(168, 31, 31);
+    font-size: 130%;
+}
+
+.line {
+    width: 200px;
+    height: 47px;
+    border-bottom: 1px solid rgb(175, 175, 175);
+    position: absolute;
 }
 
 /* .dropdownitem_text-login {

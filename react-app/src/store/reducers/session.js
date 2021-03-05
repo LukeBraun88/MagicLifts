@@ -14,6 +14,7 @@ const userTemplate = {
     username: null,
     name: null,
     email: null,
+    bodyParts: [],
 };
 
 // Action creators
@@ -79,32 +80,18 @@ export const logoutSessionUser = () => async (dispatch) => {
 
 // Reducer configuration
 
-const reducer = (state = {user:null}, action) => {
+const reducer = (state = {user: userTemplate}, action) => {
     let newState;
     switch (action.type) {
         case NORMALIZE_USER_DATA:
             newState = { ...state, user: action.payload }
             return newState
         case LOGOUT_SESSION_USER:
-            newState = {...state, user: null}
+            newState = {...state, user: userTemplate}
             return newState
         default:
             return state;
     }
 };
-// const reducer = (state = { user: userTemplate }, { type, payload }) => {
-//     switch (type) {
-//         case SET_SESSION_USER:
-//             return { user: { ...state.user, ...payload } };
-
-//         case LOGIN_SESSION_USER:
-//             return { user: { ...state.user, ...payload } };
-
-//         ;
-
-//         default:
-//             return state;
-//     }
-// };
 
 export default reducer;
