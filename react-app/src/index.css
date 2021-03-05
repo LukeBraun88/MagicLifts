@@ -64,6 +64,8 @@ a {
     text-decoration: none;
 }
 
+/* ----------------------------- NAVBAR -------------------------- */
+
 .navbar {
     height: var(--nav-size);
     background-color: var(--bg);
@@ -144,6 +146,7 @@ a {
     padding: 1rem;
     overflow: hidden;
     transition: height var(--speed) ease;
+    z-index: 2;
 }
 
 .menu-item {
@@ -258,23 +261,7 @@ a {
     position: absolute;
 }
 
-/* .dropdownitem_text-login {
-    display: border-box;
-    margin-left: 10%;
-    padding:20px 100px 20px 0;
-} */
-
-/* .form-login {
-    display: flex;
-    flex-direction: column;
-    height: 200px;
-    width: 200px;
-    /* align-items: center; */
-
-/* justify-content: center;
-} */
-
-/* ------------------------ LOG IN ------------------------ */
+/* --------------------------- LOG IN --------------------------- */
 
 .login-container {
     display: flex;
@@ -348,7 +335,6 @@ a {
     /* left: 10px; */
 }
 
-
 .signup-button {
     padding: 7px;
     margin: 7px 0px;
@@ -359,4 +345,41 @@ a {
     width: 165px;
     /* padding: 0;
     margin: auto; */
+}
+
+/*---------------------------- LANDING PAGE -------------------------*/
+
+.landing-background {
+    background-image: url("./images/icons/wallpaper/swirl.jpg");
+    background-size: stretch;
+    height: 100em;
+}
+
+.landing-center {
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+}
+
+/* .landing-container {
+    align-items: center;
+    justify-content: center;
+} */
+
+/* ------------------------------- SHOW STATS ------------------------------- */
+
+/* body {
+    text-align: center;
+} */
+
+.table-container {
+    /* display: flex; */
+    height: 100rem;
+    width: 900px;
+    margin: auto;
+    /* text-align: left; */
+    /* justify-content: center;
+    align-items: center; */
+    /* position: relative;
+    text-align: center; */
 }

@@ -91,8 +91,11 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
     // then history.push to page that displays current lift
   }
 
-  const goToLift = async(id) =>{
-    await dispatch(liftActions.setShownLifts({ liftId: id }))
+  const goToLift = (id) =>{
+    dispatch(liftActions.setShownLifts({ liftId: id }))
+    dispatch(sessionActions.toggleMenu(false))
+    history.push("/show-lift")
+    // return <Redirect to="/show-lift" />
   }
 
 
@@ -183,13 +186,13 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
               leftIcon={<img src={loginIcon} alt="log in" />}
               rightIcon={<img src={triangleRightIcon} alt="login" />}
               goToRightMenu="login"
-            ><Link to="/login" className="dropdownitem_text">LOG IN</Link>
+            ><p className="dropdownitem_text">LOG IN</p>
             </DropDownItem>
             <DropDownItem
               leftIcon={<img src={signupIcon} alt="sign up"/>}
               rightIcon={<img src={triangleRightIcon} alt="signup" />}
               goToRightMenu="signup"
-            ><Link to="/sign-up" className="dropdownitem_text">SIGN UP</Link>
+            ><p className="dropdownitem_text">SIGN UP</p>
 
             </DropDownItem>
           </div>

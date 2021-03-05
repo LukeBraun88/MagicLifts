@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
+import ShowLift from "./components/ShowLift"
 import {NavBar, NavItem, DropDownMenu } from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
@@ -12,7 +13,8 @@ import * as sessionActions from "./store/reducers/session";
 import LandingPage from "./components/LandingPage";
 import triangleDownIcon from "./images/icons/triangle-down.png"
 import {CSSTransition} from 'react-transition-group'
-
+import ReactDataGrid from '@inovua/reactdatagrid-community'
+import '@inovua/reactdatagrid-community/index.css'
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -46,9 +48,9 @@ function App() {
 
       </NavBar>
       <Switch>
-        {/* <Route path="/" exact={true}>
+        <Route path="/welcome" exact={true}>
           <LandingPage />
-        </Route> */}
+        </Route>
         <Route path="/login" exact={true}>
           <LoginForm
             authenticated={authenticated}
@@ -63,6 +65,11 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
+        </ProtectedRoute>
+        <ProtectedRoute path="/show-lift" exact={true} authenticated={authenticated}>
+          <ShowLift>
+            <ReactDataGrid />
+          </ShowLift>
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <h1>My Home Page</h1>

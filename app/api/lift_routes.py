@@ -68,12 +68,10 @@ def get_lift_by_id(id):
 
     # 2. finds lifts based off of user.id
     current_lift = Lift.query.filter(
-        Lift.id == id)
-
-    print(current_lift, "lift--------------------------")
+        Lift.id == id).first()
 
     # 3. returns users lifts
-    return {"message": "success", "data": [lift.to_dict() for lift in current_lift]}, 200
+    return {"message": "success", "data": current_lift.to_dict()}, 200
 
 
 # UPDATE LIFT

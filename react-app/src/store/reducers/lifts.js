@@ -38,7 +38,9 @@ export const setShownLifts = ({ liftId }) => async (dispatch) => {
   );
   let { data } = res.data;
 
-  data = normalizedData(data)
+  // data = normalizedData(data)
+
+  console.log("---------------data:",data)
 
   dispatch(setShownLiftsCreator(data));
   return data;
@@ -57,12 +59,13 @@ export const currentLifts = (state = {}, action) => {
     }
 };
 
-export const shownLifts = (state = {}, action) => {
+// export const shownLifts = (state = {}, action) => {
+export const shownLifts = (state = {lift:null, stats:null}, action) => {
     let newState;
     switch (action.type) {
         case SET_SHOWN_LIFTS:
             // const lifts = normalizedData(...action.payload)
-            newState = { ...action.payload }
+            newState = { lift:action.payload, stats:action.payload.stats }
             return newState;
         default:
             return state;
