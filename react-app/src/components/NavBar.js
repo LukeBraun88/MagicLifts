@@ -13,7 +13,7 @@ import signupIcon from "../images/icons/signup.png"
 import { logout } from "../services/auth.js";
 import { logoutSessionUser } from "../store/reducers/session"
 import * as liftActions from "../store/reducers/lifts"
-
+import * as sessionActions from "../store/reducers/session"
 import deadliftIcon from "../images/icons/deadlift-hollow.png"
 import deadlift_filled from "../images/icons/deadlift-filled.png"
 import bodyIcon from "../images/icons/body.png"
@@ -34,7 +34,12 @@ const NavBar = (props) => {
 
 const NavItem = (props) => {
 
-  const [open, setOpen] = useState(false)
+  // const [open, setOpen] = useState(false)
+  const open = useSelector((x) => (x.session.menu))
+  const dispatch = useDispatch()
+  const setOpen = (val) => {
+    dispatch(sessionActions.toggleMenu(val))
+  }
 
   return (
     <li className="nav-item">
@@ -59,6 +64,7 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
   const user = useSelector((x) => x.session.user)
   const bodyParts = useSelector((x) => Object.values(x.session.user.bodyParts))
   const lifts = useSelector((x) => Object.values(x.currentLifts))
+  const open = useSelector((x) => (x.session.menu))
 
   if (user != null){
 
@@ -68,8 +74,11 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
 
   // logout
   const dispatch = useDispatch();
+
+
   const onLogout = async (e) => {
     await logout();
+    dispatch(sessionActions.toggleMenu(false))
     setAuthenticated(false);
     dispatch(logoutSessionUser());
     return <Redirect to="/" />

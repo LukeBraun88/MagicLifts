@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { Redirect, useHistory } from "react-router-dom";
 import { login } from "../../services/auth";
 import * as sessionActions from "../../store/reducers/session"
@@ -8,6 +8,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
   const [errors, setErrors] = useState([]);
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
+  const user = useSelector((x) => x.session.user)
 
   let dispatch = useDispatch()
   let history = useHistory()
@@ -27,7 +28,9 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     e.preventDefault();
     const user = await login({email:"demo@user.com", password:"DemoUser"});
     if (!user.errors) {
+      dispatch(sessionActions.toggleMenu(false))
       // await dispatch(sessionActions.normalizeUserData({ id: user["id"] }))
+      // setShowDropDown(false)
       setAuthenticated(true);
     } else {
       setErrors(user.errors);

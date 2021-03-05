@@ -7,6 +7,7 @@ const SET_SESSION_USER = "session/setSessionUser";
 const LOGIN_SESSION_USER = "session/loginSessionUser";
 const LOGOUT_SESSION_USER = "session/logoutSessionUser";
 const NORMALIZE_USER_DATA = "session/normalizeUserData";
+const TOGGLE_MENU = "session/toggleMenu";
 
 // State template
 const userTemplate = {
@@ -37,6 +38,13 @@ export const setSessionUser = (payload) => ({
     type: SET_SESSION_USER,
     payload,
 });
+
+export const toggleMenu = (payload) => ({
+    type: TOGGLE_MENU,
+    payload,
+});
+
+
 
 export const normalizeUserData = ({id}) => async (dispatch) => {
     const res = await fetch(
@@ -78,9 +86,14 @@ export const logoutSessionUser = () => async (dispatch) => {
     return;
 };
 
+// const menuTemplate = {
+//     open:true
+// };
+
 // Reducer configuration
 
-const reducer = (state = {user: userTemplate}, action) => {
+const menuDefault = false
+const reducer = (state = {user: userTemplate, menu: menuDefault}, action) => {
     let newState;
     switch (action.type) {
         case NORMALIZE_USER_DATA:
@@ -88,6 +101,9 @@ const reducer = (state = {user: userTemplate}, action) => {
             return newState
         case LOGOUT_SESSION_USER:
             newState = {...state, user: userTemplate}
+            return newState
+        case TOGGLE_MENU:
+            newState = { ...state, menu: action.payload }
             return newState
         default:
             return state;
