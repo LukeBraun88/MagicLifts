@@ -62,6 +62,7 @@ ul {
 a {
     color: var(--text-color);
     text-decoration: none;
+
 }
 
 .navbar {
@@ -148,12 +149,13 @@ a {
 
 .menu-item {
     /* height: 50px; */
-    height: 40px;
+    /* height: 40px; */
     display: flex;
     align-items: center;
     border-radius: var(--border-radius);
     transition: background var(--speed);
     padding: 0.5rem;
+
 }
 
 .menu-item:hover {
@@ -248,11 +250,12 @@ a {
 .dropdown_category {
     color: rgb(168, 31, 31);
     font-size: 130%;
+    /* height: 40px; */
 }
 
 .line {
     width: 200px;
-    height: 47px;
+    height: 35px;
     border-bottom: 1px solid rgb(175, 175, 175);
     position: absolute;
 }

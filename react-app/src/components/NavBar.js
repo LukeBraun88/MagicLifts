@@ -100,10 +100,10 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
   const DropDownItem = (props) => {
 
     return (
-      <a href="#" className="menu-item" style={{width: 280}} >
-        {props.leftIcon && <span onClick={()=> props.goToLeftMenu && setActiveMenu(props.goToLeftMenu)} className="icon-button">{props.leftIcon}</span>}
+      <a className="menu-item" style={{width: 280}} >
+        {props.leftIcon && <a href="#" onClick={()=> props.goToLeftMenu && setActiveMenu(props.goToLeftMenu)} className="icon-button">{props.leftIcon}</a>}
         {props.children}
-        {props.rightIcon && <span onClick={() => { props.callFunc && props.callFunc(); props.goToRightMenu && setActiveMenu(props.goToRightMenu); }}className="icon-right">{props.rightIcon}</span>}
+        {props.rightIcon && <a href="#" onClick={() => { props.callFunc && props.callFunc(); props.goToRightMenu && setActiveMenu(props.goToRightMenu); }}className="icon-right">{props.rightIcon}</a>}
       </a>
     )
   }
