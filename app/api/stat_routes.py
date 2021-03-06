@@ -1,7 +1,7 @@
 from flask import Blueprint, session, request
 from flask_login import login_required, current_user
 
-from app.models import db, Stat
+from app.models import db, Stat, Lift
 from app.forms.stat_form import StatForm
 
 stat_routes = Blueprint('stats', __name__)
@@ -65,6 +65,7 @@ def update_stat(id):
 
     # 1. creates form, adds csrf token
     form = StatForm()
+    # print(form,"form------------")
     form['csrf_token'].data = request.cookies['csrf_token']
 
     # 2. find stat by id and add month and year to form
@@ -76,6 +77,8 @@ def update_stat(id):
 
 
     # 4. update stat commit changes to database
+    print("stat---", form.data['sets'])
+    print("date---", form.data['date'])
     stat.sets = form.data['sets']
     stat.reps = form.data['reps']
     stat.weight = form.data['weight']
@@ -84,8 +87,10 @@ def update_stat(id):
     stat.notes = form.data['notes']
     db.session.commit()
 
+    lift = Lift.query.get(stat.lift_id)
+
     # 5. Return message with updated stat and a 201 response
-    return {"message": "success", "data": stat.to_dict()}, 201
+    return {"message": "success", "data": lift.to_dict()}, 201
 
 
 # DELETE SPECIFIED STAT

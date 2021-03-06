@@ -1,15 +1,66 @@
-import React from "react";
+import React, {useState, useCallback, useEffect} from "react";
 import '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/base.css'
 import '@inovua/reactdatagrid-community/theme/default-dark.css'
 import { useSelector, useDispatch } from 'react-redux';
+import * as liftActions from "../store/reducers/lifts"
 
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 
 function ShowLift({ authenticated }) {
+    const [dataSource, setDataSource] = useState()
     const lift = useSelector((x) => (x.shownLifts.lift))
     const stats = useSelector((x) => (x.shownLifts.stats))
+    const [liftId, setliftId] = useState(0)
 
+    useEffect(()=>{
+        if (stats != null){
+
+            setDataSource(stats)
+            // console.log("------------dataSource:",dataSource)
+        }
+    },[stats])
+
+    useEffect(()=>{
+        console.log("lift", lift)
+    },[])
+
+    const dispatch = useDispatch()
+
+    const onEditComplete = useCallback(({ value, columnId, rowIndex, data }) => {
+        let {id, sets, reps, weight, date, difficulty, notes} = data
+        // console.log("columnId",columnId)
+        if (columnId == "sets"){
+            sets = value
+        } else if (columnId == "reps"){
+            reps = value
+        } else if (columnId == "weight"){
+            weight = value
+        } else if (columnId == "date"){
+            date = value
+        } else if (columnId == "difficulty"){
+            difficulty = value
+        } else if (columnId == "notes"){
+            notes = value
+        }
+        // console.log({
+        //     "id":id,
+        //     "sets":sets,
+        //     "reps": reps,
+        //     "weight":weight,
+        //     "date":date,
+        //     "difficulty":difficulty,
+        //     "notes": notes,
+        // })
+        // console.log({
+        //     "columnId":columnId,
+        //     "value":value
+        // })
+        dispatch(liftActions.updateShownStats({ id, sets, reps, weight, date, difficulty, notes }))
+
+
+
+    }, [dataSource])
 
     const statsExample = [
         {
@@ -67,6 +118,8 @@ function ShowLift({ authenticated }) {
     }
 
 
+
+
     // console.log(lifts)
     // console.log(stats)
     return (
@@ -76,7 +129,9 @@ function ShowLift({ authenticated }) {
             columns={columns}
             dataSource={stats? stats : statsExample}
             style={gridStyle}
-            livePagination={true}
+            livePagination="true"
+            editable="true"
+            onEditComplete={onEditComplete}
         />
         </div>
     )

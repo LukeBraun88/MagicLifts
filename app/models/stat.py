@@ -15,13 +15,17 @@ class Stat(db.Model):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, server_default=db.func.now())
 
+    @property
+    def created_date(self):
+        return self.date.isoformat()
 
     def to_dict(self):
         return {
             "id": self.id,
             "sets": self.sets,
             "reps": self.reps,
-            "date": self.date,
+            "weight": self.weight,
+            "date": self.created_date,
             "difficulty": self.difficulty,
             "notes": self.notes,
             "liftId": self.lift_id,

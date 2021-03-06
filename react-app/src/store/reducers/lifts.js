@@ -14,6 +14,11 @@ export const setShownLiftsCreator = (payload) => ({
   payload,
 });
 
+// export const updateShownLiftsCreator = (payload) => ({
+//   type: UPDATE_SHOWN_LIFTS,
+//   payload,
+// });
+
 
 export const setCurrentLifts = ({ bodyPartId }) => async (dispatch) => {
   const res = await fetch(
@@ -39,12 +44,34 @@ export const setShownLifts = ({ liftId }) => async (dispatch) => {
   let { data } = res.data;
 
   // data = normalizedData(data)
-
-  console.log("---------------data:",data)
+  console.log("-------setting shown lifts------")
 
   dispatch(setShownLiftsCreator(data));
   return data;
 };
+
+
+export const updateShownStats = ({ id, sets, reps, weight, date, difficulty, notes }) => async(dispatch) => {
+  const res = await fetch(
+    `/api/stats/${id}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify({
+        sets: sets,
+        reps: reps,
+        weight: weight,
+        date: date,
+        difficulty:difficulty,
+        notes: notes,
+      }),
+    }
+  );
+
+  let {data} = res.data;
+
+  dispatch(setShownLiftsCreator(data))
+  return data
+}
 
 
 export const currentLifts = (state = {}, action) => {
@@ -67,6 +94,12 @@ export const shownLifts = (state = {lift:null, stats:null}, action) => {
             // const lifts = normalizedData(...action.payload)
             newState = { lift:action.payload, stats:action.payload.stats }
             return newState;
+        // case UPDATE_SHOWN_LIFTS:
+            // const lifts = normalizedData(...action.payload)
+
+            // newState = { lift: action.payload, stats}
+
+            // return newState;
         default:
             return state;
     }
