@@ -12,6 +12,7 @@ function ShowLift({ authenticated }) {
     const [dataSource, setDataSource] = useState()
     const lift = useSelector((x) => (x.shownLifts.lift))
     const stats = useSelector((x) => (x.shownLifts.stats))
+
     const [liftId, setliftId] = useState(0)
 
     const defaultSortInfo = { name: 'date', dir: 1 }
@@ -112,14 +113,14 @@ function ShowLift({ authenticated }) {
         {
             name: 'notes',
             header: 'Notes',
-            defaultFlex: 1,
+            defaultFlex: 2,
         }
 
     ]
 
     const gridStyle = {
         minHeight: 250,
-        theme: "default-dark"
+
 
     }
 
@@ -129,7 +130,9 @@ function ShowLift({ authenticated }) {
     // console.log(lifts)
     // console.log(stats)
     return (
+        <div className="body">
         <div className="table-container">
+            <p className="table-heading">{lift? lift.title : "Example Heading"}</p>
         <ReactDataGrid dataSource={statsExample}
             idProperty="id"
             columns={columns}
@@ -139,7 +142,9 @@ function ShowLift({ authenticated }) {
             livePagination="true"
             editable="true"
             onEditComplete={onEditComplete}
+            theme= "default-dark"
         />
+        </div>
         </div>
     )
 }
