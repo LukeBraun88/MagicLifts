@@ -432,12 +432,19 @@ a {
 .InovuaReactDataGrid__column-header {
     font-size: 2em;
     color: #ffffff;
+    display: flex;
+    /* text-align: center; */
 }
 
 .InovuaReactDataGrid__row {
     font-family: sans-serif;
     color: #ffffff;
     font-size: 1.7em;
+    /* text-align: */
+}
+
+.InovuaReactDataGrid__row--rowheight{
+
 }
 
 .body {

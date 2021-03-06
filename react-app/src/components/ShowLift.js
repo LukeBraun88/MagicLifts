@@ -116,6 +116,7 @@ function ShowLift({ authenticated }) {
             header: 'Difficulty',
             defaultFlex: 1.4,
 
+
         },
         {
             name: 'notes',
@@ -131,7 +132,9 @@ function ShowLift({ authenticated }) {
 
     }
 
-
+    const renderSortTool = (direction, extraProps) => {
+        // return <div className="hidden"></div>
+    }
 
 
     // console.log(lifts)
@@ -146,6 +149,7 @@ function ShowLift({ authenticated }) {
             dataSource={stats? stats : statsExample}
             style={gridStyle}
             defaultSortInfo={defaultSortInfo}
+                    // renderSortTool={renderSortTool}
             livePagination="true"
             editable="true"
             onEditComplete={onEditComplete}
