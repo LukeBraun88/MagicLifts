@@ -88,7 +88,7 @@ a {
 }
 
 .icon-button {
-    --button-size: calc(var(--nav-size) * 0.5);
+    --button-size: calc(var(--nav-size) * 0.6);
     width: var(--button-size);
     height: var(--button-size);
     background-color: #484a4d;
@@ -357,9 +357,13 @@ a {
 /*---------------------------- LANDING PAGE -------------------------*/
 
 .landing-background {
-    background-image: url("./images/icons/wallpaper/swirl.jpg");
-    background-size: stretch;
-    height: 100em;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    background: url('./images/icons/wallpaper/swirl.jpg');
+    background-size: cover;
 }
 
 .landing-center {
@@ -380,10 +384,13 @@ a {
 } */
 
 .table-container {
-    /* display: flex; */
+    display: flex;
+    flex-direction: column;
     /* height: 100rem;
     width: 900px; */
-    max-width: 700px;
+    max-width: 1250px;
+    min-height: 300px;
+    /* max-height: 600px; */
     width: 100%;
     padding: 45px 45px;
     background-color: #ffffff;
@@ -398,7 +405,7 @@ a {
 @import url('https://fonts.googleapis.com/css2?family=Fascinate&family=Kanit:wght@800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fascinate&family=Kanit:wght@800&family=Orbitron&family=Secular+One&display=swap');
 .table-heading {
-    font-size: 2.2em;
+    font-size: 3.5em;
     /* font-weight: ; */
     font-family: 'Orbitron', sans-serif;
     /* font-family: 'Secular One', sans-serif; */
@@ -406,7 +413,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 14px;
+    bottom: 15px;
     position: relative;
     /* font-family: 'Kanit', sans-serif; */
     /* text-align: center; */
@@ -414,6 +421,7 @@ a {
 
 .InovuaReactDataGrid {
     border-radius: 20px;
+    width: 100%;
 }
 
 .InovuaReactDataGrid__header {
@@ -422,14 +430,14 @@ a {
 }
 
 .InovuaReactDataGrid__column-header {
-    font-size: 1.2em;
+    font-size: 2em;
     color: #ffffff;
 }
 
 .InovuaReactDataGrid__row {
     font-family: sans-serif;
     color: #ffffff;
-    font-size: 1.2em;
+    font-size: 1.7em;
 }
 
 .body {
