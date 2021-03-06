@@ -443,9 +443,7 @@ a {
     /* text-align: */
 }
 
-.InovuaReactDataGrid__row--rowheight{
-
-}
+.InovuaReactDataGrid__row--rowheight {}
 
 .body {
     display: flex;
@@ -455,4 +453,29 @@ a {
     align-items: center;
     background: url('./images/icons/wallpaper/swirl.jpg');
     background-size: cover;
+}
+
+.table-plus {
+    position: absolute;
+    top: 25px;
+    left: 50px;
+    cursor: pointer;
+    /* border-radius: 50%; */
+    width: 60px;
+    /* --button-size: calc(var(--nav-size) * 0.6); */
+    /* width: var(--button-size);
+    height: var(--button-size); */
+    background-color: #ffffff;
+    border-radius: 50%;
+    padding: 5px;
+    margin: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 300ms;
+}
+
+.table-plus:hover {
+    background-color: #adadad;
+    /* width: 65px; */
 }

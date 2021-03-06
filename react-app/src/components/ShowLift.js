@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as liftActions from "../store/reducers/lifts"
 import * as sessionActions from "../store/reducers/session"
 
+import plusIcon from "../images/icons/plus.png"
+
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 
 function ShowLift({ authenticated }) {
@@ -35,6 +37,10 @@ function ShowLift({ authenticated }) {
 
     const closeMenu = () => {
         dispatch(sessionActions.toggleMenu(false))
+    }
+
+    const createStat = () =>{
+        
     }
 
 
@@ -143,6 +149,7 @@ function ShowLift({ authenticated }) {
         <div className="body" onClick={()=>closeMenu()}>
         <div className="table-container">
             <p className="table-heading">{lift? lift.title : "Example Heading"}</p>
+                <img className="table-plus" onClick={()=>createStat()} src={plusIcon} alt='add stat' />
         <ReactDataGrid dataSource={statsExample}
             idProperty="id"
             columns={columns}
