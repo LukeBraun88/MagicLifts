@@ -246,8 +246,6 @@ a {
 } */
 
 @import url('https://fonts.googleapis.com/css2?family=Fascinate&family=Kanit:wght@800&family=Secular+One&display=swap');
-
-
 .dropdownitem_text {
     margin-left: 10px;
     color: #e4e4e4;
@@ -398,14 +396,17 @@ a {
 
 @import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fascinate&family=Kanit:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fascinate&family=Kanit:wght@800&family=Orbitron&family=Secular+One&display=swap');
 .table-heading {
-    font-size: 2em;
-    font-family: 'Fascinate', cursive;
+    font-size: 2.2em;
+    /* font-weight: ; */
+    font-family: 'Orbitron', sans-serif;
+    /* font-family: 'Secular One', sans-serif; */
     color: #313943;
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 10px;
+    bottom: 14px;
     position: relative;
     /* font-family: 'Kanit', sans-serif; */
     /* text-align: center; */
@@ -417,15 +418,18 @@ a {
 
 .InovuaReactDataGrid__header {
     border-radius: 20px;
+    font-family: sans-serif;
 }
 
 .InovuaReactDataGrid__column-header {
     font-size: 1.2em;
-    /* color: #ffffff; */
+    color: #ffffff;
 }
 
 .InovuaReactDataGrid__row {
-    /* color: rgb(167, 167, 167); */
+    font-family: sans-serif;
+    color: #ffffff;
+    font-size: 1.2em;
 }
 
 .body {

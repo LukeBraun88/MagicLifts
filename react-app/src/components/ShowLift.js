@@ -32,7 +32,7 @@ function ShowLift({ authenticated }) {
 
     const dispatch = useDispatch()
 
-    
+
     const closeMenu = () => {
         dispatch(sessionActions.toggleMenu(false))
     }
@@ -104,17 +104,17 @@ function ShowLift({ authenticated }) {
         {
             name: 'weight',
             header: 'Weight',
-            defaultFlex: 1,
+            defaultFlex: 1.2,
         },
         {
             name: 'date',
             header: 'Date',
-            defaultFlex: 1,
+            defaultFlex: 1.5,
         },
         {
             name: 'difficulty',
             header: 'Difficulty',
-            defaultFlex: 1,
+            defaultFlex: 1.4,
 
         },
         {
