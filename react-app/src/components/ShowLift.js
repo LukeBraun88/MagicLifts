@@ -2,6 +2,7 @@ import React, {useState, useCallback, useEffect} from "react";
 import '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/base.css'
 import '@inovua/reactdatagrid-community/theme/default-dark.css'
+import NumericEditor from '@inovua/reactdatagrid-community/NumericEditor'
 import { useSelector, useDispatch } from 'react-redux';
 import * as liftActions from "../store/reducers/lifts"
 
@@ -12,6 +13,8 @@ function ShowLift({ authenticated }) {
     const lift = useSelector((x) => (x.shownLifts.lift))
     const stats = useSelector((x) => (x.shownLifts.stats))
     const [liftId, setliftId] = useState(0)
+
+    const defaultSortInfo = { name: 'date', dir: 1 }
 
     useEffect(()=>{
         if (stats != null){
@@ -62,6 +65,8 @@ function ShowLift({ authenticated }) {
 
     }, [dataSource])
 
+
+
     const statsExample = [
         {
             id: 1,
@@ -80,7 +85,7 @@ function ShowLift({ authenticated }) {
             name: 'sets',
             header: 'Sets',
             defaultFlex: 1,
-            header: 'Sets'
+            header: 'Sets',
         },
         {
             name: 'reps',
@@ -102,6 +107,7 @@ function ShowLift({ authenticated }) {
             name: 'difficulty',
             header: 'Difficulty',
             defaultFlex: 1,
+
         },
         {
             name: 'notes',
@@ -129,6 +135,7 @@ function ShowLift({ authenticated }) {
             columns={columns}
             dataSource={stats? stats : statsExample}
             style={gridStyle}
+            defaultSortInfo={defaultSortInfo}
             livePagination="true"
             editable="true"
             onEditComplete={onEditComplete}
