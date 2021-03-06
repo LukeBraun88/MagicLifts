@@ -5,6 +5,7 @@ import '@inovua/reactdatagrid-community/theme/default-dark.css'
 import NumericEditor from '@inovua/reactdatagrid-community/NumericEditor'
 import { useSelector, useDispatch } from 'react-redux';
 import * as liftActions from "../store/reducers/lifts"
+import * as sessionActions from "../store/reducers/session"
 
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 
@@ -30,6 +31,12 @@ function ShowLift({ authenticated }) {
     },[])
 
     const dispatch = useDispatch()
+
+    
+    const closeMenu = () => {
+        dispatch(sessionActions.toggleMenu(false))
+    }
+
 
     const onEditComplete = useCallback(({ value, columnId, rowIndex, data }) => {
         let {id, sets, reps, weight, date, difficulty, notes} = data
@@ -130,7 +137,7 @@ function ShowLift({ authenticated }) {
     // console.log(lifts)
     // console.log(stats)
     return (
-        <div className="body">
+        <div className="body" onClick={()=>closeMenu()}>
         <div className="table-container">
             <p className="table-heading">{lift? lift.title : "Example Heading"}</p>
         <ReactDataGrid dataSource={statsExample}

@@ -44,7 +44,7 @@ code {
 /* global css variables --> custom properties (our theme) */
 
 :root {
-    --bg: #242546;
+    --bg: #313943;
     --bg-accent: #484a4d;
     --text-color: #dadce1;
     --nav-size: 60px;
@@ -137,7 +137,8 @@ a {
     position: absolute;
     align-items: center;
     justify-content: center;
-    top: 58px;
+    top: 57px;
+    right: -135px;
     width: 300px;
     transform: translateX(-45%);
     background-color: var(--bg);
@@ -244,13 +245,21 @@ a {
     transition: all var(--speed) ease;
 } */
 
+@import url('https://fonts.googleapis.com/css2?family=Fascinate&family=Kanit:wght@800&family=Secular+One&display=swap');
+
+
 .dropdownitem_text {
     margin-left: 10px;
+    color: #e4e4e4;
+    font-size: 120%;
+    /* font-family: 'Kanit', sans-serif; */
+    font-family: 'Secular One', sans-serif;
 }
 
 .dropdown_category {
-    color: rgb(168, 31, 31);
-    font-size: 130%;
+    color: #34c0b9;
+    font-size: 160%;
+    font-family: 'Kanit', sans-serif;
     /* height: 40px; */
 }
 
@@ -392,7 +401,7 @@ a {
 .table-heading {
     font-size: 2em;
     font-family: 'Fascinate', cursive;
-    color: #000000;
+    color: #313943;
     display: flex;
     justify-content: center;
     align-items: center;
