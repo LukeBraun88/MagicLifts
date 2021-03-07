@@ -2,7 +2,6 @@ import React, {useState, useCallback, useEffect} from "react";
 import '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/base.css'
 import '@inovua/reactdatagrid-community/theme/default-dark.css'
-import NumericEditor from '@inovua/reactdatagrid-community/NumericEditor'
 import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom'
 import * as liftActions from "../store/reducers/lifts"

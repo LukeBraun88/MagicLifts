@@ -15,6 +15,7 @@ import { logoutSessionUser } from "../store/reducers/session"
 import * as liftActions from "../store/reducers/lifts"
 import * as sessionActions from "../store/reducers/session"
 import deadliftIcon from "../images/icons/deadlift-hollow.png"
+import chartIcon from "../images/icons/chart3.png"
 import deadlift_filled from "../images/icons/deadlift-filled.png"
 import bodyIcon from "../images/icons/body.png"
 import logoutIcon from "../images/icons/logout.png"
@@ -98,6 +99,12 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
     // return <Redirect to="/show-lift" />
   }
 
+  const goToCharts = () =>{
+    dispatch(sessionActions.toggleMenu(false))
+    history.push("/chart")
+    // return <Redirect to="/show-lift" />
+  }
+
   const createLift = () =>{
     dispatch(sessionActions.toggleMenu(false))
     history.push("/create-lift")
@@ -165,6 +172,12 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
           rightIcon={<img src={triangleRightIcon} alt="more bodyParts" />}
           goToRightMenu="bodyParts"
         ><p className="dropdownitem_text">LIFTS</p>
+      </DropDownItem>
+        <DropDownItem
+          leftIcon={<img src={chartIcon} alt="body" />}
+          rightIcon={<img src={triangleRightIcon} alt="charts" />}
+          callFunc={goToCharts}
+          ><p className="dropdownitem_text">CHART</p>
       </DropDownItem>
         <DropDownItem
           leftIcon={<img src={bodyIcon} alt="body" />}

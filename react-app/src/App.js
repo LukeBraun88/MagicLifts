@@ -6,6 +6,7 @@ import SignUpForm from "./components/auth/SignUpForm";
 import ShowLift from "./components/ShowLift"
 import CreateStat from "./components/CreateStat"
 import CreateLift from "./components/CreateLift"
+import Chart from "./components/Chart"
 import {NavBar, NavItem, DropDownMenu } from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
@@ -78,6 +79,9 @@ function App() {
           <ShowLift>
             <ReactDataGrid />
           </ShowLift>
+        </ProtectedRoute>
+        <ProtectedRoute path="/chart" exact={true} authenticated={authenticated}>
+          <Chart />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <h1>My Home Page</h1>
