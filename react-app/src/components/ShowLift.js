@@ -9,6 +9,7 @@ import * as liftActions from "../store/reducers/lifts"
 import * as sessionActions from "../store/reducers/session"
 
 import plusIcon from "../images/icons/plus.png"
+import minusIcon from "../images/icons/minus.png"
 
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 
@@ -32,7 +33,7 @@ function ShowLift({ authenticated }) {
     },[stats])
 
     useEffect(()=>{
-        // dispatch(sessionActions.normalizeUserData({ id: user.id }))
+        //
     },[])
 
     const dispatch = useDispatch()
@@ -44,6 +45,12 @@ function ShowLift({ authenticated }) {
 
     const createStat = () =>{
         history.push("/create-stat")
+    }
+
+    const deleteLift = async() =>{
+        await dispatch(liftActions.deleteLift({liftId: lift.id}))
+        await dispatch(sessionActions.normalizeUserData({ id: user.id }))
+        await history.push("/welcome")
     }
 
 
@@ -153,6 +160,7 @@ function ShowLift({ authenticated }) {
         <div className="table-container">
             <p className="table-heading">{lift? lift.title : "Example Heading"}</p>
                 <img className="table-plus" onClick={()=>createStat()} src={plusIcon} alt='add stat' />
+                <img className="table-minus" onClick={()=>deleteLift()} src={minusIcon} alt='delete stat' />
         <ReactDataGrid dataSource={statsExample}
             idProperty="id"
             columns={columns}

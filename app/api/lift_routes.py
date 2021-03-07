@@ -115,6 +115,7 @@ def update_lift(id):
 @lift_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_lift(id):
+    print("-------------id:", id)
     # 1. Find lift by id
     lift = Lift.query.get(id)
     liftId = lift.id

@@ -65,7 +65,7 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
   const bodyParts = useSelector((x) => Object.values(x.session.user.bodyParts))
   const lifts = useSelector((x) => Object.values(x.currentLifts))
   const open = useSelector((x) => (x.session.menu))
-  
+
   if (user != null){
 
   }

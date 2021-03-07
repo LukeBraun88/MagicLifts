@@ -21,8 +21,9 @@ const CreateLift = ({ authenticated }) => {
         dispatch(sessionActions.toggleMenu(false))
     }
 
-    const goBack = () => {
-        history.back()
+    const goBack = async () => {
+        window.history.back()
+        window.history.back()
     }
 
 

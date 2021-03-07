@@ -71,6 +71,19 @@ export const createLift = ({ title, description, bodyPart }) => async (dispatch)
   dispatch(setShownLiftsCreator(data));
   return data;
 };
+export const deleteLift = ({ liftId }) => async (dispatch) => {
+  console.log("deleting lift:", liftId)
+  const res = await fetch(
+    `/api/lifts/${liftId}`,
+    {
+      method: "DELETE"
+    }
+  );
+  let { data } = res.data;
+    console.log("deleted----heres id:", data)
+  dispatch(setShownLiftsCreator(data));
+  return data;
+};
 
 
 export const updateShownStats = ({ id, sets, reps, weight, date, difficulty, notes }) => async(dispatch) => {
@@ -141,11 +154,13 @@ export const shownLifts = (state = {lift:null, stats:null}, action) => {
             newState = { lift:action.payload, stats:action.payload.stats }
             return newState;
         // case UPDATE_SHOWN_LIFTS:
-            // const lifts = normalizedData(...action.payload)
+        //     const lifts = normalizedData(...action.payload)
 
-            // newState = { lift: action.payload, stats}
+        //     newState = { lift: action.payload, stats}
 
-            // return newState;
+        //     return newState;
+        // case DELETE_SHOWN_LIFTS:
+
         default:
             return state;
     }
