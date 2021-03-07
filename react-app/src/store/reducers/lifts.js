@@ -3,6 +3,7 @@ import { normalizedData } from "../../services/normalize_data";
 
 const SET_CURRENT_LIFTS = "lifts/setCurrentLifts";
 const SET_SHOWN_LIFTS = "lifts/setShownLifts";
+const DELETE_SHOWN_LIFTS = "lifts/deleteShownLifts";
 // const CREATE_STAT = "stats/createStat";
 
 export const setCurrentLiftsCreator = (payload) => ({
@@ -12,6 +13,11 @@ export const setCurrentLiftsCreator = (payload) => ({
 
 export const setShownLiftsCreator = (payload) => ({
   type: SET_SHOWN_LIFTS,
+  payload,
+});
+
+export const deleteShownLiftsCreator = (payload) => ({
+  type: DELETE_SHOWN_LIFTS,
   payload,
 });
 
@@ -71,6 +77,7 @@ export const createLift = ({ title, description, bodyPart }) => async (dispatch)
   dispatch(setShownLiftsCreator(data));
   return data;
 };
+
 export const deleteLift = ({ liftId }) => async (dispatch) => {
   console.log("deleting lift:", liftId)
   const res = await fetch(
@@ -81,7 +88,7 @@ export const deleteLift = ({ liftId }) => async (dispatch) => {
   );
   let { data } = res.data;
     console.log("deleted----heres id:", data)
-  dispatch(setShownLiftsCreator(data));
+  dispatch(deleteShownLiftsCreator(data));
   return data;
 };
 
@@ -159,7 +166,9 @@ export const shownLifts = (state = {lift:null, stats:null}, action) => {
         //     newState = { lift: action.payload, stats}
 
         //     return newState;
-        // case DELETE_SHOWN_LIFTS:
+        case DELETE_SHOWN_LIFTS:
+            newState = { lift: "deleted", stats: null }
+            return newState;
 
         default:
             return state;

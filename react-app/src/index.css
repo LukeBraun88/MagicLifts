@@ -598,3 +598,43 @@ select {
 .InovuaReactDataGrid__cell--user-select-text {
     font-size: 50px;
 }
+
+.lift-delete {
+    display: flex;
+    flex-direction: column;
+    /* height: 100rem;
+    width: 900px; */
+    /* max-width: 20px; */
+    /* width: 400px;
+    height:  */
+    /* min-height: 20vh;
+    max-height: 20vh; */
+    ;
+    /* max-height: 600px; */
+    width: 400px;
+    height: 300px;;
+    padding: 45px 45px;
+    background-color: #ffffff;
+    align-items: center;
+    border-radius: 30px;
+    position: relative;
+    text-align: center;
+    justify-content: center;
+    top: -5%;
+}
+
+.lift-delete-text {
+    font-size: 3.5em;
+    /* font-weight: ; */
+    font-family: 'Orbitron', sans-serif;
+    /* font-family: 'Secular One', sans-serif; */
+    color: #313943;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    bottom: 15px;
+    position: relative;
+    /* font-family: 'Kanit', sans-serif; */
+    /* text-align: center; */
+}

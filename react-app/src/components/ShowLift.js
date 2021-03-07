@@ -18,6 +18,7 @@ function ShowLift({ authenticated }) {
     const lift = useSelector((x) => (x.shownLifts.lift))
     const stats = useSelector((x) => (x.shownLifts.stats))
     const user = useSelector((x) => x.session.user)
+    const [deleted, setDeleted] =useState(false)
     const [liftId, setliftId] = useState(0)
 
     const defaultSortInfo = { name: 'date', dir: 1 }
@@ -32,8 +33,10 @@ function ShowLift({ authenticated }) {
         }
     },[stats])
 
+
+
     useEffect(()=>{
-        //
+
     },[])
 
     const dispatch = useDispatch()
@@ -48,9 +51,9 @@ function ShowLift({ authenticated }) {
     }
 
     const deleteLift = async() =>{
+        // await setDeleted(true)
         await dispatch(liftActions.deleteLift({liftId: lift.id}))
         await dispatch(sessionActions.normalizeUserData({ id: user.id }))
-        await history.push("/welcome")
     }
 
 
@@ -156,7 +159,10 @@ function ShowLift({ authenticated }) {
     // console.log(lifts)
     // console.log(stats)
     return (
+        <>
+
         <div className="body" onClick={()=>closeMenu()}>
+                {lift !== "deleted" ?
         <div className="table-container">
             <p className="table-heading">{lift? lift.title : "Example Heading"}</p>
                 <img className="table-plus" onClick={()=>createStat()} src={plusIcon} alt='add stat' />
@@ -174,7 +180,13 @@ function ShowLift({ authenticated }) {
             theme= "default-dark"
         />
         </div>
+        :
+        <div className="lift-delete">
+            <p className="lift-delete-text">LIFT DELETED</p>
         </div>
+        }
+        </div>
+        </>
     )
 }
 
