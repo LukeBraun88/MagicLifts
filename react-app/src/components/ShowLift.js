@@ -16,7 +16,7 @@ function ShowLift({ authenticated }) {
     const [dataSource, setDataSource] = useState()
     const lift = useSelector((x) => (x.shownLifts.lift))
     const stats = useSelector((x) => (x.shownLifts.stats))
-
+    const user = useSelector((x) => x.session.user)
     const [liftId, setliftId] = useState(0)
 
     const defaultSortInfo = { name: 'date', dir: 1 }
@@ -32,7 +32,7 @@ function ShowLift({ authenticated }) {
     },[stats])
 
     useEffect(()=>{
-        console.log("lift", lift)
+        // dispatch(sessionActions.normalizeUserData({ id: user.id }))
     },[])
 
     const dispatch = useDispatch()

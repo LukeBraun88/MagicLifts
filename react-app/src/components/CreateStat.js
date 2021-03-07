@@ -96,10 +96,12 @@ const CreateStat = ({ authenticated }) => {
                             name="difficulty"
                             // type="text"
                             // placeholder="
+                            value={difficulty}
                             onChange={(e) => setDifficulty(e.target.value)}>
+                            <option disabled="true" value="">------ choose option ------</option>
                             <option value="easy">easy</option>
-                            <option value="easy">medium</option>
-                            <option value="easy">hard</option>
+                            <option value="medium">medium</option>
+                            <option value="hard">hard</option>
                             </select>
                     </div>
                     <label for="notes">NOTES</label>

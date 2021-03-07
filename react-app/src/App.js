@@ -5,6 +5,7 @@ import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import ShowLift from "./components/ShowLift"
 import CreateStat from "./components/CreateStat"
+import CreateLift from "./components/CreateLift"
 import {NavBar, NavItem, DropDownMenu } from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
@@ -69,6 +70,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/create-stat" exact={true} authenticated={authenticated}>
           <CreateStat />
+        </ProtectedRoute>
+        <ProtectedRoute path="/create-lift" exact={true} authenticated={authenticated}>
+          <CreateLift />
         </ProtectedRoute>
         <ProtectedRoute path="/show-lift" exact={true} authenticated={authenticated}>
           <ShowLift>

@@ -29,11 +29,11 @@ def new_lift():
 
     body_part = BodyPart.query.filter(
         BodyPart.user_id == user.id,
-        BodyPart.title == body_part_title)
+        BodyPart.title == body_part_title).first()
 
     # 5. Create the lift
     lift = Lift(title=title,
-                        description=description, body_part_id=body_part.id)
+        description=description, body_part_id=body_part.id)
 
     # 6. Add and commit the lift
     db.session.add(lift)

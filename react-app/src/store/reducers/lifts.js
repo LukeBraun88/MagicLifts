@@ -49,8 +49,24 @@ export const setShownLifts = ({ liftId }) => async (dispatch) => {
   );
   let { data } = res.data;
 
-  // data = normalizedData(data)
-  console.log("-------setting shown lifts------")
+  dispatch(setShownLiftsCreator(data));
+  return data;
+};
+
+export const createLift = ({ title, description, bodyPart }) => async (dispatch) => {
+  console.log("bodyPart:", bodyPart)
+  const res = await fetch(
+    `/api/lifts`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        body_part: bodyPart,
+      }),
+    }
+  );
+  let { data } = res.data;
 
   dispatch(setShownLiftsCreator(data));
   return data;

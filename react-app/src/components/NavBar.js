@@ -65,7 +65,7 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
   const bodyParts = useSelector((x) => Object.values(x.session.user.bodyParts))
   const lifts = useSelector((x) => Object.values(x.currentLifts))
   const open = useSelector((x) => (x.session.menu))
-
+  
   if (user != null){
 
   }
@@ -97,6 +97,14 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
     history.push("/show-lift")
     // return <Redirect to="/show-lift" />
   }
+
+  const createLift = () =>{
+    dispatch(sessionActions.toggleMenu(false))
+    history.push("/create-lift")
+    // return <Redirect to="/show-lift" />
+  }
+
+
 
 
   useEffect(() => {
@@ -210,9 +218,10 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
           <div className="menu">
         <DropDownItem
           leftIcon={<img src={triangleLeftIcon} alt="back to main menu" />}
-        // rightIcon={<img src={triangleRightIcon} alt="more lifts"/>}
-            goToLeftMenu="main"
-          ><p className="dropdownitem_text dropdown_category"></p>
+          rightIcon={<img src={triangleRightIcon} alt="create lift"/>}
+          goToLeftMenu="main"
+          callFunc={() => createLift()}
+          ><p className="dropdownitem_text dropdown_category">CREATE LIFT</p>
       </DropDownItem>
       {/* add showing categories. possibly have a state change when you create a new lift */}
           {user != null && bodyParts.map((bodyPart) => (
