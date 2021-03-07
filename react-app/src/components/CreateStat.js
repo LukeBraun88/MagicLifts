@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useHistory } from "react-router-dom";
-import * as sessionActions from "../../store/reducers/session"
+import * as liftActions from "../store/reducers/lifts"
+import * as sessionActions from "../store/reducers/session"
 
-const CreateStat = ({ authenticated, setAuthenticated }) => {
+const CreateStat = ({ authenticated }) => {
+    const [errors, setErrors] = useState([])
     const [sets, setSets] = useState(0);
     let [reps, setReps] = useState(0);
     let [weight, setWeight] = useState(0);
@@ -13,40 +15,62 @@ const CreateStat = ({ authenticated, setAuthenticated }) => {
 
 
     const user = useSelector((x) => x.session.user)
-
+    const lift = useSelector((x) => (x.shownLifts.lift))
+    const stats = useSelector((x) => (x.shownLifts.stats))
     let dispatch = useDispatch()
     let history = useHistory()
 
+    const closeMenu = () => {
+        dispatch(sessionActions.toggleMenu(false))
+    }
+
+    const goBack = () => {
+        history.push("/show-lift")
+    }
+
+
+
     const onCreateStat = async (e) => {
         e.preventDefault();
-        const user = await login({ email: "demo@user.com", password: "DemoUser" });
-        if (!user.errors) {
-            dispatch(sessionActions.toggleMenu(false))
-            setAuthenticated(true);
-        } else {
-            setErrors(user.errors);
+        try {
+            await dispatch(liftActions.createStat({ sets, reps, weight, date, difficulty, notes, liftId:lift.id }))
+            await dispatch(liftActions.setShownLifts({liftId: lift.id}))
+            await history.push("/show-lift")
+
+        } catch (err) {
+            setErrors(err);
         }
     };
 
 
     return (
-        <div className="login-container">
-            <form className="form-login" onSubmit={onCreateStat}>
+        <div className="body" onClick={() => closeMenu()}>
+        <div className="stat-create_container">
+                <p className="table-heading">{lift ? lift.title : "Example Heading"}</p>
+            <form className="stat-create_form" onSubmit={onCreateStat}>
 
                 {/* <label htmlFor="email">Email</label> */}
-                <div className="inputs-login">
-
-
+                <div className="stat-create_inputs">
+                    <label for="date">DATE</label>
+                    <div>
+                        <input
+                            name="date"
+                            type="date"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
+                        />
+                    </div>
+                    <label for="sets">SETS</label>
                     <div>
                         <input
                             name="sets"
-                            type="text"
-                            placeholder="Sets"
+                            type="number"
+                            placeholder="sets"
                             value={sets}
                             onChange={(e)=>setSets(e.target.value)}
                         />
                     </div>
-                    {/* <label htmlFor="password">Password</label> */}
+                    <label for="reps">REPS</label>
                     <div>
                         <input
                             name="reps"
@@ -56,6 +80,7 @@ const CreateStat = ({ authenticated, setAuthenticated }) => {
                             onChange={(e) => setReps(e.target.value)}
                         />
                     </div>
+                    <label for="weight">WEIGHT</label>
                     <div>
                         <input
                             name="weight"
@@ -65,39 +90,35 @@ const CreateStat = ({ authenticated, setAuthenticated }) => {
                             onChange={(e) => setWeight(e.target.value)}
                         />
                     </div>
+                    <label for="difficulty">DIFFICULTY</label>
                     <div>
-                        <input
-                            name="date"
-                            type="date"
-                            placeholder="Date"
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <input
+                        <select
                             name="difficulty"
-                            type="text"
-                            placeholder="Difficulty"
-                            value={difficulty}
-                            onChange={(e) => setDifficulty(e.target.value)}
-                        />
+                            // type="text"
+                            // placeholder="
+                            onChange={(e) => setDifficulty(e.target.value)}>
+                            <option value="easy">easy</option>
+                            <option value="easy">medium</option>
+                            <option value="easy">hard</option>
+                            </select>
                     </div>
+                    <label for="notes">NOTES</label>
                     <div>
                         <input
                             name="notes"
                             type="text"
-                            placeholder="Notes"
+                            placeholder=""
                             value={notes}
                             onChange={(e) => setNotes(e.target.value)}
                         />
                     </div>
                 </div>
 
-                <div className="buttons-login">
-                    <button className="login-button" type="submit">Create</button>
+                <div className="stat-create_buttons">
+                    <button className="stat-back_button" type="button" onClick={()=>goBack()}>Back</button>
+                    <button className="stat-create_button" type="submit">Create</button>
                 </div>
-                <div className="errors-login">
+                <div className="stat-create_errors">
                     {errors.map((error) => (
                         <div>{error}</div>
                     ))}
@@ -105,6 +126,7 @@ const CreateStat = ({ authenticated, setAuthenticated }) => {
                 </div>
             </form>
 
+        </div>
         </div>
     );
 };

@@ -6,7 +6,7 @@ from app.forms.stat_form import StatForm
 
 stat_routes = Blueprint('stats', __name__)
 
-# CREATE NEW STAT
+# ----------------------------------CREATE NEW STAT--------------------------------
 @stat_routes.route('', methods=['POST'])
 @login_required
 def new_stat():
@@ -17,6 +17,8 @@ def new_stat():
     form = StatForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     lift_id = request.json['lift_id']
+
+
     # 3. Validate form data; if invalid return 400 bad request to user
     if not form.validate_on_submit():
         return {"message": "validation_errors", "data": form.errors}, 400
@@ -39,11 +41,13 @@ def new_stat():
     db.session.add(stat)
     db.session.commit()
 
+    lift = Lift.query.get(lift_id)
+
     # 7. Send 201 response to the user
-    return {"message": "success", "data": stat.to_dict()}, 201
+    return {"message": "success", "data": lift.to_dict()}, 201
 
 
-# READ STATS FOR CURRENT USER
+# -------------------------------READ STATS FOR CURRENT USER--------------------------
 @stat_routes.route('', methods=['GET'])
 @login_required
 def get_stats():

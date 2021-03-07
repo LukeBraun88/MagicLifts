@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import ShowLift from "./components/ShowLift"
+import CreateStat from "./components/CreateStat"
 import {NavBar, NavItem, DropDownMenu } from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
@@ -65,6 +66,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
+        </ProtectedRoute>
+        <ProtectedRoute path="/create-stat" exact={true} authenticated={authenticated}>
+          <CreateStat />
         </ProtectedRoute>
         <ProtectedRoute path="/show-lift" exact={true} authenticated={authenticated}>
           <ShowLift>

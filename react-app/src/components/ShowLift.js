@@ -4,6 +4,7 @@ import '@inovua/reactdatagrid-community/base.css'
 import '@inovua/reactdatagrid-community/theme/default-dark.css'
 import NumericEditor from '@inovua/reactdatagrid-community/NumericEditor'
 import { useSelector, useDispatch } from 'react-redux';
+import {useHistory} from 'react-router-dom'
 import * as liftActions from "../store/reducers/lifts"
 import * as sessionActions from "../store/reducers/session"
 
@@ -19,6 +20,8 @@ function ShowLift({ authenticated }) {
     const [liftId, setliftId] = useState(0)
 
     const defaultSortInfo = { name: 'date', dir: 1 }
+
+    const history = useHistory()
 
     useEffect(()=>{
         if (stats != null){
@@ -40,7 +43,7 @@ function ShowLift({ authenticated }) {
     }
 
     const createStat = () =>{
-        
+        history.push("/create-stat")
     }
 
 
@@ -155,7 +158,7 @@ function ShowLift({ authenticated }) {
             columns={columns}
             dataSource={stats? stats : statsExample}
             style={gridStyle}
-            defaultSortInfo={defaultSortInfo}
+            defaultSortInfo={{name: 'date',dir:-1}}
                     // renderSortTool={renderSortTool}
             livePagination="true"
             editable="true"
