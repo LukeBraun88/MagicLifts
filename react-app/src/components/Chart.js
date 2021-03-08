@@ -83,8 +83,8 @@ const Chart = ({ authenticated }) => {
             ...theme,
             colors: {
                 ...theme.colors,
-                primary25: 'aquamarine',
-                primary: 'aquamarine'
+                primary25: '#34c0b9',
+                primary: '#34c0b9'
             },
 
         }

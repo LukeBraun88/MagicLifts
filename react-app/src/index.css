@@ -175,22 +175,24 @@ a {
     left: 20px;
     top: 8px;
     font-weight: 300;
+    height: 55px;
+    cursor: pointer;
     text-shadow: 1px 1px 1px #919191, 1px 2px 1px #919191, 1px 3px 1px #919191, 1px 4px 1px #919191;
 }
 
 .magic-lifts-heading {
-    cursor: pointer;
     z-index: 4;
     position: absolute;
     left: 0px;
-    width: 600px;
-    height: 150px;
+    width: 500px;
+    height: 70px;
     display: flex;
 }
 
 .magic-lifts-logo {
     z-index: 4;
     position: relative;
+    cursor: pointer;
     width: 60px;
     height: 60px;
     left: 5px;
@@ -526,8 +528,8 @@ a {
 
 .table-plus {
     position: absolute;
-    top: 25px;
-    left: 50px;
+    top: 1px;
+    left: 1px;
     cursor: pointer;
     /* border-radius: 50%; */
     width: 60px;
@@ -551,8 +553,8 @@ a {
 
 .table-minus {
     position: absolute;
-    top: 25px;
-    left: 120px;
+    top: 1px;
+    right: 1px;
     cursor: pointer;
     /* border-radius: 50%; */
     width: 60px;
@@ -743,7 +745,7 @@ select {
     justify-content: center; */
     position: relative;
     /* right: -80px; */
-    width: 98%;
+    width: 95%;
     height: 98%;
     background-color: #313943;
     border-radius: 20px;
@@ -770,8 +772,8 @@ select {
     height: 5px;
     font-size: 18px;
     position: relative;
-    top: 40px;
-    right: 35px;
+    top: 55px;
+    right: 0px;
     z-index: 2;
     font-family: sans-serif;
 }

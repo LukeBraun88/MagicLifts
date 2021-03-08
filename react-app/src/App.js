@@ -18,6 +18,8 @@ import triangleDownIcon from "./images/icons/triangle-down.png"
 import {CSSTransition} from 'react-transition-group'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);

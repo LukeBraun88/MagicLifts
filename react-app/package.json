@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@tippyjs/react": "^4.2.3",
     "http-proxy-middleware": "^1.0.5",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
@@ -16,10 +17,12 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-select": "^4.2.1",
+    "react-spring": "^9.0.0-rc.3",
     "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
