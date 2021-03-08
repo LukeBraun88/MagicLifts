@@ -20,7 +20,9 @@ class Lift(db.Model):
 
     @property
     def graph_stats(self):
-        return [x.to_graph() for x in self._stats]
+        stats1 = [x.to_graph() for x in self._stats]
+        stats1.sort(key=lambda r: r["x"])
+        return stats1
 
     def to_dict(self):
         return {
@@ -36,6 +38,6 @@ class Lift(db.Model):
     def to_graph(self):
         return {
             "id": self.title,
-            "color": "example",
+            "color": "blue",
             "data": self.graph_stats
         }

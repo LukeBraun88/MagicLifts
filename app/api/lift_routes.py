@@ -96,7 +96,6 @@ def get_lift_for_graph():
     # 3. returns users lifts
     return {"message": "success", "data": lifts}, 200
 
-
 # UPDATE LIFT
 @lift_routes.route('/<int:id>', methods=['PATCH'])
 @login_required

@@ -26,6 +26,10 @@ const Chart = ({authenticated}) => {
         window.history.back()
     }
 
+    useEffect(()=>{
+        console.log(graphData)
+    },[graphData])
+
     const [selected, setSelected] = useState([])
 
     const findIds = async() =>{
@@ -65,56 +69,14 @@ const Chart = ({authenticated}) => {
             "color": "hsl(230, 70%, 50%)",
             "data": [
                 {
-                    "x": "plane",
+                    "x": "1994-02-02",
                     "y": 51
                 },
-                {
-                    "x": "helicopter",
-                    "y": 123
-                },
-                {
-                    "x": "boat",
-                    "y": 259
-                },
-                {
-                    "x": "train",
-                    "y": 4
-                },
-                {
-                    "x": "subway",
-                    "y": 149
-                },
-                {
-                    "x": "bus",
-                    "y": 171
-                },
-                {
-                    "x": "car",
-                    "y": 201
-                },
-                {
-                    "x": "moto",
-                    "y": 141
-                },
-                {
-                    "x": "bicycle",
-                    "y": 4
-                },
-                {
-                    "x": "horse",
-                    "y": 182
-                },
-                {
-                    "x": "skateboard",
-                    "y": 171
-                },
-                {
-                    "x": "others",
-                    "y": 75
-                }
             ]
         }
     ]
+
+
 
     function customTheme(theme){
         return {
@@ -140,6 +102,7 @@ const Chart = ({authenticated}) => {
                         isMulti={true}
                         placeholder="Select Lifts"
                         noOptionsMessage="no lifts"
+
                         autoFocus
                         theme={customTheme}
                         isSearchable
@@ -153,21 +116,28 @@ const Chart = ({authenticated}) => {
                 </div>
                 <div className="chart-container">
             <ResponsiveLine
-                data={data}
+                data={graphData ? graphData : data}
                 margin={{ top: 50, right: 110, bottom: 90, left: 80 }}
-                xScale={{ type: 'point' }}
+                        xScale={{
+                            type: 'point',
+                            type: "time",
+                            format: "%Y-%m-%d",
+                            precision: "month" }}
                 yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: false, reverse: false }}
                 axisTop={null}
                 axisRight={null}
+                lineWidth={2}
+                indexBy="date"
                 theme={{"textColor": "white",
                         "fontSize": 19,
                         "labelFontSize":19}}
-
+                xFormat="time:%Y-%m-%d"
                 axisBottom={{
                     orient: 'bottom',
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
+                    format: "%-m/%y",
                     legend: 'Date',
                     legendOffset: 55,
                     legendPosition: 'middle'
@@ -184,7 +154,7 @@ const Chart = ({authenticated}) => {
                 colors={{ scheme: 'set2' }}
                 pointSize={10}
                 pointColor={{ theme: 'background' }}
-                pointBorderWidth={2}
+                pointBorderWidth={3}
                 pointBorderColor={{ from: 'serieColor' }}
                 pointLabelYOffset={-12}
                 useMesh={true}

@@ -38,7 +38,7 @@ const graphData = (state = null, action) => {
     let newState;
     switch (action.type) {
         case SET_GRAPH_DATA:
-            newState = { ...action.payload }
+            newState = [...action.payload ]
             return newState
         // case DELETE_GRAPH_DATA:
         //     newState = { ...state }
