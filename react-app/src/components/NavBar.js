@@ -22,14 +22,14 @@ import bodyIcon from "../images/icons/body.png"
 import logoutIcon from "../images/icons/logout.png"
 import { CSSTransition } from 'react-transition-group'
 import SignUpForm from './auth/SignUpForm';
-import dumbbell from "../images/icons/planet.png"
+import planet from "../images/icons/planet.png"
 // props.children is where the props will show up (navItems)
 // took out {authenticated, isAuthenticated} might need later
 const NavBar = (props) => {
   return (
     <nav className="navbar">
       <div className="magic-lifts-heading">
-      <img src={dumbbell} className="magic-lifts-logo"></img>
+        <Link to="/welcome"><img src={planet} onClick={() => Redirect("/welcome")} className="magic-lifts-logo" alt="home"></img></Link>
       <Link to="/welcome" className="magic-lifts-title">MAGIC LIFTS</Link>
       </div>
       <ul className="navbar-nav">{props.children}</ul>
