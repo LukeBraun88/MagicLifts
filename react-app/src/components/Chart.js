@@ -8,12 +8,12 @@ import { ResponsiveLine } from '@nivo/line'
 import Select from 'react-select'
 
 
-const Chart = ({authenticated}) => {
+const Chart = ({ authenticated }) => {
     const user = useSelector((x) => x.session.user)
-    const allLifts = useSelector((x)=>x.session.user.lifts)
+    const allLifts = useSelector((x) => x.session.user.lifts)
     // const lift = useSelector((x) => (x.shownLifts.lift))
     const stats = useSelector((x) => (x.shownLifts.stats))
-    const graphData = useSelector((x)=> x.graphData)
+    const graphData = useSelector((x) => x.graphData)
     let dispatch = useDispatch()
     let history = useHistory()
 
@@ -26,13 +26,13 @@ const Chart = ({authenticated}) => {
         window.history.back()
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(graphData)
-    },[graphData])
+    }, [graphData])
 
     const [selected, setSelected] = useState([])
 
-    const findIds = async() =>{
+    const findIds = async () => {
         let ids = []
         for (let option in selected) {
             // console.log(option)
@@ -57,19 +57,19 @@ const Chart = ({authenticated}) => {
     //     // console.log("ids:",ids)
     //     // await
     // }
-    const handleChange = function(e) {
+    const handleChange = function (e) {
 
     }
 
 
 
-    const data =[
+    const data = [
         {
-            "id": "japan",
+            "id": "example",
             "color": "hsl(230, 70%, 50%)",
             "data": [
                 {
-                    "x": "1994-02-02",
+                    "x": "1995-12-09",
                     "y": 51
                 },
             ]
@@ -78,112 +78,118 @@ const Chart = ({authenticated}) => {
 
 
 
-    function customTheme(theme){
+    function customTheme(theme) {
         return {
             ...theme,
             colors: {
                 ...theme.colors,
                 primary25: 'aquamarine',
                 primary: 'aquamarine'
-            }
+            },
+
         }
     }
 
 
-
-    return(
+    return (
         <div className="body" onClick={() => closeMenu()}>
             <div className="chart-background">
                 <p className="chart-heading">CREATE LIFT</p>
-                <div className="graph-select">
-                    <Select
-                        className="graph-select-dropdown"
-                        onChange={setSelected}
-                        isMulti={true}
-                        placeholder="Select Lifts"
-                        noOptionsMessage="no lifts"
-
-                        autoFocus
-                        theme={customTheme}
-                        isSearchable
-                        options={allLifts && allLifts.map((lift) => {
-                            return { id:lift.id,
-                                 value:lift.id,
-                                label: lift.title }
-                        })}
-                        // onChange={(e) => addLift(e.target.value)}
-                    />
-                </div>
-                <div className="chart-container">
-            <ResponsiveLine
-                data={graphData ? graphData : data}
-                margin={{ top: 50, right: 110, bottom: 90, left: 80 }}
-                        xScale={{
-                            type: 'point',
-                            type: "time",
-                            format: "%Y-%m-%d",
-                            precision: "month" }}
-                yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: false, reverse: false }}
-                axisTop={null}
-                axisRight={null}
-                lineWidth={2}
-                indexBy="date"
-                theme={{"textColor": "white",
-                        "fontSize": 19,
-                        "labelFontSize":19}}
-                xFormat="time:%Y-%m-%d"
-                axisBottom={{
-                    orient: 'bottom',
-                    tickSize: 5,
-                    tickPadding: 5,
-                    tickRotation: 0,
-                    format: "%-m/%y",
-                    legend: 'Date',
-                    legendOffset: 55,
-                    legendPosition: 'middle'
-                }}
-                axisLeft={{
-                    orient: 'left',
-                    tickSize: 5,
-                    tickPadding: 5,
-                    tickRotation: 0,
-                    legend: '1RM',
-                    legendOffset: -55,
-                    legendPosition: 'middle'
-                }}
-                colors={{ scheme: 'set2' }}
-                pointSize={10}
-                pointColor={{ theme: 'background' }}
-                pointBorderWidth={3}
-                pointBorderColor={{ from: 'serieColor' }}
-                pointLabelYOffset={-12}
-                useMesh={true}
-                legends={[
-                    {
-                        anchor: 'bottom-right',
-                        direction: 'column',
-                        justify: false,
-                        translateX: 110,
-                        translateY: 0,
-                        itemWidth: 100,
-                        itemHeight: 21,
-                        itemsSpacing: 6,
-                        symbolSize: 20,
-                        symbolShape: 'circle',
-                        itemDirection: 'left-to-right',
-                        itemTextColor: '#777',
-                        effects: [
-                            {
-                                on: 'hover',
-                                style: {
-                                    itemBackground: 'rgba(0, 0, 0, .03)',
-                                    itemOpacity: 1
+                <div className="chart-and-select">
+                    <div className="graph-select">
+                        <Select
+                            className="graph-select-dropdown"
+                            onChange={setSelected}
+                            isMulti={true}
+                            placeholder="Select Lifts"
+                            noOptionsMessage="no lifts"
+                            autoFocus
+                            theme={customTheme}
+                            isSearchable
+                            options={allLifts && allLifts.map((lift) => {
+                                return {
+                                    id: lift.id,
+                                    value: lift.id,
+                                    label: lift.title
                                 }
-                            }
-                        ]
-                    }
-                ]}
-            />
+                            })}
+                        // onChange={(e) => addLift(e.target.value)}
+                        />
+                    </div>
+                    <div className="chart-container">
+                        <ResponsiveLine
+                            data={graphData ? graphData : data}
+                            margin={{ top: 50, right: 30, bottom: 90, left: 350 }}
+                            xScale={{
+                                type: 'point',
+                                type: "time",
+                                format: "%Y-%m-%d",
+                                precision: "month"
+                            }}
+                            yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: false, reverse: false }}
+                            axisTop={null}
+                            axisRight={null}
+                            lineWidth={2}
+                            indexBy="date"
+                            theme={{
+                                "textColor": "white",
+                                "fontSize": 19,
+                                "labelFontSize": 19
+                            }}
+                            xFormat="time:%Y-%m-%d"
+                            axisBottom={{
+                                orient: 'bottom',
+                                tickSize: 5,
+                                tickPadding: 5,
+                                tickRotation: 0,
+                                format: "%-m/%y",
+                                legend: 'Date',
+                                legendOffset: 55,
+                                legendPosition: 'middle'
+                            }}
+                            axisLeft={{
+                                orient: 'left',
+                                tickSize: 5,
+                                tickPadding: 5,
+                                tickRotation: 0,
+                                legend: '1RM',
+                                legendOffset: -55,
+                                legendPosition: 'middle'
+                            }}
+                            colors={{ scheme: 'set2' }}
+                            pointSize={10}
+                            pointColor={{ theme: 'background' }}
+                            pointBorderWidth={3}
+                            pointBorderColor={{ from: 'serieColor' }}
+                            pointLabelYOffset={-12}
+                            useMesh={true}
+                            legends={[
+                                {
+                                    anchor: 'bottom-left',
+                                    direction: 'column',
+                                    justify: false,
+                                    translateX: -310,
+                                    translateY: -10,
+                                    itemWidth: 200,
+                                    itemHeight: 21,
+                                    itemsSpacing: 6,
+                                    symbolSize: 20,
+                                    symbolShape: 'circle',
+                                    itemDirection: 'left-to-right',
+                                    itemTextColor: '#777',
+                                    effects: [
+                                        {
+                                            on: 'hover',
+                                            style: {
+                                                itemBackground: 'rgba(0, 0, 0, .03)',
+                                                itemOpacity: 1
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

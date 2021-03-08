@@ -641,12 +641,12 @@ select {
 }
 
 .chart-background {
-    width: 80%;
-    height: 70%;
+    width: 95%;
+    height: 80%;
     background-color: white;
     border-radius: 50px;
     position: relative;
-    bottom: 60px;
+    bottom: 50px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -664,6 +664,7 @@ select {
     align-items: center;
     /* bottom: 15px; */
     position: relative;
+    top: 10px;
     /* font-family: 'Kanit', sans-serif; */
     /* text-align: center; */
 }
@@ -672,28 +673,50 @@ select {
     /* display: flex;
     flex-direction: column; */
     /* justify-content: space-around; */
-    align-items: center;
-    justify-content: center;
-    width: 90%;
-    height: 75%;
+    /* align-items: center;
+    justify-content: center; */
+    position: relative;
+    /* right: -80px; */
+    width: 98%;
+    height: 98%;
     background-color: #313943;
     border-radius: 20px;
-    position: relative;
+    /* position: relative; */
     font-family: sans-serif;
     color: white;
     font-size: 120%;
     top: 20px;
+    /* right: 15px; */
+    border-radius: 50px;
 }
 
-.graph-select{
+.graph-select {
     position: absolute;
-    top: 10px;
-    right: 90px;
-
+    /* top: 120px; */
+    left: 70px;
+    height: 5px;
+    top: 20px;
+    z-index: 2;
 }
 
 .graph-select-dropdown {
-    width: 255px;
-    height: 50px;
-    font-size: 14px;
+    width: 260px;
+    height: 5px;
+    font-size: 18px;
+    position: relative;
+    top: 40px;
+    right: 35px;
+    z-index: 2;
+    font-family: sans-serif;
+}
+
+.chart-and-select {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* justify-content: space-around; */
 }
