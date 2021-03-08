@@ -14,6 +14,7 @@ import { logout } from "../services/auth.js";
 import { logoutSessionUser } from "../store/reducers/session"
 import * as liftActions from "../store/reducers/lifts"
 import * as sessionActions from "../store/reducers/session"
+import * as graphActions from "../store/reducers/graphData"
 import deadliftIcon from "../images/icons/deadlift-hollow.png"
 import chartIcon from "../images/icons/chart3.png"
 import deadlift_filled from "../images/icons/deadlift-filled.png"
@@ -21,12 +22,16 @@ import bodyIcon from "../images/icons/body.png"
 import logoutIcon from "../images/icons/logout.png"
 import { CSSTransition } from 'react-transition-group'
 import SignUpForm from './auth/SignUpForm';
-
+import dumbbell from "../images/icons/planet.png"
 // props.children is where the props will show up (navItems)
 // took out {authenticated, isAuthenticated} might need later
 const NavBar = (props) => {
   return (
     <nav className="navbar">
+      <div className="magic-lifts-heading">
+      <img src={dumbbell} className="magic-lifts-logo"></img>
+      <Link to="/welcome" className="magic-lifts-title">MAGIC LIFTS</Link>
+      </div>
       <ul className="navbar-nav">{props.children}</ul>
     </nav>
   );
@@ -94,6 +99,7 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
 
   const goToLift = (id) =>{
     dispatch(liftActions.setShownLifts({ liftId: id }))
+    dispatch(graphActions.setGraphLifts([id]))
     dispatch(sessionActions.toggleMenu(false))
     history.push("/show-lift")
     // return <Redirect to="/show-lift" />
@@ -153,6 +159,7 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
     //when in is truthy, shows children. else changes css classes
     //unmountonExi unmounts children if they aren't active
     //timeout sets duration of animation
+    <>
 
     <div className="dropdown" style={{height: menuHeight}} ref={dropdownRef}>
         {authenticated ?
@@ -358,6 +365,7 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
         </div>
       </CSSTransition>
     </div>
+    </>
   )
 }
 

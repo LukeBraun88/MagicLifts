@@ -94,7 +94,7 @@ const Chart = ({ authenticated }) => {
     return (
         <div className="body" onClick={() => closeMenu()}>
             <div className="chart-background">
-                <p className="chart-heading">CREATE LIFT</p>
+                <p className="chart-heading">CHARTED DATA</p>
                 <div className="chart-and-select">
                     <div className="graph-select">
                         <Select
@@ -143,7 +143,7 @@ const Chart = ({ authenticated }) => {
                                 tickSize: 5,
                                 tickPadding: 5,
                                 tickRotation: 0,
-                                format: "%m/%d/%y",
+                                format: "%-m/%y",
                                 legend: 'Date',
                                 legendOffset: 55,
                                 legendPosition: 'middle'
