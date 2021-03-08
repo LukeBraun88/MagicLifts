@@ -65,12 +65,12 @@ const Chart = ({ authenticated }) => {
 
     const data = [
         {
-            "id": "example",
+            "id": "Select a Lift",
             "color": "hsl(230, 70%, 50%)",
             "data": [
                 {
-                    "x": "1995-12-09",
-                    "y": 51
+                    "x": "2001-01-01",
+                    "y": 100
                 },
             ]
         }
@@ -124,7 +124,8 @@ const Chart = ({ authenticated }) => {
                                 type: 'point',
                                 type: "time",
                                 format: "%Y-%m-%d",
-                                precision: "month"
+                                precision: "month",
+                                useUTC: false,
                             }}
                             yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: false, reverse: false }}
                             axisTop={null}
@@ -142,7 +143,7 @@ const Chart = ({ authenticated }) => {
                                 tickSize: 5,
                                 tickPadding: 5,
                                 tickRotation: 0,
-                                format: "%-m/%y",
+                                format: "%m/%d/%y",
                                 legend: 'Date',
                                 legendOffset: 55,
                                 legendPosition: 'middle'
