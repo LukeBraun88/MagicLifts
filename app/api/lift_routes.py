@@ -1,6 +1,6 @@
 from flask import Blueprint, session, request
 from flask_login import login_required, current_user
-
+import json
 from app.models import db, Lift, BodyPart
 from app.forms.lift_form import LiftForm, LiftForm
 
@@ -72,6 +72,29 @@ def get_lift_by_id(id):
 
     # 3. returns users lifts
     return {"message": "success", "data": current_lift.to_dict()}, 200
+
+@lift_routes.route('/graph', methods=['GET'])
+@login_required
+def get_lift_for_graph():
+    # 1. gets user from session
+    user = current_user
+    # ids = [ids]
+    ids = request.args.get("id")
+    # ids = json.load(ids)
+    # print("---------------------------:", test)
+    ids = ids.split(",")
+    print("------------", ids)
+
+    # 2. finds lifts based off of user.id
+    lifts = []
+    for id in ids:
+        lift = Lift.query.filter(
+            Lift.id == int(id)).first()
+        lifts.append(lift.to_graph())
+
+
+    # 3. returns users lifts
+    return {"message": "success", "data": lifts}, 200
 
 
 # UPDATE LIFT

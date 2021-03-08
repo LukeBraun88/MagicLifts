@@ -4,6 +4,7 @@ import { createStore, combineReducers } from 'redux';
 import enhancer from './enhancer';
 import session from './reducers/session';
 import {currentLifts, shownLifts} from './reducers/lifts';
+import graphData from './reducers/graphData'
 
 
 
@@ -11,7 +12,8 @@ import {currentLifts, shownLifts} from './reducers/lifts';
 const rootReducer = combineReducers({
     session,
     currentLifts,
-    shownLifts
+    shownLifts,
+    graphData
 });
 
 // Store config for export

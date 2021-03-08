@@ -55,16 +55,17 @@ export const normalizeUserData = ({id}) => async (dispatch) => {
     );
     const { data } = res.data;
 
-
+    let lifts = []
     for (let i = 0; i < data.bodyParts.length; i++) {
         let bodyPart = data.bodyParts[i];
         for (let j = 0; j < bodyPart.lifts.length; j++) {
             let lift = bodyPart.lifts[j];
+            lifts.push(lift)
             lift.stats = normalizedData(lift.stats);
         }
         bodyPart.lifts = normalizedData(bodyPart.lifts);
     }
-
+    data.lifts = lifts
     data.bodyParts = normalizedBodyPartData(data.bodyParts);
 
     dispatch(normalizeUserDataActionCreator(data));

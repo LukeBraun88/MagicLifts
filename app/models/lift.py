@@ -18,6 +18,10 @@ class Lift(db.Model):
     def stats(self):
         return [x.to_dict() for x in self._stats]
 
+    @property
+    def graph_stats(self):
+        return [x.to_graph() for x in self._stats]
+
     def to_dict(self):
         return {
             "id": self.id,
@@ -27,4 +31,11 @@ class Lift(db.Model):
             "stats": self.stats,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
+        }
+
+    def to_graph(self):
+        return {
+            "id": self.title,
+            "color": "example",
+            "data": self.graph_stats
         }
