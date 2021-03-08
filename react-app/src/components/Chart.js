@@ -131,6 +131,7 @@ const Chart = ({ authenticated }) => {
                             axisTop={null}
                             axisRight={null}
                             lineWidth={2}
+                            isInteractive
                             indexBy="date"
                             theme={{
                                 "textColor": "white",
@@ -164,6 +165,15 @@ const Chart = ({ authenticated }) => {
                             pointBorderColor={{ from: 'serieColor' }}
                             pointLabelYOffset={-12}
                             useMesh={true}
+                            tooltip={(input) => {
+                                // input.point['data'].xFormatted
+                                return (
+                                    <div className="tooltip">
+                                        <p> Date: {input.point['data'].xFormatted}</p>
+                                        <p> 1RM: {input.point['data'].yFormatted}</p>
+                                    </div>
+                                )
+                            }}
                             legends={[
                                 {
                                     anchor: 'bottom-left',
@@ -182,7 +192,7 @@ const Chart = ({ authenticated }) => {
                                         {
                                             on: 'hover',
                                             style: {
-                                                itemBackground: 'rgba(0, 0, 0, .03)',
+                                                itemBackground: 'white;',
                                                 itemOpacity: 1
                                             }
                                         }

@@ -21,7 +21,7 @@ class Stat(db.Model):
 
     @property
     def one_rep_max(self):
-        return (self.weight * (1 + ((self.reps) / 30)))
+        return round((self.weight * (1 + ((self.reps) / 30))), 0)
 
     def to_dict(self):
         return {
