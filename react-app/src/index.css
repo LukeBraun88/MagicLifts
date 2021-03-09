@@ -583,7 +583,7 @@ a {
     flex-direction: column;
     /* height: 100rem;
     width: 900px; */
-    max-width: 290px;
+    max-width: 600px;
     width: 100%;
     min-height: 470px;
     /* max-height: 600px; */
@@ -597,17 +597,25 @@ a {
 }
 
 .stat-create_inputs {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center;
     justify-content: space-around;
-    height: 280px;
+
+    /* flex-direction: column; */
+    /* height: 400px;
+    width: 500px; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /* position: relative;
+    top: -10px; */
 }
 
 .stat-create_form {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -621,11 +629,39 @@ a {
     top: 10px;
 }
 
-/* input {
+.create-1 {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.create-2 {
+    width: 50%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* .create-2_texts {
+    height: 300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+} */
+
+input {
     border-radius: 2px;
     font-family: sans-serif;
     font-size: 100%;
-} */
+}
 
 .stat-create_buttons {
     padding: 5px;
@@ -633,9 +669,10 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: relative;
-    bottom: -10px;
     width: 240px;
+    height: 15%;
+    /* position: relative;
+    bottom: 5px; */
     /* width: 80px; */
 }
 
@@ -672,6 +709,120 @@ select {
     height: 1.5em;
     font-size: 100%;
 }
+
+/* -------------------- LIFT CREATE ----------------- */
+
+.lift-create_container {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    width: 100%;
+    min-height: 470px;
+    padding: 30px 30px;
+    background-color: #ffffff;
+    align-items: center;
+    border-radius: 30px;
+    position: relative;
+    text-align: center;
+    top: -5%;
+}
+
+.lift-create_inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 400px;
+    width: 500px;
+    width: 100%;
+    height: 70%;
+    display: flex;
+    position: relative;
+    top: 0px;
+}
+
+.lift-create_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 400px;
+    background-color: #313943;
+    border-radius: 20px;
+    position: relative;
+    font-family: sans-serif;
+    color: white;
+    font-size: 120%;
+    top: 10px;
+}
+
+.create-1 {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-2 {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-items: space-between; */
+}
+
+input {
+    border-radius: 2px;
+    font-family: sans-serif;
+    font-size: 100%;
+}
+
+.lift-create_buttons {
+    padding: 5px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    bottom: -10px;
+    width: 240px;
+    /* width: 80px; */
+}
+
+.lift-create_button {
+    /* padding: 8px 20px; */
+    font-family: sans-serif;
+    font-size: 100%;
+    width: 110px;
+    height: 100%;
+}
+
+.lift-back_button {
+    /* padding: 8px 20px; */
+    font-family: sans-serif;
+    font-size: 100%;
+    width: 110px;
+    height: 55px;
+}
+
+.lift-back_button:hover {
+    opacity: 0.95;
+}
+
+.lift-create_button:hover {
+    opacity: 0.95;
+}
+
+.lift-create_errors {
+    width: 165px;
+}
+
+/* -------------------- GRAPH ---------------- */
 
 .InovuaReactDataGrid__cell--user-select-text {
     font-size: 50px;
@@ -814,8 +965,6 @@ select {
 
 rect {
     display: inline;
-
-
 }
 
 /* ------------------ inputs ---------------*/
