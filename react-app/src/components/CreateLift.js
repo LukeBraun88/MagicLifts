@@ -9,15 +9,25 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
+import purple from '@material-ui/core/colors/purple';
+
 
 
     const theme = createMuiTheme({
+        palette: {
+            primary: {
+                main: '#ffffff',
+            },
+            secondary: {
+                main: '#ffffff',
+            },
+        },
         overrides: {
             MuiInputLabel: {
                 root: {
-                    color: "white",
+                    color: "black",
                     "&$focused": {
-                        color: "white"
+                        color: "black"
                     }
                 }
             },
@@ -28,38 +38,43 @@ import { ThemeProvider } from "@material-ui/styles";
 
 
 const buttonStyle1 = {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    // background: 'linear-gradient(45deg, #34c0b9 30%, #f14d8a 90%)',
+    // background:'#e8e8e8',
     borderRadius: 10,
     border: 0,
-    color: 'white',
+    color: 'black',
     fontSize: 16,
-    height: 48,
+    fontWeight: 400,
+    height: 55,
     padding: '0 30px',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    boxShadow: '0 3px 5px 2px #34c0b9',
 }
 const buttonStyle2 = {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    // background: 'linear-gradient(45deg, #34c0b9 30%, #f14d8a 90%)',
     borderRadius: 10,
     border: 0,
     fontSize: 16,
-    color: 'white',
-    height: 48,
+    fontWeight: 400,
+    color: 'black',
+    height: 55,
     padding: '0 30px',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    boxShadow: '0 3px 5px 2px #34c0b9',
 }
+
+
 
 const inputStyle = {
     minWidth: 240,
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    background: 'linear-gradient(45deg, white 30%, white 90%)',
     borderRadius: 10,
     border: 0,
     fontSize: 16,
-    color: 'white',
+    color: 'black',
     display:'flex',
     textAlign:'left',
     // height: 48,
     // padding: '0 30px',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    boxShadow: '0 3px 5px 2px #34c0b9',
 }
 
 
@@ -144,7 +159,7 @@ const CreateLift = ({ authenticated }) => {
                                 label="DESCRIPTION"
                                 name="description"
                                 type="text"
-                                placeholder="description"
+                                // placeholder="Description"
                                 rowsMax={4}
                                 style={inputStyle}
                                 value={description}
