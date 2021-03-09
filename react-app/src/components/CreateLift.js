@@ -16,7 +16,7 @@ import purple from '@material-ui/core/colors/purple';
     const theme = createMuiTheme({
         palette: {
             primary: {
-                main: '#ffffff',
+                main: '#34c0b9',
             },
             secondary: {
                 main: '#ffffff',
@@ -27,10 +27,19 @@ import purple from '@material-ui/core/colors/purple';
                 root: {
                     color: "black",
                     "&$focused": {
-                        color: "black"
-                    }
+                        color: "#34c0b9",
+                        fontWeight:600,
+                    },
                 }
             },
+            MuiFilledInput:{
+                root:{
+                    fontWeight:400,
+                    fontSize: 20,
+                    // fontFamily: 'sans-serif',
+                    // fontSize: 20
+                }
+            }
 
         }
     });
@@ -47,7 +56,7 @@ const buttonStyle1 = {
     fontWeight: 400,
     height: 55,
     padding: '0 30px',
-    boxShadow: '0 3px 5px 2px #34c0b9',
+    // boxShadow: '0 3px 5px 2px #34c0b9',
 }
 const buttonStyle2 = {
     // background: 'linear-gradient(45deg, #34c0b9 30%, #f14d8a 90%)',
@@ -58,23 +67,25 @@ const buttonStyle2 = {
     color: 'black',
     height: 55,
     padding: '0 30px',
-    boxShadow: '0 3px 5px 2px #34c0b9',
+    // boxShadow: '0 3px 5px 2px #34c0b9',
 }
 
 
 
 const inputStyle = {
-    minWidth: 240,
+    width: 240,
     background: 'linear-gradient(45deg, white 30%, white 90%)',
     borderRadius: 10,
     border: 0,
-    fontSize: 16,
+    fontSize: 30,
+    fontWeight: 400,
+    fontFamily:'sans-serif',
     color: 'black',
     display:'flex',
     textAlign:'left',
     // height: 48,
     // padding: '0 30px',
-    boxShadow: '0 3px 5px 2px #34c0b9',
+    // boxShadow: '0 3px 2px 2px white',
 }
 
 

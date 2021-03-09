@@ -601,7 +601,7 @@ a {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    height: 220px;
+    height: 280px;
 }
 
 .stat-create_form {
@@ -621,11 +621,11 @@ a {
     top: 10px;
 }
 
-input {
+/* input {
     border-radius: 2px;
     font-family: sans-serif;
     font-size: 100%;
-}
+} */
 
 .stat-create_buttons {
     padding: 5px;
@@ -634,7 +634,7 @@ input {
     align-items: center;
     justify-content: space-between;
     position: relative;
-    top: 1px;
+    bottom: -10px;
     width: 240px;
     /* width: 80px; */
 }
@@ -814,6 +814,8 @@ select {
 
 rect {
     display: inline;
+
+
 }
 
 /* ------------------ inputs ---------------*/
