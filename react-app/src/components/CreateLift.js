@@ -3,6 +3,65 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useHistory } from "react-router-dom";
 import * as liftActions from "../store/reducers/lifts"
 import * as sessionActions from "../store/reducers/session"
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+
+
+    const theme = createMuiTheme({
+        overrides: {
+            MuiInputLabel: {
+                root: {
+                    color: "white",
+                    "&$focused": {
+                        color: "white"
+                    }
+                }
+            },
+
+        }
+    });
+
+
+
+const buttonStyle1 = {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    borderRadius: 10,
+    border: 0,
+    color: 'white',
+    fontSize: 16,
+    height: 48,
+    padding: '0 30px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+}
+const buttonStyle2 = {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    borderRadius: 10,
+    border: 0,
+    fontSize: 16,
+    color: 'white',
+    height: 48,
+    padding: '0 30px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+}
+
+const inputStyle = {
+    minWidth: 240,
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    borderRadius: 10,
+    border: 0,
+    fontSize: 16,
+    color: 'white',
+    display:'flex',
+    textAlign:'left',
+    // height: 48,
+    // padding: '0 30px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+}
+
 
 const CreateLift = ({ authenticated }) => {
     const [errors, setErrors] = useState([])
@@ -27,6 +86,7 @@ const CreateLift = ({ authenticated }) => {
     }
 
 
+    // const classes = useStyles();
 
     const onCreateLift = async (e) => {
         e.preventDefault();
@@ -41,53 +101,82 @@ const CreateLift = ({ authenticated }) => {
     };
 
 
+
     return (
         <div className="body" onClick={() => closeMenu()}>
             <div className="stat-create_container">
                 <p className="table-heading">CREATE LIFT</p>
-                <form className="stat-create_form" onSubmit={onCreateLift}>
+                <ThemeProvider theme={theme}>
+                <form className="stat-create_form" noValidate autoComplete="off" onSubmit={onCreateLift}>
 
                     <div className="stat-create_inputs">
-                        <label for="title">TITLE</label>
+                        {/* <label for="title">TITLE</label> */}
                         <div>
-                            <input
+                            <TextField
+                                id="title"
+                                variant="filled"
+                                label="TITLE"
                                 name="title"
                                 type="text"
+                                    // InputLabelProps={{
+                                    //     classes: {
+                                    //         root: classes.cssLabel,
+                                    //         focused: classes.cssFocused,
+                                    //     },
+                                    // }}
+                                // className={classes.root}
+                                // InputLabelProps={{
+                                //     FormLabelClasses: {
+                                //         className: classes.overrides
+                                //     },
+                                // }}
                                 value={title}
+                                    style={inputStyle}
                                 onChange={(e) => setTitle(e.target.value)}
                             />
                         </div>
-                        <label for="description">DESCRIPTION</label>
+                        {/* <label for="description">DESCRIPTION</label> */}
                         <div>
-                            <input
+                            <TextField
+                                multiline
+                                id="description"
+                                variant="filled"
+                                label="DESCRIPTION"
                                 name="description"
                                 type="text"
                                 placeholder="description"
+                                rowsMax={4}
+                                style={inputStyle}
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                             />
                         </div>
-                        <label for="bodyPart">BODY PART</label>
+                        {/* <label for="bodyPart"></label> */}
                         <div>
-                            <select
+                            <TextField
+                                id="outlined-select"
+                                select
                                 name="bodyPart"
+                                label="BODY PART"
                                 value={bodyPart}
+                                variant="filled"
+                                style={inputStyle}
                                 onChange={(e) => setBodyPart(e.target.value)}>
-                                <option disabled="true" value="">------ choose option ------</option>
-                                <option value="Shoulders">Shoulders</option>
-                                <option value="Abs">Abs</option>
-                                <option value="Chest">Chest</option>
-                                <option value="Arms">Arms</option>
-                                <option value="Back">Back</option>
-                                <option value="Legs">Legs</option>
-                            </select>
+                                <MenuItem disabled="true" value="">------ choose MenuItem ------</MenuItem>
+                                <MenuItem value="Shoulders">Shoulders</MenuItem>
+                                <MenuItem value="Abs">Abs</MenuItem>
+                                <MenuItem value="Chest">Chest</MenuItem>
+                                <MenuItem value="Arms">Arms</MenuItem>
+                                <MenuItem value="Back">Back</MenuItem>
+                                <MenuItem value="Legs">Legs</MenuItem>
+                            </TextField>
                         </div>
 
                     </div>
 
                     <div className="stat-create_buttons">
-                        <button className="stat-back_button" type="button" onClick={() => goBack()}>Back</button>
-                        <button className="stat-create_button" type="submit">Create</button>
+                        <Button style={buttonStyle1} variant="contained" className="stat-back_button" type="button" onClick={() => goBack()}>Back</Button>
+                        <Button style={buttonStyle2} variant="contained"className="stat-create_button" type="submit">Create</Button>
                     </div>
                     <div className="stat-create_errors">
                         {/* {errors.map((error) => (
@@ -96,6 +185,8 @@ const CreateLift = ({ authenticated }) => {
 
                     </div>
                 </form>
+                    </ThemeProvider>
+
 
             </div>
         </div>

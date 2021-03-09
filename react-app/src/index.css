@@ -631,7 +631,7 @@ input {
     padding: 5px;
     margin: 5px;
     display: flex;
-    align-items: ;
+    /* align-items: ; */
     justify-content: space-around;
     position: relative;
     top: 1px;
@@ -804,4 +804,11 @@ select {
 
 rect {
     display: inline;
+}
+
+
+/* ------------------ inputs ---------------*/
+
+.label-class{
+    color: white;
 }
