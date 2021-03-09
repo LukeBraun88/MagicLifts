@@ -169,6 +169,7 @@ const CreateStat = ({ authenticated }) => {
                             </div>
 
                             <div className="create-2">
+                                <div className="smaller">
                                 <TextField
                                     label="DATE"
                                     variant="filled"
@@ -199,6 +200,7 @@ const CreateStat = ({ authenticated }) => {
                                 <div className="stat-create_buttons">
                                     <Button style={buttonStyle} variant="contained" className="stat-back_button" type="button" onClick={() => goBack()}>Back</Button>
                                     <Button style={buttonStyle} variant="contained" className="stat-create_button" type="submit">Create</Button>
+                                </div>
                                 </div>
                                 </div>
                             </div>
