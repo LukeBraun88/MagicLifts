@@ -95,6 +95,7 @@ const Chart = ({ authenticated }) => {
         background: 'transparent',
         fontFamily: 'sans-serif',
         fontSize: 19,
+        fontOpacity:1,
         textColor: 'white',
         axis: {
             domain: {

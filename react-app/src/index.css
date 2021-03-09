@@ -789,15 +789,19 @@ select {
     /* justify-content: space-around; */
 }
 
-.tooltip{
-    width:170px;
-    height:50px;
+.tooltip {
+    width: 170px;
+    height: 50px;
     background-color: rgb(97, 97, 97);
     display: flex;
     flex-direction: column;
-     align-items: center;
-     font-family: sans-serif;
+    align-items: center;
+    font-family: sans-serif;
     justify-content: space-around;
     border-radius: 10px;
     color: white;
+}
+
+rect {
+    display: inline;
 }

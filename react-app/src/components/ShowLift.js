@@ -191,7 +191,18 @@ function ShowLift({ authenticated }) {
             <div className="body" onClick={() => closeMenu()}>
                 {lift !== "deleted" ?
                     <div className="table-container">
+                        <Tippy
+                            render={attrs => (
+                                <Box style={props} {...attrs}>
+                                   {lift? lift.description: "no description of lift"}
+                                </Box>
+                            )}
+                            animation={true}
+                            onMount={onMount}
+                            onHide={onHide}
+                        >
                         <p className="table-heading">{lift ? lift.title : "Example Heading"}</p>
+                        </Tippy>
                         <Tippy
                             render={attrs => (
                                 <Box style={props} {...attrs}>
