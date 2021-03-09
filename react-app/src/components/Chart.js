@@ -87,8 +87,112 @@ const Chart = ({ authenticated }) => {
                 primary: '#34c0b9'
             },
 
+
         }
     }
+
+    const theme = {
+        background: 'transparent',
+        fontFamily: 'sans-serif',
+        fontSize: 19,
+        textColor: 'white',
+        axis: {
+            domain: {
+                line: {
+                    stroke: 'transparent',
+                    strokeWidth: 1
+                }
+            },
+            ticks: {
+                line: {
+                    stroke: '#777777',
+                    strokeWidth: 1
+                },
+                text: {}
+            },
+            legend: {
+                text: {
+                    fontSize: 18
+                }
+            }
+        },
+        grid: {
+            line: {
+                stroke: '#dddddd',
+                strokeWidth: 1
+            }
+        },
+        legends: {
+            text: {
+                fill: 'white'
+            }
+        },
+        labels: {
+            text: {}
+        },
+        markers: {
+            lineColor: 'white',
+            lineStrokeWidth: 1,
+            text: {}
+        },
+        dots: {
+            text: {}
+        },
+        tooltip: {
+            container: {
+                background: 'white',
+                color: 'inherit',
+                fontSize: 'inherit',
+                borderRadius: '2px',
+                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.25)',
+                padding: '5px 9px'
+            },
+            basic: {
+                whiteSpace: 'pre',
+                display: 'flex',
+                alignItems: 'center'
+            },
+            table: {},
+            tableCell: {
+                padding: '3px 5px'
+            }
+        },
+        crosshair: {
+            line: {
+                stroke: 'white',
+                strokeWidth: 1,
+                strokeOpacity: 0.75,
+                strokeDasharray: '6 6'
+            }
+        },
+        annotations: {
+            text: {
+                fontSize: 13,
+                outlineWidth: 2,
+                outlineColor: '#ffffff'
+            },
+            link: {
+                stroke: 'white',
+                strokeWidth: 1,
+                outlineWidth: 2,
+                outlineColor: '#ffffff'
+            },
+            outline: {
+                fill: 'none',
+                stroke: 'white',
+                strokeWidth: 2,
+                outlineWidth: 2,
+                outlineColor: '#ffffff'
+            },
+            symbol: {
+                fill: 'white',
+                outlineWidth: 2,
+                outlineColor: '#ffffff'
+            }
+        }
+    }
+
+
 
 
     return (
@@ -133,11 +237,7 @@ const Chart = ({ authenticated }) => {
                             lineWidth={2}
                             isInteractive
                             indexBy="date"
-                            theme={{
-                                "textColor": "white",
-                                "fontSize": 19,
-                                "labelFontSize": 19
-                            }}
+                            theme={theme}
                             xFormat="time:%Y-%m-%d"
                             axisBottom={{
                                 orient: 'bottom',
