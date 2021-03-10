@@ -310,24 +310,27 @@ a {
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
-    width: 200px;
-    height: 200px;
+    justify-content: space-around;
+    position: relative;
+    top: 10px;
+    width: 230px;
+    height: 210px;
 }
 
 .inputs-login {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 50px;
+    justify-content: space-around;
+    height: 150px;
+    align-items: center;
 }
 
 .form-login {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 180px;
+    justify-content: space-between;
+    width: 300px;
     position: relative;
     /* top: -60px; */
 }
@@ -335,21 +338,37 @@ a {
 .buttons-login {
     display: flex;
     justify-content: space-between;
-    width: 165px;
+    width: 200px;
 }
 
 .login-button {
     padding: 7px;
     margin: 5px 0px;
-    width: 80px;
+    width: 94px;
 }
 
 .errors-login {
-    width: 165px;
+    padding: 20px 0px 0px 0px;
+    margin: auto;
+    width: 200px;
+    /* height: 80px; */
+    font-size: 18px;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     /* padding: 0;
     margin: auto; */
 }
 
+.login-error-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+}
 /* ------------------------- SIGN UP -------------------------- */
 
 .signup-container {
@@ -357,15 +376,17 @@ a {
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    width: 200px;
-    height: 250px;
+    width: 230px;
+    height: 500px;
 }
 
 .inputs-signup {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 135px;
+    height: 450px;
+    width: 200px;
+    align-items: center;
 }
 
 .form-signup {
@@ -381,7 +402,7 @@ a {
 .signup-button {
     padding: 7px;
     margin: 7px 0px;
-    width: 80px;
+    width: 130px;
 }
 
 .errors-signup {

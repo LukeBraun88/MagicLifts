@@ -1,8 +1,73 @@
 import React, { useState } from "react";
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useHistory } from "react-router-dom";
 import { login } from "../../services/auth";
 import * as sessionActions from "../../store/reducers/session"
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#34c0b9',
+    },
+    secondary: {
+      main: '#ffffff',
+    },
+  },
+  overrides: {
+    MuiInputLabel: {
+      root: {
+        color: "black",
+        "&$focused": {
+          color: "#34c0b9",
+          fontWeight: 600,
+        },
+      }
+    },
+    MuiFilledInput: {
+      root: {
+        fontWeight: 400,
+        fontSize: 20,
+      }
+    }
+
+  }
+});
+
+
+const buttonStyle = {
+  // background: 'linear-gradient(45deg, #34c0b9 30%, #f14d8a 90%)',
+  borderRadius: 10,
+  border: 0,
+  color: 'black',
+  fontSize: 16,
+  fontWeight: 400,
+  height: 55,
+  padding: '0 30px',
+  // boxShadow: '0 3px 5px 2px #34c0b9',
+}
+
+const inputStyle = {
+  width: 200,
+  background: 'linear-gradient(45deg, white 30%, white 90%)',
+  borderRadius: 10,
+  border: 0,
+  fontSize: 30,
+  fontWeight: 400,
+  fontFamily: 'sans-serif',
+  color: 'black',
+  display: 'flex',
+  textAlign: 'left',
+  // height: 48,
+  // padding: '0 30px',
+  // boxShadow: '0 3px 2px 2px white',
+}
+
 
 const LoginForm = ({ authenticated, setAuthenticated }) => {
   const [errors, setErrors] = useState([]);
@@ -15,7 +80,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const user = await login({email, password});
+    const user = await login({ email, password });
     if (!user.errors) {
       dispatch(sessionActions.toggleMenu(false))
       setAuthenticated(true);
@@ -26,7 +91,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
 
   const onDemoLogin = async (e) => {
     e.preventDefault();
-    const user = await login({email:"demo@user.com", password:"DemoUser"});
+    const user = await login({ email: "demo@user.com", password: "DemoUser" });
     if (!user.errors) {
       dispatch(sessionActions.toggleMenu(false))
       setAuthenticated(true);
@@ -51,47 +116,48 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
 
 
   return (
-    <div className="login-container">
-    <form className="form-login" onSubmit={onLogin}>
+    <div className="login-error-container">
+      <ThemeProvider theme={theme}>
+        <form className="login-container" onSubmit={onLogin}>
 
-        {/* <label htmlFor="email">Email</label> */}
-        <div className="inputs-login">
+            <div>
+              <TextField
+                variant="filled"
+                label="EMAIL"
+                name="email"
+                type="text"
 
+                value={email}
+                onChange={updateEmail}
+                style={inputStyle}
+              />
+            </div>
+            <div>
+              <TextField
+                variant="filled"
+                label="PASSWORD"
+                name="password"
+                type="password"
+                value={password}
+                onChange={updatePassword}
+                style={inputStyle}
+              />
+            </div>
 
-      <div>
-        <input
-          name="email"
-          type="text"
-          placeholder="Email"
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-        {/* <label htmlFor="password">Password</label> */}
-      <div>
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={updatePassword}
-        />
-      </div>
-</div>
+          <div className="buttons-login">
+            <Button style={buttonStyle} variant="contained" className="login-button" type="submit">LOGIN</Button>
+            <Button style={buttonStyle} variant="contained" className="login-button" type="button" onClick={(e) => onDemoLogin(e)}>DEMO</Button>
+          </div>
+        </form>
+          <div className="errors-login">
+            {errors.map((error) => (
+              <div>{error}</div>
+            ))}
 
-      <div className="buttons-login">
-        <button className="login-button" type="submit">LOGIN</button>
-          <button className="login-button" type="button" onClick={(e) => onDemoLogin(e)}>DEMO</button>
-      </div>
-        <div className="errors-login">
-          {errors.map((error) => (
-            <div>{error}</div>
-          ))}
+          </div>
+      </ThemeProvider>
 
-        </div>
-          </form>
-
-    </div>
+   </div>
   );
 };
 

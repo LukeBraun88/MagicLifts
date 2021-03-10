@@ -3,8 +3,72 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { signUp } from '../../services/auth';
 import * as sessionActions from "../../store/reducers/session"
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
 
-const SignUpForm = ({authenticated, setAuthenticated}) => {
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#34c0b9',
+    },
+    secondary: {
+      main: '#ffffff',
+    },
+  },
+  overrides: {
+    MuiInputLabel: {
+      root: {
+        color: "black",
+        "&$focused": {
+          color: "#34c0b9",
+          fontWeight: 600,
+        },
+      }
+    },
+    MuiFilledInput: {
+      root: {
+        fontWeight: 400,
+        fontSize: 20,
+      }
+    }
+
+  }
+});
+
+
+const buttonStyle = {
+  // background: 'linear-gradient(45deg, #34c0b9 30%, #f14d8a 90%)',
+  borderRadius: 10,
+  border: 0,
+  color: 'black',
+  fontSize: 16,
+  fontWeight: 400,
+  height: 55,
+  padding: '0 30px',
+  // boxShadow: '0 3px 5px 2px #34c0b9',
+}
+
+const inputStyle = {
+  width: 200,
+  background: 'linear-gradient(45deg, white 30%, white 90%)',
+  borderRadius: 10,
+  border: 0,
+  fontSize: 30,
+  fontWeight: 400,
+  fontFamily: 'sans-serif',
+  color: 'black',
+  display: 'flex',
+  textAlign: 'left',
+  // height: 48,
+  // padding: '0 30px',
+  // boxShadow: '0 3px 2px 2px white',
+}
+
+const SignUpForm = ({ authenticated, setAuthenticated }) => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
@@ -23,8 +87,8 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
         dispatch(sessionActions.toggleMenu(false))
         setAuthenticated(true);
       } else {
-      setErrors(user.errors);
-    }
+        setErrors(user.errors);
+      }
     }
   };
 
@@ -53,64 +117,75 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
   }
 
   return (
-    <div className = "signup-container">
-    <form className="form-signup" onSubmit={onSignUp}>
-      <div className="inputs-signup">
-      <div>
-        <input
-          type="text"
-          name="username"
-          placeholder="username"
-          onChange={updateUsername}
-          value={username}
-        ></input>
-      </div>
-      <div>
-        <input
-          type="text"
-          name="name"
-          placeholder="name"
-          onChange={updateName}
-          value={name}
-        ></input>
-      </div>
-      <div>
-        <input
-          type="text"
-          name="email"
-          placeholder="email"
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <input
-          type="password"
-          name="repeat_password"
-          placeholder="repeat password"
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-        </div>
-      <button className="signup-button" type="submit">Sign Up</button>
+    <div className="signup-container">
+      <ThemeProvider theme={theme}>
+        <form className="form-signup" onSubmit={onSignUp}>
+          <div className="inputs-signup">
+            <div>
+              <TextField
+                variant="filled"
+                label="USERNAME"
+                style={inputStyle}
+                type="text"
+                name="username"
+                onChange={updateUsername}
+                value={username}
+              />
+            </div>
+            <div>
+              <TextField
+                variant="filled"
+                label="NAME"
+                style={inputStyle}
+                type="text"
+                name="name"
+                onChange={updateName}
+                value={name}
+              />
+            </div>
+            <div>
+              <TextField
+                variant="filled"
+                label="EMAIL"
+                style={inputStyle}
+                type="text"
+                name="email"
+                onChange={updateEmail}
+                value={email}
+              />
+            </div>
+            <div>
+              <TextField
+                variant="filled"
+                label="PASSWORD"
+                style={inputStyle}
+                type="password"
+                name="password"
+                onChange={updatePassword}
+                value={password}
+              />
+            </div>
+            <div>
+              <TextField
+                variant="filled"
+                label="CONFIRM PASSWORD"
+                style={inputStyle}
+                type="password"
+                name="repeat_password"
+                onChange={updateRepeatPassword}
+                value={repeatPassword}
+                required={true}
+              />
+            </div>
+          <Button style={buttonStyle} variant="contained" className="signup-button" type="submit">Sign Up</Button>
+          </div>
+        </form>
         <div className="errors-signup">
           {errors.map((error) => (
             <div>{error}</div>
           ))}
-
         </div>
-    </form>
+      </ThemeProvider>
     </div>
   );
 };
