@@ -29,8 +29,8 @@ const NavBar = (props) => {
   return (
     <nav className="navbar">
       <div className="magic-lifts-heading">
-        <Link to="/welcome"><img src={planet} onClick={() => Redirect("/welcome")} className="magic-lifts-logo" alt="home"></img></Link>
-      <Link to="/welcome" className="magic-lifts-title">MAGIC LIFTS</Link>
+        <Link to="/"><img src={planet} onClick={() => Redirect("/")} className="magic-lifts-logo" alt="home"></img></Link>
+      <Link to="/" className="magic-lifts-title">MAGIC LIFTS</Link>
       </div>
       <ul className="navbar-nav">{props.children}</ul>
     </nav>

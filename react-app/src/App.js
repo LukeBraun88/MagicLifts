@@ -53,7 +53,7 @@ function App() {
 
       </NavBar>
       <Switch>
-        <Route path="/welcome" exact={true}>
+        <Route path="/" exact={true}>
           <LandingPage />
         </Route>
         <Route path="/login" exact={true}>
@@ -85,9 +85,9 @@ function App() {
         <ProtectedRoute path="/chart" exact={true} authenticated={authenticated}>
           <Chart />
         </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
+        {/* <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <h1>My Home Page</h1>
-        </ProtectedRoute>
+        </ProtectedRoute> */}
       </Switch>
     </BrowserRouter>
   );
