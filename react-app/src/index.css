@@ -857,9 +857,10 @@ input {
 }
 
 .tooltip {
-    width: 170px;
-    height: 50px;
-    background-color: rgb(97, 97, 97);
+    width: 180px;
+    height: 55px;
+    background-color: rgb(31, 31, 31);
+    border: 1px solid white;
     display: flex;
     flex-direction: column;
     align-items: center;
