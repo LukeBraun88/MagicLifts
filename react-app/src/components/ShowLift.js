@@ -125,14 +125,14 @@ function ShowLift({ authenticated }) {
             <div className="body" onClick={() => closeMenu()}>
                 {lift !== "deleted" ?
                     <div className="table-container">
-                        <Tippy content={lift ? lift.description : "no description of lift"} maxWidth={600} arrow={roundArrow + roundArrow} theme={'custom'} >
+                        <Tippy content={lift ? lift.description : "no description of lift"} maxWidth={600} arrow={roundArrow} theme={'custom'} >
                             <p className="table-heading">{lift ? lift.title : "Example Heading"}</p>
 
                         </Tippy>
-                        <Tippy content="Add Stat" arrow={roundArrow + roundArrow} theme={'custom'}>
+                        <Tippy content="Add Stat" arrow={roundArrow} theme={'custom'}>
                             <img className="table-plus" onClick={() => createStat()} src={plusIcon} alt='add stat' />
                         </Tippy>
-                        <Tippy content="Delete Lift" arrow={roundArrow + roundArrow} theme={'custom'}>
+                        <Tippy content="Delete Lift" arrow={roundArrow} theme={'custom'}>
                             <img className="table-minus" onClick={() => deleteLift()} src={minusIcon} alt='delete lift' />
                         </Tippy>
                         <ReactDataGrid dataSource={statsExample}
