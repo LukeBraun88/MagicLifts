@@ -12,17 +12,23 @@ import minusIcon from "../images/icons/minus.png"
 import ex from "../images/icons/ex.png"
 
 import ReactDataGrid from '@inovua/reactdatagrid-community'
-import Tippy, { roundArrow } from "@tippyjs/react/headless";
+// import Tippy, { roundArrow } from "@tippyjs/react/headless";
+import Tippy, { tippy } from '@tippyjs/react';
+import {roundArrow} from 'tippy.js'
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/dist/svg-arrow.css';
+import 'tippy.js/themes/material.css';
+import 'tippy.js/dist/border.css';
 import styled from "styled-components";
-import { useSpring, animated } from "react-spring";
+// import { useSpring, animated } from "react-spring";
 
-const Box = styled(animated.div)`
-  background: #333;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-family: sans-serif;
-`;
+// const Box = styled(animated.div)`
+//   background: #333;
+//   color: white;
+//   padding: 5px 10px;
+//   border-radius: 4px;
+//   font-family: sans-serif;
+// `;
 
 
 function ShowLift({ authenticated }) {
@@ -161,26 +167,26 @@ function ShowLift({ authenticated }) {
         minHeight: 250,
     }
 
-    const config = { tension: 300, friction: 15 };
-    const initialStyles = { opacity: 0, transform: "scale(0.5)" };
-    const [props, setSpring] = useSpring(() => initialStyles);
+    // const config = { tension: 300, friction: 15 };
+    // const initialStyles = { opacity: 0, transform: "scale(0.5)" };
+    // const [props, setSpring] = useSpring(() => initialStyles);
 
-    function onMount() {
-        setSpring({
-            opacity: 1,
-            transform: "scale(1.5)",
-            onRest: () => { },
-            config
-        });
-    }
+    // function onMount() {
+    //     setSpring({
+    //         opacity: 1,
+    //         transform: "scale(1.5)",
+    //         onRest: () => { },
+    //         config
+    //     });
+    // }
 
-    function onHide({ unmount }) {
-        setSpring({
-            ...initialStyles,
-            onRest: unmount,
-            config: { ...config, clamp: true }
-        });
-    }
+    // function onHide({ unmount }) {
+    //     setSpring({
+    //         ...initialStyles,
+    //         onRest: unmount,
+    //         config: { ...config, clamp: true }
+    //     });
+    // }
 
 
     // console.log(lifts)
@@ -191,42 +197,17 @@ function ShowLift({ authenticated }) {
             <div className="body" onClick={() => closeMenu()}>
                 {lift !== "deleted" ?
                     <div className="table-container">
-                        <Tippy
-                            render={attrs => (
-                                <Box style={props} {...attrs}>
-                                   {lift? lift.description: "no description of lift"}
-                                </Box>
-                            )}
-                            animation={true}
-                            onMount={onMount}
-                            onHide={onHide}
-                        >
+                        <Tippy content={lift ? lift.description : "no description of lift"} maxWidth={600} arrow={roundArrow + roundArrow} theme={'custom'} >
                         <p className="table-heading">{lift ? lift.title : "Example Heading"}</p>
+
                         </Tippy>
-                        <Tippy
-                            render={attrs => (
-                                <Box style={props} {...attrs}>
-                                    Add Stat
-                                </Box>
-                            )}
-                            animation={true}
-                            onMount={onMount}
-                            onHide={onHide}
-                        >
+                        <Tippy content="Add Stat" arrow={roundArrow + roundArrow} theme={'custom'}>
                             <img className="table-plus" onClick={() => createStat()} src={plusIcon} alt='add stat' />
                         </Tippy>
-                        <Tippy
-                            render={attrs => (
-                                <Box style={props} {...attrs}>
-                                    Delete Lift
-                                </Box>
-                            )}
-                            animation={true}
-                            onMount={onMount}
-                            onHide={onHide}
-                        >
-                            <img className="table-minus" onClick={() => deleteLift()} src={minusIcon} alt='delete lift' />
+                        <Tippy content="Delete Lift" arrow={roundArrow + roundArrow} theme={'custom'}>
+                        <img className="table-minus" onClick={() => deleteLift()} src={minusIcon} alt='delete lift' />
                         </Tippy>
+
                         <ReactDataGrid dataSource={statsExample}
                             idProperty="id"
                             columns={columns}

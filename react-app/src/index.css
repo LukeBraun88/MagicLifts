@@ -362,13 +362,14 @@ a {
     margin: auto; */
 }
 
-.login-error-container{
+.login-error-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 300px;
 }
+
 /* ------------------------- SIGN UP -------------------------- */
 
 .signup-container {
@@ -993,6 +994,32 @@ input {
     justify-content: space-around;
     border-radius: 10px;
     color: white;
+}
+
+.tippy-tooltip {}
+
+.tippy-popper {
+    /* border: 2px solid white; */
+}
+
+.tippy-content {
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+.tippy-box[data-theme~='custom'] {
+    background: black;
+    border: 2px solid white;
+}
+
+.tippy-box[data-theme~='custom']>.tippy-svg-arrow>svg:first-child {
+    fill: white;
+    width: 100%;
+    height: 43%;
+}
+
+.tippy-box[data-theme~='custom']>.tippy-svg-arrow>svg:last-child {
+    fill: black;
 }
 
 rect {
