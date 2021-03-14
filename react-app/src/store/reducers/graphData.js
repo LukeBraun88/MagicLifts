@@ -19,17 +19,19 @@ export const deleteGraphData = (payload) => ({
 
 export const setGraphLifts = (ids) => async (dispatch) => {
     JSON.stringify(ids)
-    const res = await fetch(
-        `/api/lifts/graph?id=${ids}`,
-        {
-            method: "GET",
-        }
-    );
-    let { data } = res.data;
-    console.log("---------data:", data)
-    // data = normalizedData(data)
-    dispatch(setGraphData(data));
-    return data;
+    try {
+        const res = await fetch(
+            `/api/lifts/graph?id=${ids}`,
+            {
+                method: "GET",
+            }
+        );
+        let { data } = res.data;
+        dispatch(setGraphData(data));
+        return data;
+    } catch (error) {
+        dispatch(deleteGraphData());
+    }
 };
 
 
@@ -40,10 +42,9 @@ const graphData = (state = null, action) => {
         case SET_GRAPH_DATA:
             newState = [...action.payload ]
             return newState
-        // case DELETE_GRAPH_DATA:
-        //     newState = { ...state }
-        //     delete newState[action.payload.id]
-        //     return newState
+        case DELETE_GRAPH_DATA:
+            newState = null
+            return newState
         default:
             return state;
     }

@@ -47,7 +47,6 @@ function ShowLift({ authenticated }) {
         if (stats != null) {
 
             setDataSource(stats)
-            // console.log("------------dataSource:",dataSource)
         }
     }, [stats])
 
@@ -69,7 +68,6 @@ function ShowLift({ authenticated }) {
     }
 
     const deleteLift = async () => {
-        // await setDeleted(true)
         await dispatch(liftActions.deleteLift({ liftId: lift.id }))
         await dispatch(sessionActions.normalizeUserData({ id: user.id }))
     }
@@ -77,7 +75,6 @@ function ShowLift({ authenticated }) {
 
     const onEditComplete = useCallback(({ value, columnId, rowIndex, data }) => {
         let { id, sets, reps, weight, date, difficulty, notes } = data
-        // console.log("columnId",columnId)
         if (columnId == "sets") {
             sets = value
         } else if (columnId == "reps") {

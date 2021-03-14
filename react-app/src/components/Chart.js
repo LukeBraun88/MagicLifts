@@ -27,7 +27,6 @@ const Chart = ({ authenticated }) => {
     }
 
     useEffect(() => {
-        console.log(graphData)
     }, [graphData])
 
     const [selected, setSelected] = useState([])
@@ -35,7 +34,6 @@ const Chart = ({ authenticated }) => {
     const findIds = async () => {
         let ids = []
         for (let option in selected) {
-            // console.log(option)
             ids.push(option.id)
         }
     }
@@ -43,24 +41,10 @@ const Chart = ({ authenticated }) => {
     useEffect(() => {
         let ids = []
         for (let key in selected) {
-            console.log(selected[key])
             ids.push(selected[key].id)
         }
-        // console.log("ids:",ids)
         dispatch(graphActions.setGraphLifts(ids))
     }, [selected])
-
-    // const addLift = async(selectedOption) =>{
-
-    //     setSelected(selectedOption)
-    //     // console.log(selectedOption)
-    //     // console.log("ids:",ids)
-    //     // await
-    // }
-    const handleChange = function (e) {
-
-    }
-
 
 
     const data = [
@@ -75,8 +59,6 @@ const Chart = ({ authenticated }) => {
             ]
         }
     ]
-
-
 
     function customTheme(theme) {
         return {

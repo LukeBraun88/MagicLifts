@@ -1,3 +1,4 @@
+from re import error
 from flask import Blueprint, session, request
 from flask_login import login_required, current_user
 import json
@@ -78,20 +79,17 @@ def get_lift_by_id(id):
 def get_lift_for_graph():
     # 1. gets user from session
     user = current_user
-    # ids = [ids]
     ids = request.args.get("id")
-    # ids = json.load(ids)
-    # print("---------------------------:", test)
     ids = ids.split(",")
-    print("------------", ids)
 
-    # 2. finds lifts based off of user.id
     lifts = []
-    for id in ids:
-        lift = Lift.query.filter(
-            Lift.id == int(id)).first()
-        lifts.append(lift.to_graph())
-
+    try:
+        for id in ids:
+            lift = Lift.query.filter(
+                Lift.id == int(id)).first()
+            lifts.append(lift.to_graph())
+    except (ValueError):
+        return {"message": "no lift id given"}, 500
 
     # 3. returns users lifts
     return {"message": "success", "data": lifts}, 200
