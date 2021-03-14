@@ -7,7 +7,7 @@ import ShowLift from "./components/ShowLift"
 import CreateStat from "./components/CreateStat"
 import CreateLift from "./components/CreateLift"
 import Chart from "./components/Chart"
-import {NavBar, NavItem, DropDownMenu } from "./components/NavBar";
+import { NavBar, NavItem, DropDownMenu } from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
@@ -15,7 +15,7 @@ import { authenticate } from "./services/auth";
 import * as sessionActions from "./store/reducers/session";
 import LandingPage from "./components/LandingPage";
 import triangleDownIcon from "./images/icons/triangle-down.png"
-import {CSSTransition} from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
 import tippy from 'tippy.js';
@@ -27,7 +27,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       const user = await authenticate();
       if (!user.errors) {
         setAuthenticated(true);
@@ -48,8 +48,8 @@ function App() {
 
         <NavItem >
           <DropDownMenu authenticated={authenticated} //this didn't have authenticated. do we need it?
-            setAuthenticated={setAuthenticated}/>
-      </NavItem>
+            setAuthenticated={setAuthenticated} />
+        </NavItem>
 
       </NavBar>
       <Switch>
@@ -66,7 +66,7 @@ function App() {
           <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
         </Route>
         <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
-          <UsersList/>
+          <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
@@ -85,9 +85,6 @@ function App() {
         <ProtectedRoute path="/chart" exact={true} authenticated={authenticated}>
           <Chart />
         </ProtectedRoute>
-        {/* <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <h1>My Home Page</h1>
-        </ProtectedRoute> */}
       </Switch>
     </BrowserRouter>
   );

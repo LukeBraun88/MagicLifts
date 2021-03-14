@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { fetch } from "../../services/fetch";
-import {normalizedData, normalizedBodyPartData} from "../../services/normalize_data"
+import { normalizedData, normalizedBodyPartData } from "../../services/normalize_data"
 
 // Action constants
 const SET_SESSION_USER = "session/setSessionUser";
@@ -46,7 +46,7 @@ export const toggleMenu = (payload) => ({
 
 
 
-export const normalizeUserData = ({id}) => async (dispatch) => {
+export const normalizeUserData = ({ id }) => async (dispatch) => {
     const res = await fetch(
         `/api/users/${id}`,
         {
@@ -87,21 +87,15 @@ export const logoutSessionUser = () => async (dispatch) => {
     return;
 };
 
-// const menuTemplate = {
-//     open:true
-// };
-
-// Reducer configuration
-
 const menuDefault = false
-const reducer = (state = {user: userTemplate, menu: menuDefault}, action) => {
+const reducer = (state = { user: userTemplate, menu: menuDefault }, action) => {
     let newState;
     switch (action.type) {
         case NORMALIZE_USER_DATA:
             newState = { ...state, user: action.payload }
             return newState
         case LOGOUT_SESSION_USER:
-            newState = {...state, user: userTemplate}
+            newState = { ...state, user: userTemplate }
             return newState
         case TOGGLE_MENU:
             newState = { ...state, menu: action.payload }

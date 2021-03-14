@@ -6,13 +6,7 @@ import * as liftActions from "../store/reducers/lifts"
 import * as sessionActions from "../store/reducers/session"
 import { NavLink } from "react-router-dom";
 
-
-
-
-function LandingPage(){
-
-
-
+function LandingPage() {
     let dispatch = useDispatch()
     let history = useHistory()
 
@@ -20,15 +14,13 @@ function LandingPage(){
         dispatch(sessionActions.toggleMenu(false))
     }
 
-
-
     return (
         <div className="body" onClick={() => closeMenu()}>
-    <div className="landing-container"></div>
-    <div className="landing-something">
+            <div className="landing-container"></div>
+            <div className="landing-something">
 
-    </div>
-        <div className="landing-heading">MAGIC LIFTS</div>
+            </div>
+            <div className="landing-heading">MAGIC LIFTS</div>
 
         </div>
     )

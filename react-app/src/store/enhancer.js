@@ -1,7 +1,6 @@
 import { applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
-
 let enhancer;
 
 // Configure Chrome dev tools as enhancer

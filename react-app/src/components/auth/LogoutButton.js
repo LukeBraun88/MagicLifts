@@ -4,7 +4,7 @@ import { logout } from "../../services/auth";
 import { useDispatch } from "react-redux";
 import { logoutSessionUser } from "../../store/reducers/session"
 
-const LogoutButton = ({setAuthenticated}) => {
+const LogoutButton = ({ setAuthenticated }) => {
   const dispatch = useDispatch();
 
   const onLogout = async (e) => {

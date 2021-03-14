@@ -41,7 +41,6 @@ const theme = createMuiTheme({
 
 
 const buttonStyle = {
-  // background: 'linear-gradient(45deg, #34c0b9 30%, #f14d8a 90%)',
   borderRadius: 10,
   border: 0,
   color: 'black',
@@ -49,12 +48,11 @@ const buttonStyle = {
   fontWeight: 400,
   height: 55,
   padding: '0 30px',
-  // boxShadow: '0 3px 5px 2px #34c0b9',
 }
 
 const inputStyle = {
   width: 200,
-  background: 'linear-gradient(45deg, white 30%, white 90%)',
+  background: 'white',
   borderRadius: 10,
   border: 0,
   fontSize: 30,
@@ -63,9 +61,6 @@ const inputStyle = {
   color: 'black',
   display: 'flex',
   textAlign: 'left',
-  // height: 48,
-  // padding: '0 30px',
-  // boxShadow: '0 3px 2px 2px white',
 }
 
 const SignUpForm = ({ authenticated, setAuthenticated }) => {
@@ -177,7 +172,7 @@ const SignUpForm = ({ authenticated, setAuthenticated }) => {
                 required={true}
               />
             </div>
-          <Button style={buttonStyle} variant="contained" className="signup-button" type="submit">Sign Up</Button>
+            <Button style={buttonStyle} variant="contained" className="signup-button" type="submit">Sign Up</Button>
           </div>
         </form>
         <div className="errors-signup">

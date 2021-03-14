@@ -11,7 +11,6 @@ import Select from 'react-select'
 const Chart = ({ authenticated }) => {
     const user = useSelector((x) => x.session.user)
     const allLifts = useSelector((x) => x.session.user.lifts)
-    // const lift = useSelector((x) => (x.shownLifts.lift))
     const stats = useSelector((x) => (x.shownLifts.stats))
     const graphData = useSelector((x) => x.graphData)
     let dispatch = useDispatch()
@@ -68,8 +67,6 @@ const Chart = ({ authenticated }) => {
                 primary25: '#34c0b9',
                 primary: '#34c0b9'
             },
-
-
         }
     }
 
@@ -176,8 +173,6 @@ const Chart = ({ authenticated }) => {
     }
 
 
-
-
     return (
         <div className="body" onClick={() => closeMenu()}>
             <div className="chart-background">
@@ -200,7 +195,6 @@ const Chart = ({ authenticated }) => {
                                     label: lift.title
                                 }
                             })}
-                        // onChange={(e) => addLift(e.target.value)}
                         />
                     </div>
                     <div className="chart-container">
@@ -249,7 +243,6 @@ const Chart = ({ authenticated }) => {
                             pointLabelYOffset={-12}
                             useMesh={true}
                             tooltip={(input) => {
-                                // input.point['data'].xFormatted
                                 return (
                                     <div className="tooltip">
                                         <p> Date: {input.point['data'].xFormatted}</p>

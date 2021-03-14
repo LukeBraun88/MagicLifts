@@ -23,6 +23,7 @@ import logoutIcon from "../images/icons/logout.png"
 import { CSSTransition } from 'react-transition-group'
 import SignUpForm from './auth/SignUpForm';
 import planet from "../images/icons/planet.png"
+
 // props.children is where the props will show up (navItems)
 // took out {authenticated, isAuthenticated} might need later
 const NavBar = (props) => {
@@ -30,7 +31,7 @@ const NavBar = (props) => {
     <nav className="navbar">
       <div className="magic-lifts-heading">
         <Link to="/"><img src={planet} onClick={() => Redirect("/")} className="magic-lifts-logo" alt="home"></img></Link>
-      <Link to="/" className="magic-lifts-title">MAGIC LIFTS</Link>
+        <Link to="/" className="magic-lifts-title">MAGIC LIFTS</Link>
       </div>
       <ul className="navbar-nav">{props.children}</ul>
     </nav>
@@ -39,8 +40,6 @@ const NavBar = (props) => {
 
 
 const NavItem = (props) => {
-
-  // const [open, setOpen] = useState(false)
   const open = useSelector((x) => (x.session.menu))
   const dispatch = useDispatch()
   const setOpen = (val) => {
@@ -50,7 +49,7 @@ const NavItem = (props) => {
   return (
     <li className="nav-item">
       <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
-        {!open ? < img className="dropdown_img" src={triangleDownIcon} alt="menu down" />:
+        {!open ? < img className="dropdown_img" src={triangleDownIcon} alt="menu down" /> :
           < img className="dropdown_img" src={triangleUpIcon} alt="menu up" />}
       </a>
       {open && props.children}
@@ -58,7 +57,7 @@ const NavItem = (props) => {
   )
 }
 
-const DropDownMenu = ({authenticated, setAuthenticated}) => {
+const DropDownMenu = ({ authenticated, setAuthenticated }) => {
 
   const [activeMenu, setActiveMenu] = useState('main')
   const [menuHeight, setMenuHeight] = useState(null)
@@ -72,10 +71,9 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
   const lifts = useSelector((x) => Object.values(x.currentLifts))
   const open = useSelector((x) => (x.session.menu))
 
-  if (user != null){
+  if (user != null) {
 
   }
-  // const userBodyParts = useSelector((x) => x.session.user.bodyParts)
 
 
   // logout
@@ -90,31 +88,25 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
     return <Redirect to="/" />
   };
 
-  const goToBodyPart = async(id) => {
-    await dispatch(liftActions.setCurrentLifts({bodyPartId: id}))
-    // alert(lift)
-    // dispatch(liftActions.setCurrentLiftsCreator(lift))
-    // then history.push to page that displays current lift
+  const goToBodyPart = async (id) => {
+    await dispatch(liftActions.setCurrentLifts({ bodyPartId: id }))
   }
 
-  const goToLift = (id) =>{
+  const goToLift = (id) => {
     dispatch(liftActions.setShownLifts({ liftId: id }))
     dispatch(graphActions.setGraphLifts([id]))
     dispatch(sessionActions.toggleMenu(false))
     history.push("/show-lift")
-    // return <Redirect to="/show-lift" />
   }
 
-  const goToCharts = () =>{
+  const goToCharts = () => {
     dispatch(sessionActions.toggleMenu(false))
     history.push("/chart")
-    // return <Redirect to="/show-lift" />
   }
 
-  const createLift = () =>{
+  const createLift = () => {
     dispatch(sessionActions.toggleMenu(false))
     history.push("/create-lift")
-    // return <Redirect to="/show-lift" />
   }
 
 
@@ -133,10 +125,10 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
   const DropDownItem = (props) => {
 
     return (
-      <a className="menu-item" style={{width: 280}} >
-        {props.leftIcon && <a href="#" onClick={()=> props.goToLeftMenu && setActiveMenu(props.goToLeftMenu)} className="icon-button">{props.leftIcon}</a>}
+      <a className="menu-item" style={{ width: 280 }} >
+        {props.leftIcon && <a href="#" onClick={() => props.goToLeftMenu && setActiveMenu(props.goToLeftMenu)} className="icon-button">{props.leftIcon}</a>}
         {props.children}
-        {props.rightIcon && <a href="#" onClick={() => { props.callFunc && props.callFunc(); props.goToRightMenu && setActiveMenu(props.goToRightMenu); }}className="icon-right">{props.rightIcon}</a>}
+        {props.rightIcon && <a href="#" onClick={() => { props.callFunc && props.callFunc(); props.goToRightMenu && setActiveMenu(props.goToRightMenu); }} className="icon-right">{props.rightIcon}</a>}
       </a>
     )
   }
@@ -157,178 +149,162 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
   return (
     //css transition adds or removes classes based on state
     //when in is truthy, shows children. else changes css classes
-    //unmountonExi unmounts children if they aren't active
+    //unmountonExit unmounts children if they aren't active
     //timeout sets duration of animation
     <>
 
-    <div className="dropdown" style={{height: menuHeight}} ref={dropdownRef}>
+      <div className="dropdown" style={{ height: menuHeight }} ref={dropdownRef}>
         {authenticated ?
-// ----------------------------- AUTHENTICATED --------------------------
-      <CSSTransition
-        in={activeMenu === 'main'}
-        unmountOnExit
-        timeout={500}
-        classNames="menu-primary"
-        //callback as soon as enter class is added to element
-        onEnter={calcDimensions}
-        // onExit={calcDimensions}
-        >
-          <div className="menu">
-        <DropDownItem
-          leftIcon={<img src={deadliftIcon} alt="bodyParts" />}
-          rightIcon={<img src={triangleRightIcon} alt="more bodyParts" />}
-          goToRightMenu="bodyParts"
-        ><p className="dropdownitem_text">LIFTS</p>
-      </DropDownItem>
-        <DropDownItem
-          leftIcon={<img src={chartIcon} alt="body" />}
-          rightIcon={<img src={triangleRightIcon} alt="charts" />}
-          callFunc={goToCharts}
-          ><p className="dropdownitem_text">CHART</p>
-      </DropDownItem>
-        <DropDownItem
-          leftIcon={<img src={bodyIcon} alt="body" />}
-          ><p className="dropdownitem_text">BODY DIAGRAM</p>
-      </DropDownItem>
-        <DropDownItem
-          leftIcon={<img src={logoutIcon} alt="logout" />}
-              rightIcon={<img src={triangleRightIcon} alt="logout are you sure?" />}
-              goToRightMenu="main"
-              callFunc={onLogout}
-          ><p className="dropdownitem_text">LOGOUT</p>
-      </DropDownItem>
-        </div>
-      </CSSTransition>
-      :
-// ------------------------- UN-AUTHENTICATED ----------------------------
-        <CSSTransition
-          in={activeMenu === 'main'}
+          // ----------------------------- AUTHENTICATED --------------------------
+          <CSSTransition
+            in={activeMenu === 'main'}
+            unmountOnExit
+            timeout={500}
+            classNames="menu-primary"
+            //callback as soon as enter class is added to element
+            onEnter={calcDimensions}
+          >
+            <div className="menu">
+              <DropDownItem
+                leftIcon={<img src={deadliftIcon} alt="bodyParts" />}
+                rightIcon={<img src={triangleRightIcon} alt="more bodyParts" />}
+                goToRightMenu="bodyParts"
+              ><p className="dropdownitem_text">LIFTS</p>
+              </DropDownItem>
+              <DropDownItem
+                leftIcon={<img src={chartIcon} alt="body" />}
+                rightIcon={<img src={triangleRightIcon} alt="charts" />}
+                callFunc={goToCharts}
+              ><p className="dropdownitem_text">CHART</p>
+              </DropDownItem>
+              <DropDownItem
+                leftIcon={<img src={bodyIcon} alt="body" />}
+              ><p className="dropdownitem_text">BODY DIAGRAM</p>
+              </DropDownItem>
+              <DropDownItem
+                leftIcon={<img src={logoutIcon} alt="logout" />}
+                rightIcon={<img src={triangleRightIcon} alt="logout are you sure?" />}
+                goToRightMenu="main"
+                callFunc={onLogout}
+              ><p className="dropdownitem_text">LOGOUT</p>
+              </DropDownItem>
+            </div>
+          </CSSTransition>
+          :
+          // ------------------------- UN-AUTHENTICATED ----------------------------
+          <CSSTransition
+            in={activeMenu === 'main'}
+            unmountOnExit
+            timeout={500}
+            classNames="menu-primary"
+            //callback as soon as enter class is added to element
+            onEnter={calcDimensions}
+          >
+            <div className="menu">
+              <DropDownItem
+                leftIcon={<img src={loginIcon} alt="log in" />}
+                rightIcon={<img src={triangleRightIcon} alt="login" />}
+                goToRightMenu="login"
+              ><p className="dropdownitem_text">LOG IN</p>
+              </DropDownItem>
+              <DropDownItem
+                leftIcon={<img src={signupIcon} alt="sign up" />}
+                rightIcon={<img src={triangleRightIcon} alt="signup" />}
+                goToRightMenu="signup"
+              ><p className="dropdownitem_text">SIGN UP</p>
+
+              </DropDownItem>
+            </div>
+          </CSSTransition>
+        }
+        {/* ----------------------- BODY PARTS -------------------------------- */}
+        {user != null &&
+          <CSSTransition
+            in={activeMenu === 'bodyParts'}
+            unmountOnExit
+            timeout={500}
+            classNames="menu-secondary"
+            onEnter={calcDimensions}
+          >
+            <div className="menu">
+              <DropDownItem
+                leftIcon={<img src={triangleLeftIcon} alt="back to main menu" />}
+                rightIcon={<img src={triangleRightIcon} alt="create lift" />}
+                goToLeftMenu="main"
+                callFunc={() => createLift()}
+              ><p className="dropdownitem_text dropdown_category">CREATE LIFT</p>
+              </DropDownItem>
+              {user != null && bodyParts.map((bodyPart) => (
+                <>
+                  <DropDownItem
+                    callFunc={() => goToBodyPart(bodyPart.id)}
+                    key={bodyPart.id}
+                  ><p className="dropdownitem_text dropdown_category">{bodyPart.title}</p>
+                    <div className="line"></div>
+                  </DropDownItem>
+                  {Object.values(bodyPart.lifts).map((lift) => (
+                    <DropDownItem
+                      rightIcon={<img src={triangleRightIcon} alt={`go to ${lift.title}`} />}
+                      callFunc={() => goToLift(lift.id)}
+                      key={lift.id}
+                    ><p className="dropdownitem_text">{lift.title}</p>
+                    </DropDownItem>
+                  ))}
+                </>
+              ))}
+            </div>
+          </CSSTransition>
+
+        }
+
+        {/* --------------------- LIFTS --------------------------------- */}
+        {lifts && <CSSTransition
+          in={activeMenu === 'lifts'}
           unmountOnExit
           timeout={500}
-          classNames="menu-primary"
-          //callback as soon as enter class is added to element
+          classNames="menu-secondary"
           onEnter={calcDimensions}
         >
           <div className="menu">
             <DropDownItem
-              leftIcon={<img src={loginIcon} alt="log in" />}
-              rightIcon={<img src={triangleRightIcon} alt="login" />}
-              goToRightMenu="login"
-            ><p className="dropdownitem_text">LOG IN</p>
+              leftIcon={<img src={triangleLeftIcon} alt="back to bodyParts" />}
+              goToLeftMenu="bodyParts"
+            ><p className="dropdownitem_text"></p>
             </DropDownItem>
-            <DropDownItem
-              leftIcon={<img src={signupIcon} alt="sign up"/>}
-              rightIcon={<img src={triangleRightIcon} alt="signup" />}
-              goToRightMenu="signup"
-            ><p className="dropdownitem_text">SIGN UP</p>
-
-            </DropDownItem>
+            {lifts && lifts.map((lift) => (
+              <DropDownItem
+                rightIcon={<img src={triangleRightIcon} alt={`go to ${lift.title}`} />}
+                callFunc={() => goToLift(lift.id)}
+                key={lift.id}
+              ><p className="dropdownitem_text">{lift.title}</p>
+              </DropDownItem>
+            ))}
           </div>
         </CSSTransition>
         }
-{/* ----------------------- BODY PARTS -------------------------------- */}
-{user != null &&
-      <CSSTransition
-        in={activeMenu === 'bodyParts'}
-        unmountOnExit
-        timeout={500}
-        classNames="menu-secondary"
-        onEnter={calcDimensions}
+
+        {/* --------------------- LOGIN --------------------------------- */}
+        <CSSTransition
+          in={activeMenu === 'login'}
+          unmountOnExit
+          timeout={500}
+          classNames="menu-secondary"
+          onEnter={calcDimensions}
         >
           <div className="menu">
-        <DropDownItem
-          leftIcon={<img src={triangleLeftIcon} alt="back to main menu" />}
-          rightIcon={<img src={triangleRightIcon} alt="create lift"/>}
-          goToLeftMenu="main"
-          callFunc={() => createLift()}
-          ><p className="dropdownitem_text dropdown_category">CREATE LIFT</p>
-      </DropDownItem>
-      {/* add showing categories. possibly have a state change when you create a new lift */}
-          {user != null && bodyParts.map((bodyPart) => (
-
-            <>
-
             <DropDownItem
-              // rightIcon={<img src={triangleRightIcon} alt={`go to ${bodyPart.title}`} />}
-              callFunc={()=>goToBodyPart(bodyPart.id)}
-              // goToRightMenu="lifts"
-              key={bodyPart.id}
-              ><p className="dropdownitem_text dropdown_category">{bodyPart.title}</p>
-              <div className="line"></div>
+              leftIcon={<img src={triangleLeftIcon} alt="back to main menu" />}
+              goToLeftMenu="main"
+            >
+
+              <LoginForm authenticated={authenticated}
+                setAuthenticated={setAuthenticated} />
             </DropDownItem>
-              {Object.values(bodyPart.lifts).map((lift)=>(
-                <DropDownItem
-                  rightIcon={<img src={triangleRightIcon} alt={`go to ${lift.title}`} />}
-                  // goToRightMenu="lifts"
-                  callFunc={() => goToLift(lift.id)}
-                  key={lift.id}
-                ><p className="dropdownitem_text">{lift.title}</p>
-                </DropDownItem>
-              ))}
+          </div>
+        </CSSTransition>
 
-
-            </>
-
-          ))}
-        </div>
-      </CSSTransition>
-
-}
-
-      {/* // callFunc={() => goToBodyPart(() => bodyPart)} */}
-
-
-{/* --------------------- LIFTS --------------------------------- */}
-     {lifts && <CSSTransition
-        in={activeMenu === 'lifts'}
-        unmountOnExit
-        timeout={500}
-        classNames="menu-secondary"
-        onEnter={calcDimensions}
-      >
-        <div className="menu">
-          <DropDownItem
-            leftIcon={<img src={triangleLeftIcon} alt="back to bodyParts" />}
-            // rightIcon={<img src={triangleRightIcon} alt="more lifts"/>}
-            goToLeftMenu="bodyParts"
-          ><p className="dropdownitem_text"></p>
-          </DropDownItem>
-          {/* add showing categories. possibly have a state change when you create a new lift */}
-          {lifts && lifts.map((lift) => (
-            <DropDownItem
-              rightIcon={<img src={triangleRightIcon} alt={`go to ${lift.title}`} />}
-              // goToRightMenu="lifts"
-              callFunc={() => goToLift(lift.id)}
-              key={lift.id}
-            ><p className="dropdownitem_text">{lift.title}</p>
-            </DropDownItem>
-          ))}
-        </div>
-      </CSSTransition>
-}
-
-{/* --------------------- LOGIN --------------------------------- */}
-      <CSSTransition
-        in={activeMenu === 'login'}
-        unmountOnExit
-        timeout={500}
-        classNames="menu-secondary"
-        onEnter={calcDimensions}
-        >
-          <div className="menu">
-        <DropDownItem
-          leftIcon={<img src={triangleLeftIcon} alt="back to main menu" />}
-          goToLeftMenu="main"
-          >
-
-            <LoginForm authenticated={authenticated}
-              setAuthenticated={setAuthenticated}/>
-      </DropDownItem>
-        </div>
-      </CSSTransition>
-
-{/* -------------------------- LOGOUT -------------------------- */}
-      {/* <CSSTransition
+        {/* -------------------------- LOGOUT -------------------------- */}
+        {/* <CSSTransition
         in={activeMenu === 'logout'}
         unmountOnExit
         timeout={500}
@@ -346,25 +322,25 @@ const DropDownMenu = ({authenticated, setAuthenticated}) => {
         </div>
       </CSSTransition> */}
 
-{/* ---------------- SIGNUP ----------------------- */}
-      <CSSTransition
-        in={activeMenu === 'signup'}
-        unmountOnExit
-        timeout={500}
-        classNames="menu-secondary"
-        onEnter={calcDimensions}
+        {/* ---------------- SIGNUP ----------------------- */}
+        <CSSTransition
+          in={activeMenu === 'signup'}
+          unmountOnExit
+          timeout={500}
+          classNames="menu-secondary"
+          onEnter={calcDimensions}
         >
           <div className="menu">
-        <DropDownItem
-          leftIcon={<img src={triangleLeftIcon} alt="back to main menu" />}
-            goToLeftMenu="main"
-          >
-            <SignUpForm authenticated={authenticated}
-              setAuthenticated={setAuthenticated}/>
-      </DropDownItem>
-        </div>
-      </CSSTransition>
-    </div>
+            <DropDownItem
+              leftIcon={<img src={triangleLeftIcon} alt="back to main menu" />}
+              goToLeftMenu="main"
+            >
+              <SignUpForm authenticated={authenticated}
+                setAuthenticated={setAuthenticated} />
+            </DropDownItem>
+          </div>
+        </CSSTransition>
+      </div>
     </>
   )
 }

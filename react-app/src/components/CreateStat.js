@@ -46,7 +46,6 @@ const CreateStat = ({ authenticated }) => {
     };
 
     const buttonStyle = {
-        // background: 'linear-gradient(45deg, #34c0b9 30%, #f14d8a 90%)',
         borderRadius: 10,
         border: 0,
         color: 'black',
@@ -54,7 +53,6 @@ const CreateStat = ({ authenticated }) => {
         fontWeight: 400,
         height: 60,
         padding: '0 30px',
-        // boxShadow: '0 3px 5px 2px #34c0b9',
     }
 
     const theme = createMuiTheme({
@@ -88,7 +86,7 @@ const CreateStat = ({ authenticated }) => {
 
     const inputStyle = {
         width: 240,
-        background: 'linear-gradient(45deg, white 30%, white 90%)',
+        background: 'white',
         borderRadius: 10,
         border: 0,
         fontSize: 30,
@@ -97,11 +95,7 @@ const CreateStat = ({ authenticated }) => {
         color: 'black',
         display: 'flex',
         textAlign: 'left',
-        // height: 48,
-        // padding: '0 30px',
-        // boxShadow: '0 3px 2px 2px white',
     }
-
 
 
     return (
@@ -170,40 +164,35 @@ const CreateStat = ({ authenticated }) => {
 
                             <div className="create-2">
                                 <div className="smaller">
-                                <TextField
-                                    label="DATE"
-                                    variant="filled"
-                                    style={inputStyle}
-                                    name="date"
-                                    type="date"
-                                    value={date}
-                                    onChange={(e) => setDate(e.target.value)}
-                                />
-
-
-
-
-
-                                <TextField
-                                    multiline
-                                    id="notes"
-                                    variant="filled"
-                                    label="NOTES"
-                                    name="notes"
-                                    type="text"
-                                    rowsMax={4}
-                                    style={inputStyle}
-                                    placeholder="notes"
-                                    value={notes}
-                                    onChange={(e) => setNotes(e.target.value)}
-                                />
-                                <div className="stat-create_buttons">
-                                    <Button style={buttonStyle} variant="contained" className="stat-back_button" type="button" onClick={() => goBack()}>Back</Button>
-                                    <Button style={buttonStyle} variant="contained" className="stat-create_button" type="submit">Create</Button>
-                                </div>
-                                </div>
+                                    <TextField
+                                        label="DATE"
+                                        variant="filled"
+                                        style={inputStyle}
+                                        name="date"
+                                        type="date"
+                                        value={date}
+                                        onChange={(e) => setDate(e.target.value)}
+                                    />
+                                    <TextField
+                                        multiline
+                                        id="notes"
+                                        variant="filled"
+                                        label="NOTES"
+                                        name="notes"
+                                        type="text"
+                                        rowsMax={4}
+                                        style={inputStyle}
+                                        placeholder="notes"
+                                        value={notes}
+                                        onChange={(e) => setNotes(e.target.value)}
+                                    />
+                                    <div className="stat-create_buttons">
+                                        <Button style={buttonStyle} variant="contained" className="stat-back_button" type="button" onClick={() => goBack()}>Back</Button>
+                                        <Button style={buttonStyle} variant="contained" className="stat-create_button" type="submit">Create</Button>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
 
                         <div className="stat-create_errors">
                             {errors.map((error) => (

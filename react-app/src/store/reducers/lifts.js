@@ -87,13 +87,13 @@ export const deleteLift = ({ liftId }) => async (dispatch) => {
     }
   );
   let { data } = res.data;
-    console.log("deleted----heres id:", data)
+  console.log("deleted----heres id:", data)
   dispatch(deleteShownLiftsCreator(data));
   return data;
 };
 
 
-export const updateShownStats = ({ id, sets, reps, weight, date, difficulty, notes }) => async(dispatch) => {
+export const updateShownStats = ({ id, sets, reps, weight, date, difficulty, notes }) => async (dispatch) => {
   const res = await fetch(
     `/api/stats/${id}`,
     {
@@ -103,13 +103,13 @@ export const updateShownStats = ({ id, sets, reps, weight, date, difficulty, not
         reps: reps,
         weight: weight,
         date: date,
-        difficulty:difficulty,
+        difficulty: difficulty,
         notes: notes,
       }),
     }
   );
 
-  let {data} = res.data;
+  let { data } = res.data;
 
   dispatch(setShownLiftsCreator(data))
   return data
@@ -141,36 +141,32 @@ export const createStat = ({ sets, reps, weight, date, difficulty, notes, liftId
 
 
 export const currentLifts = (state = {}, action) => {
-    let newState;
-    switch (action.type) {
-        case SET_CURRENT_LIFTS:
-            // const lifts = normalizedData(...action.payload)
-            newState = { ...action.payload }
-            return newState;
-        default:
-            return state;
-    }
+  let newState;
+  switch (action.type) {
+    case SET_CURRENT_LIFTS:
+      newState = { ...action.payload }
+      return newState;
+    default:
+      return state;
+  }
 };
 
 // export const shownLifts = (state = {}, action) => {
-export const shownLifts = (state = {lift:null, stats:null}, action) => {
-    let newState;
-    switch (action.type) {
-        case SET_SHOWN_LIFTS:
-            // const lifts = normalizedData(...action.payload)
-            newState = { lift:action.payload, stats:action.payload.stats }
-            return newState;
-        // case UPDATE_SHOWN_LIFTS:
-        //     const lifts = normalizedData(...action.payload)
+export const shownLifts = (state = { lift: null, stats: null }, action) => {
+  let newState;
+  switch (action.type) {
+    case SET_SHOWN_LIFTS:
+      newState = { lift: action.payload, stats: action.payload.stats }
+      return newState;
+    // case UPDATE_SHOWN_LIFTS:
+    //     const lifts = normalizedData(...action.payload)
+    //     newState = { lift: action.payload, stats}
+    //     return newState;
+    case DELETE_SHOWN_LIFTS:
+      newState = { lift: "deleted", stats: null }
+      return newState;
 
-        //     newState = { lift: action.payload, stats}
-
-        //     return newState;
-        case DELETE_SHOWN_LIFTS:
-            newState = { lift: "deleted", stats: null }
-            return newState;
-
-        default:
-            return state;
-    }
+    default:
+      return state;
+  }
 };

@@ -23,6 +23,4 @@ class BodyPart(db.Model):
             "title": self.title,
             "lifts": self.lifts,
             "userId": self.user_id,
-            # "createdAt": self.created_at,
-            # "updatedAt": self.updated_at,
         }

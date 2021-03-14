@@ -39,9 +39,7 @@ const theme = createMuiTheme({
   }
 });
 
-
 const buttonStyle = {
-  // background: 'linear-gradient(45deg, #34c0b9 30%, #f14d8a 90%)',
   borderRadius: 10,
   border: 0,
   color: 'black',
@@ -49,12 +47,11 @@ const buttonStyle = {
   fontWeight: 400,
   height: 55,
   padding: '0 30px',
-  // boxShadow: '0 3px 5px 2px #34c0b9',
 }
 
 const inputStyle = {
   width: 200,
-  background: 'linear-gradient(45deg, white 30%, white 90%)',
+  background: 'white',
   borderRadius: 10,
   border: 0,
   fontSize: 30,
@@ -63,9 +60,6 @@ const inputStyle = {
   color: 'black',
   display: 'flex',
   textAlign: 'left',
-  // height: 48,
-  // padding: '0 30px',
-  // boxShadow: '0 3px 2px 2px white',
 }
 
 
@@ -100,8 +94,6 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     }
   };
 
-
-
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -120,44 +112,43 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
       <ThemeProvider theme={theme}>
         <form className="login-container" onSubmit={onLogin}>
 
-            <div>
-              <TextField
-                variant="filled"
-                label="EMAIL"
-                name="email"
-                type="text"
-
-                value={email}
-                onChange={updateEmail}
-                style={inputStyle}
-              />
-            </div>
-            <div>
-              <TextField
-                variant="filled"
-                label="PASSWORD"
-                name="password"
-                type="password"
-                value={password}
-                onChange={updatePassword}
-                style={inputStyle}
-              />
-            </div>
+          <div>
+            <TextField
+              variant="filled"
+              label="EMAIL"
+              name="email"
+              type="text"
+              value={email}
+              onChange={updateEmail}
+              style={inputStyle}
+            />
+          </div>
+          <div>
+            <TextField
+              variant="filled"
+              label="PASSWORD"
+              name="password"
+              type="password"
+              value={password}
+              onChange={updatePassword}
+              style={inputStyle}
+            />
+          </div>
 
           <div className="buttons-login">
             <Button style={buttonStyle} variant="contained" className="login-button" type="submit">LOGIN</Button>
             <Button style={buttonStyle} variant="contained" className="login-button" type="button" onClick={(e) => onDemoLogin(e)}>DEMO</Button>
           </div>
         </form>
-          <div className="errors-login">
-            {errors.map((error) => (
-              <div>{error}</div>
-            ))}
+        <div className="errors-login">
+          {errors.map((error) => (
+            <div>{error}</div>
+          ))}
 
-          </div>
+        </div>
       </ThemeProvider>
 
-   </div>
+    </div>
   );
 };
 
