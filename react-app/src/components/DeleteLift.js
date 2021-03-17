@@ -39,10 +39,10 @@ function DeleteLift() {
         <div className="body" onClick={() => closeMenu()}>
             {lift !== "deleted" ?
                 <div className="lift-delete">
-                    <p className="lift-delete-text">ARE YOU POSITIVE?</p>
-                    <div className="stat-create_buttons">
-                        <Button style={buttonStyle} variant="contained" className="stat-back_button" type="button" onClick={() => goBack()}>Back</Button>
-                        <Button style={buttonStyle} variant="contained" className="stat-create_button" type="button" onClick={() => deleteLift()}>Delete</Button>
+                    <p className="lift-delete-text">U SURE ?</p>
+                    <div className="lift-delete_buttons">
+                        <Button style={buttonStyle} variant="contained" className="lift-delete_button" type="button" onClick={() => goBack()}>GO BACK</Button>
+                        <Button style={buttonStyle} variant="contained" className="lift-delete_button" type="button" onClick={() => deleteLift()}>DELETE</Button>
                     </div>
                 </div>
             :
