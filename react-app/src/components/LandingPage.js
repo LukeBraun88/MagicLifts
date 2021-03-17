@@ -17,7 +17,7 @@ function LandingPage() {
     return (
         <div className="body" onClick={() => closeMenu()}>
             <div className="landing-container"></div>
-            <div className="landing-something">
+            <div className="landing-circle">
             <div className="landing-heading">MAGIC LIFTS</div>
 
             </div>
