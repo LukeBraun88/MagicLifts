@@ -169,6 +169,10 @@ const CreateStat = ({ authenticated }) => {
                                         variant="filled"
                                         style={inputStyle}
                                         name="date"
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        defaultValue="null"
                                         type="date"
                                         value={date}
                                         onChange={(e) => setDate(e.target.value)}
@@ -182,7 +186,7 @@ const CreateStat = ({ authenticated }) => {
                                         type="text"
                                         rowsMax={4}
                                         style={inputStyle}
-                                        placeholder="notes"
+                                        placeholder="optional notes"
                                         value={notes}
                                         onChange={(e) => setNotes(e.target.value)}
                                     />
