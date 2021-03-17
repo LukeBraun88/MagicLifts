@@ -769,11 +769,41 @@ input {
 
 /* ----------------------- DELETE LIFT? -------------------- */
 
-.lift-delete {
+.lift-delete_container {
     display: flex;
     flex-direction: column;
     width: 400px;
-    height: 300px;
+    height: 210px;
+    padding: 55px 55px;
+    background-color: #ffffff;
+    align-items: center;
+    border-radius: 30px;
+    position: relative;
+    text-align: center;
+    justify-content: space-between;
+    top: -5%;
+}
+
+.lift-delete {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 50px;
+    padding: 45px 45px;
+    background-color: #313943;
+    align-items: center;
+    border-radius: 30px;
+    /* position: relative; */
+    /* text-align: center; */
+    justify-content: center;
+    /* top: -5%; */
+}
+
+.lift-deleted {
+    display: flex;
+    flex-direction: column;
+    width: 330px;
+    height: 230px;
     padding: 45px 45px;
     background-color: #ffffff;
     align-items: center;
@@ -787,7 +817,7 @@ input {
 .lift-delete-text {
     font-size: 3.5em;
     font-family: 'Orbitron', sans-serif;
-    color: #313943;
+    color: #000000;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -803,7 +833,7 @@ input {
     align-items: center;
     justify-content: space-between;
     width: 300px;
-    height: 15%;
+    height: 60px;
 }
 
 /* .lift-delete-back_button {
@@ -818,8 +848,8 @@ input {
     font-size: 100%;
     width: 130px;
     height: 55px;
-    position: relative;
-    top: 20px;
+    /* position: relative;
+    top: 20px; */
 }
 
 .lift-delete-back_button:hover {
@@ -828,7 +858,7 @@ input {
 
 .lift-delete_button:hover {
     opacity: 0.95;
-    background: #34c0b9
+    /* background: #00fff2 */
 }
 
 /* -------------------- GRAPH ---------------- */

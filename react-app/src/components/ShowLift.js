@@ -147,7 +147,7 @@ function ShowLift({ authenticated }) {
                         />
                     </div>
                     :
-                    <div className="lift-delete">
+                    <div className="lift-deleted">
                         <p className="lift-delete-text">LIFT DELETED</p>
                     </div>
                 }
