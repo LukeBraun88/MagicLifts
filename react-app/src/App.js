@@ -20,6 +20,7 @@ import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
+import DeleteLift from "./components/DeleteLift";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -76,6 +77,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/create-lift" exact={true} authenticated={authenticated}>
           <CreateLift />
+        </ProtectedRoute>
+        <ProtectedRoute path="/delete-lift" exact={true} authenticated={authenticated}>
+          <DeleteLift />
         </ProtectedRoute>
         <ProtectedRoute path="/show-lift" exact={true} authenticated={authenticated}>
           <ShowLift>

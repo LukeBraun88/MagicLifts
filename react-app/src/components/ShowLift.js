@@ -43,8 +43,7 @@ function ShowLift({ authenticated }) {
     }
 
     const deleteLift = async () => {
-        await dispatch(liftActions.deleteLift({ liftId: lift.id }))
-        await dispatch(sessionActions.normalizeUserData({ id: user.id }))
+        history.push("/delete-lift")
     }
 
     const onEditComplete = useCallback(({ value, columnId, rowIndex, data }) => {
