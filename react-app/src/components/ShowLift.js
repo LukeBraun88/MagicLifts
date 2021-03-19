@@ -141,7 +141,7 @@ function ShowLift({ authenticated }) {
                             style={gridStyle}
                             defaultSortInfo={{ name: 'date', dir: -1 }}
                             livePagination="true"
-                            editable="true"
+                            editable={true}
                             onEditComplete={onEditComplete}
                             theme="default-dark"
                         />

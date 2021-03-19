@@ -135,9 +135,9 @@ const DropDownMenu = ({ authenticated, setAuthenticated }) => {
 
     return (
       <a className="menu-item" style={{ width: 280 }} onClick={menuItem} >
-        {props.leftIcon && <a href="#" onClick={() => props.goToLeftMenu && setActiveMenu(props.goToLeftMenu)} className="icon-button">{props.leftIcon}</a>}
+        {props.leftIcon && <span href="#" onClick={() => props.goToLeftMenu && setActiveMenu(props.goToLeftMenu)} className="icon-button">{props.leftIcon}</span>}
         {props.children}
-        {props.rightIcon && <a href="#" className="icon-right">{props.rightIcon}</a>}
+        {props.rightIcon && <span href="#" className="icon-right">{props.rightIcon}</span>}
       </a>
     )
   }
@@ -186,10 +186,10 @@ const DropDownMenu = ({ authenticated, setAuthenticated }) => {
                 callFunc={goToCharts}
               ><p className="dropdownitem_text">CHART</p>
               </DropDownItem>
-              <DropDownItem
+              {/* <DropDownItem
                 leftIcon={<img src={bodyIcon} alt="body" />}
               ><p className="dropdownitem_text">BODY DIAGRAM</p>
-              </DropDownItem>
+              </DropDownItem> */}
               <DropDownItem
                 leftIcon={<img src={logoutIcon} alt="logout" />}
                 rightIcon={<img src={triangleRightIcon} className="img-right" alt="logout are you sure?" />}
