@@ -126,7 +126,7 @@ const DropDownMenu = ({ authenticated, setAuthenticated }) => {
 
     function menuItem(event){
       const target = event.target;
-      if (target.className !== 'menu-item' & target.className !== 'dropdownitem_text' & target.className !== 'img-right' & target.className !== 'dropdown_category') {
+      if (target.className !== 'menu-item' & target.className !== 'dropdownitem_text' & target.className !== 'img-right' & target.className !== 'icon-right' & target.className !== 'dropdown_category') {
         return;
       }
       props.callFunc && props.callFunc()
@@ -236,11 +236,19 @@ const DropDownMenu = ({ authenticated, setAuthenticated }) => {
             onEnter={calcDimensions}
           >
             <div className="menu">
-               <a className="menu-item" style={{ width: 280 }} onClick={() => createLift()}>
+               {/* <a className="menu-item" style={{ width: 280 }} onClick={() => createLift()}>
               <img src={triangleLeftIcon} onClick={() => setActiveMenu('main')} className="icon-button" alt="back to main menu" />
             <p className="dropdown_category">CREATE LIFT</p>
               <img src={triangleRightIcon} onClick={() => createLift()} className="icon-right" alt="create-lift" />
-            </a>
+            </a> */}
+            <DropDownItem
+              leftIcon={<img src={triangleLeftIcon} alt="sign up" onClick={() => setActiveMenu('main')}/>}
+            callFunc={()=>createLift()}
+            >
+              {/* <img src={triangleLeftIcon} onClick={() => setActiveMenu('main')} className="icon-button" alt="back to main menu" /> */}
+              <p className="dropdown_category">CREATE LIFT</p>
+              <img src={triangleRightIcon} onClick={() => createLift()} className="icon-right" alt="create-lift" />
+            </DropDownItem>
               {user != null && bodyParts.map((bodyPart) => (
                 <>
                   <DropDownItem
@@ -251,10 +259,11 @@ const DropDownMenu = ({ authenticated, setAuthenticated }) => {
                   </DropDownItem>
                   {Object.values(bodyPart.lifts).map((lift) => (
                     <DropDownItem
-                      rightIcon={<img src={triangleRightIcon} alt={`go to ${lift.title}`} />}
+                      // rightIcon={<img src={triangleRightIcon} alt={`go to ${lift.title}`} />}
                       callFunc={() => goToLift(lift.id)}
                       key={lift.id}
                     ><p className="dropdownitem_text">{lift.title}</p>
+                      <img src={triangleRightIcon} onClick={() => goToLift(lift.id)} className="icon-right" alt="go to lift" />
                     </DropDownItem>
                   ))}
                 </>
