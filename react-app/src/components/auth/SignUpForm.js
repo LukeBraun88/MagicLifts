@@ -63,7 +63,7 @@ const inputStyle = {
   textAlign: 'left',
 }
 
-const SignUpForm = ({ authenticated, setAuthenticated }) => {
+const SignUpForm = ({ authenticated, setAuthenticated, setActiveMenu }) => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
@@ -79,8 +79,8 @@ const SignUpForm = ({ authenticated, setAuthenticated }) => {
     if (password === repeatPassword) {
       const user = await signUp(username, email, password, name);
       if (!user.errors) {
-        dispatch(sessionActions.toggleMenu(false))
         setAuthenticated(true);
+        setActiveMenu('main')
       } else {
         setErrors(user.errors);
       }

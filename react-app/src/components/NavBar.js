@@ -392,12 +392,16 @@ const DropDownMenu = ({ authenticated, setAuthenticated }) => {
           onEnter={calcDimensions}
         >
           <div className="menu">
+            <a className="menu-item" style={{ width: 280 }} onClick={() => setActiveMenu('main')}>
+              <img src={triangleLeftIcon} onClick={() => setActiveMenu('main')} className="icon-button" alt="back to main menu" />
+
+              <p className="dropdownitem_text dropdown_category">SIGNUP FORM</p>
+            </a>
             <DropDownItem
-              leftIcon={<img src={triangleLeftIcon} alt="back to main menu" />}
-              goToLeftMenu="main"
             >
               <SignUpForm authenticated={authenticated}
-                setAuthenticated={setAuthenticated} />
+                setAuthenticated={setAuthenticated}
+                setActiveMenu={setActiveMenu}/>
             </DropDownItem>
           </div>
         </CSSTransition>
