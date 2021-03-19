@@ -63,7 +63,7 @@ const inputStyle = {
 }
 
 
-const LoginForm = ({ authenticated, setAuthenticated }) => {
+const LoginForm = ({ authenticated, setAuthenticated, setActiveMenu }) => {
   const [errors, setErrors] = useState([]);
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
@@ -87,8 +87,9 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     e.preventDefault();
     const user = await login({ email: "demo@user.com", password: "DemoUser" });
     if (!user.errors) {
-      dispatch(sessionActions.toggleMenu(false))
+      // dispatch(sessionActions.toggleMenu(false))
       setAuthenticated(true);
+      setActiveMenu('main')
     } else {
       setErrors(user.errors);
     }

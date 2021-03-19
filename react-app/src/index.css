@@ -100,6 +100,11 @@ a {
     align-items: center;
     justify-content: center;
     transition: filter 300ms;
+    z-index: 4;
+}
+
+.back-main {
+    z-index: 4;
 }
 
 .icon-button:hover {
@@ -167,7 +172,9 @@ a {
     align-items: center;
     border-radius: var(--border-radius);
     transition: background var(--speed);
+    cursor: pointer;
     padding: 0.5rem;
+    z-index: 2;
 }
 
 .menu-item:hover {
@@ -298,6 +305,7 @@ a {
 .dropdown_category {
     color: #34c0b9;
     font-size: 160%;
+    margin-left: 20px;
     font-family: 'Kanit', sans-serif;
     /* height: 40px; */
 }
@@ -320,6 +328,14 @@ a {
     top: 10px;
     width: 230px;
     height: 210px;
+}
+
+.login-dropdown{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .inputs-login {
