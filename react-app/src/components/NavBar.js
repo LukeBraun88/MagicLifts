@@ -242,8 +242,9 @@ const DropDownMenu = ({ authenticated, setAuthenticated }) => {
               <img src={triangleRightIcon} onClick={() => createLift()} className="icon-right" alt="create-lift" />
             </a> */}
             <DropDownItem
-              leftIcon={<img src={triangleLeftIcon} alt="sign up" onClick={() => setActiveMenu('main')}/>}
+              leftIcon={<img src={triangleLeftIcon} alt="sign up" />}
             callFunc={()=>createLift()}
+              goToLeftMenu="main"
             >
               {/* <img src={triangleLeftIcon} onClick={() => setActiveMenu('main')} className="icon-button" alt="back to main menu" /> */}
               <p className="dropdown_category">CREATE LIFT</p>
