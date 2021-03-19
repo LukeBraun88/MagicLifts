@@ -124,7 +124,7 @@ const DropDownMenu = ({ authenticated, setAuthenticated }) => {
 
   const DropDownItem = (props) => {
 
-    function menuItem(event){
+    function menuItem(event) {
       const target = event.target;
       if (target.className !== 'menu-item' & target.className !== 'dropdownitem_text' & target.className !== 'img-right' & target.className !== 'icon-right' & target.className !== 'dropdown_category') {
         return;
@@ -193,8 +193,8 @@ const DropDownMenu = ({ authenticated, setAuthenticated }) => {
               <DropDownItem
                 leftIcon={<img src={logoutIcon} alt="logout" />}
                 rightIcon={<img src={triangleRightIcon} className="img-right" alt="logout are you sure?" />}
-                goToRightMenu="main"
-                callFunc={onLogout}
+                goToRightMenu="logout"
+              // callFunc={onLogout}
               ><p className="dropdownitem_text">LOGOUT</p>
               </DropDownItem>
             </div>
@@ -226,7 +226,39 @@ const DropDownMenu = ({ authenticated, setAuthenticated }) => {
             </div>
           </CSSTransition>
         }
+
+
+        {/*------------------------------ LOGOUT ------------------------------------------ */}
+
+        <CSSTransition
+          in={activeMenu === 'logout'}
+          unmountOnExit
+          timeout={500}
+          classNames="menu-secondary"
+          //callback as soon as enter class is added to element
+          onEnter={calcDimensions}
+        >
+          <div className="menu">
+            <a className="menu-item" style={{ width: 280 }} onClick={() => setActiveMenu('main')}>
+              <img src={triangleLeftIcon} onClick={() => setActiveMenu('main')} className="icon-button" alt="back to main menu" />
+
+              <p className="dropdownitem_text dropdown_category">ARE U SURE?</p>
+            </a>
+            <DropDownItem
+              // leftIcon={<img src={triangleLeftIcon} alt="back to main menu" />}
+              goToLeftMenu="main"
+            >
+              <div className="login-dropdown">
+                <LogoutButton
+                  setAuthenticated={setAuthenticated} setActiveMenu={setActiveMenu} />
+              </div>
+            </DropDownItem>
+          </div>
+        </CSSTransition>
+
+
         {/* ----------------------- BODY PARTS -------------------------------- */}
+
         {user != null &&
           <CSSTransition
             in={activeMenu === 'bodyParts'}
@@ -236,20 +268,20 @@ const DropDownMenu = ({ authenticated, setAuthenticated }) => {
             onEnter={calcDimensions}
           >
             <div className="menu">
-               {/* <a className="menu-item" style={{ width: 280 }} onClick={() => createLift()}>
+              {/* <a className="menu-item" style={{ width: 280 }} onClick={() => createLift()}>
               <img src={triangleLeftIcon} onClick={() => setActiveMenu('main')} className="icon-button" alt="back to main menu" />
             <p className="dropdown_category">CREATE LIFT</p>
               <img src={triangleRightIcon} onClick={() => createLift()} className="icon-right" alt="create-lift" />
             </a> */}
-            <DropDownItem
-              leftIcon={<img src={triangleLeftIcon} alt="sign up" />}
-            callFunc={()=>createLift()}
-              goToLeftMenu="main"
-            >
-              {/* <img src={triangleLeftIcon} onClick={() => setActiveMenu('main')} className="icon-button" alt="back to main menu" /> */}
-              <p className="dropdown_category">CREATE LIFT</p>
-              <img src={triangleRightIcon} onClick={() => createLift()} className="icon-right" alt="create-lift" />
-            </DropDownItem>
+              <DropDownItem
+                leftIcon={<img src={triangleLeftIcon} alt="sign up" />}
+                callFunc={() => createLift()}
+                goToLeftMenu="main"
+              >
+                {/* <img src={triangleLeftIcon} onClick={() => setActiveMenu('main')} className="icon-button" alt="back to main menu" /> */}
+                <p className="dropdown_category">CREATE LIFT</p>
+                <img src={triangleRightIcon} onClick={() => createLift()} className="icon-right" alt="create-lift" />
+              </DropDownItem>
               {user != null && bodyParts.map((bodyPart) => (
                 <>
                   <DropDownItem
@@ -317,17 +349,17 @@ const DropDownMenu = ({ authenticated, setAuthenticated }) => {
             <a className="menu-item" style={{ width: 280 }} onClick={() => setActiveMenu('main')}>
               <img src={triangleLeftIcon} onClick={() => setActiveMenu('main')} className="icon-button" alt="back to main menu" />
 
-              <p className="dropdownitem_text dropdown_category">BACK TO MAIN</p>
+              <p className="dropdownitem_text dropdown_category">LOGIN FORM</p>
             </a>
             <DropDownItem
               // leftIcon={<img src={triangleLeftIcon} alt="back to main menu" />}
               goToLeftMenu="main"
             >
 
-            <div className="login-dropdown">
-              <LoginForm authenticated={authenticated}
-                setAuthenticated={setAuthenticated} setActiveMenu={setActiveMenu}/>
-            </div>
+              <div className="login-dropdown">
+                <LoginForm authenticated={authenticated}
+                  setAuthenticated={setAuthenticated} setActiveMenu={setActiveMenu} />
+              </div>
             </DropDownItem>
           </div>
         </CSSTransition>

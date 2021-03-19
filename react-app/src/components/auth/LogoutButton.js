@@ -3,20 +3,40 @@ import { Link, Redirect } from "react-router-dom";
 import { logout } from "../../services/auth";
 import { useDispatch } from "react-redux";
 import { logoutSessionUser } from "../../store/reducers/session"
+import Button from '@material-ui/core/Button';
+import * as sessionActions from "../../store/reducers/session"
+const buttonStyle = {
+  borderRadius: 10,
+  border: 0,
+  color: 'black',
+  fontSize: 16,
+  fontWeight: 400,
+  height: 60,
+  padding: '0 30px',
+}
 
-const LogoutButton = ({ setAuthenticated }) => {
+const LogoutButton = ({ setAuthenticated, setActiveMenu }) => {
   const dispatch = useDispatch();
 
   const onLogout = async (e) => {
     await logout();
     setAuthenticated(false);
     dispatch(logoutSessionUser());
+    dispatch(sessionActions.toggleMenu(false))
     return <Redirect to="/" />
   };
 
-  return <Link className="link-logout" to="/" onClick={onLogout}>
-    <span className="text-logout">Logout</span>
-  </Link>;
+  return (
+
+    <div className="logout">
+      {/* <p className="logout-text">U SURE ?</p> */}
+      <div className="logout_buttons">
+        {/* <Button style={buttonStyle} variant="contained" className="logout_button" type="button" onClick={() => setActiveMenu('main')}>GO BACK</Button> */}
+          <Button style={buttonStyle} variant="contained" className="logout_button" type="button" onClick={() => onLogout()}>LOGOUT</Button>
+      </div>
+    </div>
+
+  )
 };
 
 export default LogoutButton;
