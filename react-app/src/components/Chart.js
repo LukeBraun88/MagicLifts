@@ -34,14 +34,14 @@ const Chart = ({ authenticated }) => {
 
 // const [selected, setSelected] = useState([])
 
-    const setSelectedLifts = (selectedLifts) =>{
+    const setSelectedLifts = async(selectedLifts) =>{
 
         let ids = []
         for (let key in selectedLifts) {
             ids.push(selectedLifts[key].id)
         }
-        dispatch(graphActions.setGraphLifts(ids))
-        dispatch(selectActions.setSelected(ids))
+        await dispatch(selectActions.setSelected(ids))
+        await dispatch(graphActions.setGraphLifts(ids))
 
     }
 
@@ -197,12 +197,25 @@ const Chart = ({ authenticated }) => {
                     <div className="graph-select">
                         <Select
                             className="graph-select-dropdown"
-                            onChange={setSelectedLifts}
+                            // onChange={setSelectedLifts}
                             isMulti={true}
                             placeholder="Select Lifts"
                             noOptionsMessage="no lifts"
                             autoFocus
-                            // value={selected}
+                            value={selectedLifts && selectedLifts.map((lift) => {
+                                return {
+                                    id: lift.id,
+                                    value: lift.id,
+                                    label: lift.title
+                                }
+                            })}
+                            // value={selectedLifts.title}
+                            onChange={setSelectedLifts}
+                            // value={selectedLifts ? selectedLifts.map((lift)=>lift): "nothing"}
+                            // selectValue={selectedLifts ? selectedLifts.map((lift)=>lift) : "example"}
+                            // inputValue={input}
+                            // onInputChange={inputValue => inputs(inputValue)}
+
                             theme={customTheme}
                             isSearchable
                             options={allLifts && allLifts.map((lift) => {

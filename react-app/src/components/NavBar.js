@@ -95,7 +95,7 @@ const DropDownMenu = ({ authenticated, setAuthenticated }) => {
   const goToLift = (id) => {
 
     dispatch(liftActions.setShownLifts({ liftId: id }))
-    dispatch(graphActions.setGraphLifts([id]))
+    // dispatch(graphActions.setGraphLifts([id]))
     dispatch(sessionActions.toggleMenu(false))
     history.push("/show-lift")
   }
