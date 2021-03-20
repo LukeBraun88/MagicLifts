@@ -108,7 +108,8 @@ def get_lift_for_selected():
         for id in ids:
             lift = Lift.query.filter(
                 Lift.id == int(id)).first()
-            lifts.append(lift.to_dict())
+            if lift.stats:
+                lifts.append(lift.to_dict())
     except (ValueError):
         return {"message": "no lift id given"}, 500
 
