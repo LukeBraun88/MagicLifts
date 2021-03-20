@@ -1,15 +1,17 @@
 import { createStore, combineReducers } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import enhancer from './enhancer';
 import session from './reducers/session';
 import { currentLifts, shownLifts } from './reducers/lifts';
 import graphData from './reducers/graphData'
+import selectedLifts from "./reducers/selected"
 
 const persistConfig = { // configuration object for redux-persist
     key: 'root',
     storage, // define which storage to use
+    // stateReconciler: autoMergeLevel2
 }
 
 
@@ -18,7 +20,8 @@ const rootReducer = combineReducers({
     session,
     currentLifts,
     shownLifts,
-    graphData
+    graphData,
+    selectedLifts,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer) // create a persisted reducer

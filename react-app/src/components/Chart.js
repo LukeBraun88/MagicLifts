@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useHistory } from "react-router-dom";
 import * as liftActions from "../store/reducers/lifts"
 import * as graphActions from "../store/reducers/graphData"
+import * as selectActions from "../store/reducers/selected"
 import * as sessionActions from "../store/reducers/session"
 import { ResponsiveLine } from '@nivo/line'
 import Select from 'react-select'
@@ -12,6 +13,9 @@ const Chart = ({ authenticated }) => {
     const user = useSelector((x) => x.session.user)
     const allLifts = useSelector((x) => x.session.user.lifts)
     const stats = useSelector((x) => (x.shownLifts.stats))
+    const lift = useSelector((x) => (x.shownLifts.lift))
+    const selectedLifts = useSelector((x)=> x.selectedLifts)
+
     const graphData = useSelector((x) => x.graphData)
     let dispatch = useDispatch()
     let history = useHistory()
@@ -28,22 +32,34 @@ const Chart = ({ authenticated }) => {
     // useEffect(() => {
     // }, [graphData])
 
-    const [selected, setSelected] = useState([])
+// const [selected, setSelected] = useState([])
 
-    const findIds = async () => {
-        let ids = []
-        for (let option in selected) {
-            ids.push(option.id)
-        }
-    }
+    const setSelectedLifts = (selectedLifts) =>{
 
-    useEffect(() => {
         let ids = []
-        for (let key in selected) {
-            ids.push(selected[key].id)
+        for (let key in selectedLifts) {
+            ids.push(selectedLifts[key].id)
         }
         dispatch(graphActions.setGraphLifts(ids))
-    }, [selected])
+        dispatch(selectActions.setSelected(ids))
+
+    }
+
+    // const findIds = async () => {
+    //     let ids = []
+    //     for (let option in selected) {
+    //         ids.push(option.id)
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     let ids = []
+    //     for (let key in selected) {
+    //         ids.push(selected[key].id)
+    //     }
+    //     dispatch(graphActions.setGraphLifts(ids))
+
+    // }, [selected])
 
 
     const data = [
@@ -181,11 +197,12 @@ const Chart = ({ authenticated }) => {
                     <div className="graph-select">
                         <Select
                             className="graph-select-dropdown"
-                            onChange={setSelected}
+                            onChange={setSelectedLifts}
                             isMulti={true}
                             placeholder="Select Lifts"
                             noOptionsMessage="no lifts"
                             autoFocus
+                            // value={selected}
                             theme={customTheme}
                             isSearchable
                             options={allLifts && allLifts.map((lift) => {

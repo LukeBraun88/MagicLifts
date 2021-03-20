@@ -94,6 +94,26 @@ def get_lift_for_graph():
     # 3. returns users lifts
     return {"message": "success", "data": lifts}, 200
 
+@lift_routes.route('/selected', methods=['GET'])
+@login_required
+def get_lift_for_selected():
+    # 1. gets user from session
+    user = current_user
+    ids = request.args.get("id")
+    ids = ids.split(",")
+
+    lifts = []
+    try:
+        for id in ids:
+            lift = Lift.query.filter(
+                Lift.id == int(id)).first()
+            lifts.append(lift.to_dict())
+    except (ValueError):
+        return {"message": "no lift id given"}, 500
+
+    # 3. returns users lifts
+    return {"message": "success", "data": lifts}, 200
+
 # UPDATE LIFT
 @lift_routes.route('/<int:id>', methods=['PATCH'])
 @login_required
