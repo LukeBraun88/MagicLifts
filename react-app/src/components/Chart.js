@@ -25,8 +25,8 @@ const Chart = ({ authenticated }) => {
         window.history.back()
     }
 
-    useEffect(() => {
-    }, [graphData])
+    // useEffect(() => {
+    // }, [graphData])
 
     const [selected, setSelected] = useState([])
 
