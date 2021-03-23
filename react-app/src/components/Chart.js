@@ -62,9 +62,9 @@ const Chart = ({ authenticated }) => {
             setVisible(true)
             setTimeout(() => {
                 setVisible(false)
-            }, 2000)
+            }, 3000)
         } else {
-            // setVisible(false)
+            setVisible(false)
         }
     }, [selectedLifts])
 
