@@ -261,7 +261,7 @@ const Chart = ({ authenticated }) => {
                     </Tippy>
                     <div className="chart-container">
                         <ResponsiveLine
-                            data={graphData ? graphData : data}
+                            data={graphData && graphData.length >= 1 ? graphData : data}
                             margin={{ top: 50, right: 30, bottom: 90, left: 350 }}
                             xScale={{
                                 type: 'point',
