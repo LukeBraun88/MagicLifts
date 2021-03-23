@@ -29,21 +29,32 @@ const Chart = ({ authenticated }) => {
         window.history.back()
     }
 
-    // useEffect(() => {
-    // }, [graphData])
 
-// const [selected, setSelected] = useState([])
+    const [liftIds, setLiftIds] = useState([])
 
-    const setSelectedLifts = async(selectedLifts) =>{
-
-        let ids = []
-        for (let key in selectedLifts) {
-            ids.push(selectedLifts[key].id)
-        }
-        await dispatch(selectActions.setSelected(ids))
-        await dispatch(graphActions.setGraphLifts(ids))
-
+    const setSelectedLifts = async(lifts) =>{
+    let ids = []
+    for (let key in lifts) {
+        ids.push(lifts[key].id)
     }
+    await setLiftIds(ids)
+    await dispatch(selectActions.setSelected(ids))
+    await dispatch(graphActions.setGraphLifts(ids))
+
+}
+
+useEffect(() => {
+    let selectedIds = []
+    for (let key in selectedLifts) {
+        selectedIds.push(selectedLifts[key].id)
+    }
+
+    console.log("selectedIds:",selectedIds)
+    console.log("ids:",liftIds)
+    if (liftIds.length != selectedIds.length){
+        console.log("NO STATS")
+    }
+}, [selectedLifts])
 
     // const findIds = async () => {
     //     let ids = []
