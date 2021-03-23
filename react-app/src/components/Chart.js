@@ -7,14 +7,19 @@ import * as selectActions from "../store/reducers/selected"
 import * as sessionActions from "../store/reducers/session"
 import { ResponsiveLine } from '@nivo/line'
 import Select from 'react-select'
-
+import Tippy, { tippy } from '@tippyjs/react';
+import { roundArrow } from 'tippy.js'
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/dist/svg-arrow.css';
+import 'tippy.js/themes/material.css';
+import 'tippy.js/dist/border.css';
 
 const Chart = ({ authenticated }) => {
     const user = useSelector((x) => x.session.user)
     const allLifts = useSelector((x) => x.session.user.lifts)
     const stats = useSelector((x) => (x.shownLifts.stats))
     const lift = useSelector((x) => (x.shownLifts.lift))
-    const selectedLifts = useSelector((x)=> x.selectedLifts)
+    const selectedLifts = useSelector((x) => x.selectedLifts)
 
     const graphData = useSelector((x) => x.graphData)
     let dispatch = useDispatch()
@@ -32,29 +37,36 @@ const Chart = ({ authenticated }) => {
 
     const [liftIds, setLiftIds] = useState([])
 
-    const setSelectedLifts = async(lifts) =>{
-    let ids = []
-    for (let key in lifts) {
-        ids.push(lifts[key].id)
-    }
-    await setLiftIds(ids)
-    await dispatch(selectActions.setSelected(ids))
-    await dispatch(graphActions.setGraphLifts(ids))
+    const setSelectedLifts = async (lifts) => {
+        let ids = []
+        for (let key in lifts) {
+            ids.push(lifts[key].id)
+        }
+        await setLiftIds(ids)
+        await dispatch(selectActions.setSelected(ids))
+        await dispatch(graphActions.setGraphLifts(ids))
 
-}
-
-useEffect(() => {
-    let selectedIds = []
-    for (let key in selectedLifts) {
-        selectedIds.push(selectedLifts[key].id)
     }
 
-    console.log("selectedIds:",selectedIds)
-    console.log("ids:",liftIds)
-    if (liftIds.length != selectedIds.length){
-        console.log("NO STATS")
-    }
-}, [selectedLifts])
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        let selectedIds = []
+        for (let key in selectedLifts) {
+            selectedIds.push(selectedLifts[key].id)
+        }
+
+        console.log("selectedIds:", selectedIds)
+        console.log("ids:", liftIds)
+        if (liftIds.length != selectedIds.length) {
+            setVisible(true)
+            setTimeout(() => {
+                setVisible(false)
+            }, 2000)
+        } else {
+            // setVisible(false)
+        }
+    }, [selectedLifts])
 
     // const findIds = async () => {
     //     let ids = []
@@ -71,6 +83,8 @@ useEffect(() => {
     //     dispatch(graphActions.setGraphLifts(ids))
 
     // }, [selected])
+
+
 
 
     const data = [
@@ -101,7 +115,7 @@ useEffect(() => {
         background: 'transparent',
         fontFamily: 'sans-serif',
         fontSize: 19,
-        fontOpacity:1,
+        fontOpacity: 1,
         textColor: 'white',
         axis: {
             domain: {
@@ -203,41 +217,48 @@ useEffect(() => {
     return (
         <div className="body" onClick={() => closeMenu()}>
             <div className="chart-background">
-                <p className="chart-heading">CHARTED DATA</p>
-                <div className="chart-and-select">
-                    <div className="graph-select">
-                        <Select
-                            className="graph-select-dropdown"
-                            // onChange={setSelectedLifts}
-                            isMulti={true}
-                            placeholder="Select Lifts"
-                            noOptionsMessage="no lifts"
-                            autoFocus
-                            value={selectedLifts && selectedLifts.map((lift) => {
-                                return {
-                                    id: lift.id,
-                                    value: lift.id,
-                                    label: lift.title
-                                }
-                            })}
-                            // value={selectedLifts.title}
-                            onChange={setSelectedLifts}
-                            // value={selectedLifts ? selectedLifts.map((lift)=>lift): "nothing"}
-                            // selectValue={selectedLifts ? selectedLifts.map((lift)=>lift) : "example"}
-                            // inputValue={input}
-                            // onInputChange={inputValue => inputs(inputValue)}
 
-                            theme={customTheme}
-                            isSearchable
-                            options={allLifts && allLifts.map((lift) => {
-                                return {
-                                    id: lift.id,
-                                    value: lift.id,
-                                    label: lift.title
-                                }
-                            })}
-                        />
-                    </div>
+
+                <p className="chart-heading">CHARTED DATA</p>
+
+                <div className="chart-and-select">
+                    <Tippy content={"Lift has no stats!"} maxWidth={600} arrow={roundArrow} visible={visible} theme={'custom'} >
+                        <div className="graph-select">
+                            <Select
+                                className="graph-select-dropdown"
+                                // onChange={setSelectedLifts}
+                                isMulti={true}
+                                placeholder="Select Lifts"
+                                noOptionsMessage="no lifts"
+                                autoFocus
+                                value={selectedLifts && selectedLifts.map((lift) => {
+                                    return {
+                                        id: lift.id,
+                                        value: lift.id,
+                                        label: lift.title
+                                    }
+                                })}
+                                // value={selectedLifts.title}
+                                onChange={setSelectedLifts}
+                                // value={selectedLifts ? selectedLifts.map((lift)=>lift): "nothing"}
+                                // selectValue={selectedLifts ? selectedLifts.map((lift)=>lift) : "example"}
+                                // inputValue={input}
+                                // onInputChange={inputValue => inputs(inputValue)}
+
+                                theme={customTheme}
+                                isSearchable
+                                options={allLifts && allLifts.map((lift) => {
+                                    return {
+                                        id: lift.id,
+                                        value: lift.id,
+                                        label: lift.title
+                                    }
+                                })}
+                            />
+
+                        </div>
+
+                    </Tippy>
                     <div className="chart-container">
                         <ResponsiveLine
                             data={graphData ? graphData : data}
