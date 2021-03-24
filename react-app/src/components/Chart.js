@@ -46,7 +46,7 @@ const Chart = ({ authenticated }) => {
         for (let key in lifts) {
             ids.push(lifts[key].id)
         }
-        await dispatch(clickActions.setClickedLifts(ids))
+        // await dispatch(clickActions.setClickedLifts(ids))
         await dispatch(selectActions.setSelected(ids))
         await dispatch(graphActions.setGraphLifts(ids))
 
@@ -55,26 +55,26 @@ const Chart = ({ authenticated }) => {
 
     const [visible, setVisible] = useState(false);
 
-    useEffect(() => {
-        let selectedIds = []
-        for (let key in selectedLifts) {
-            selectedIds.push(selectedLifts[key].id)
-        }
+    // useEffect(() => {
+    //     let selectedIds = []
+    //     for (let key in selectedLifts) {
+    //         selectedIds.push(selectedLifts[key].id)
+    //     }
 
-        console.log("selectedIds:", selectedIds)
-        console.log("ids:", liftIds)
-        if (liftIds && liftIds.length != selectedIds.length) {
-            setVisible(true)
-            setTimeout(() => {
-                setVisible(false)
-                setTimeout(()=>{
-                    dispatch(clickActions.setClickedLifts(selectedIds))
-                },150)
-            }, 3000)
-        } else {
-            setVisible(false)
-        }
-    }, [selectedLifts])
+    //     console.log("selectedIds:", selectedIds)
+    //     console.log("ids:", liftIds)
+    //     if (liftIds && liftIds.length != selectedIds.length) {
+    //         setVisible(true)
+    //         setTimeout(() => {
+    //             setVisible(false)
+    //             setTimeout(()=>{
+    //                 dispatch(clickActions.setClickedLifts(selectedIds))
+    //             },150)
+    //         }, 3000)
+    //     } else {
+    //         setVisible(false)
+    //     }
+    // }, [selectedLifts])
 
     // const findIds = async () => {
     //     let ids = []
@@ -225,16 +225,12 @@ const Chart = ({ authenticated }) => {
     return (
         <div className="body" onClick={() => closeMenu()}>
             <div className="chart-background">
-
-
                 <p className="chart-heading">CHARTED DATA</p>
-
                 <div className="chart-and-select">
-                    <Tippy content={"Lift has no stats!"} maxWidth={600} arrow={roundArrow} visible={visible} theme={'custom'} >
+                    {/* <Tippy content={"Lift has no stats!"} maxWidth={600} arrow={roundArrow} visible={visible} theme={'custom'} > */}
                         <div className="graph-select">
                             <Select
                                 className="graph-select-dropdown"
-                                // onChange={setSelectedLifts}
                                 isMulti={true}
                                 placeholder="Select Lifts"
                                 noOptionsMessage="no lifts"
@@ -246,27 +242,32 @@ const Chart = ({ authenticated }) => {
                                         label: lift.title
                                     }
                                 })}
-                                // value={selectedLifts.title}
+                                isOptionDisabled={(option) => option.isdisabled}
                                 onChange={setSelectedLifts}
-                                // value={selectedLifts ? selectedLifts.map((lift)=>lift): "nothing"}
-                                // selectValue={selectedLifts ? selectedLifts.map((lift)=>lift) : "example"}
-                                // inputValue={input}
-                                // onInputChange={inputValue => inputs(inputValue)}
-
                                 theme={customTheme}
                                 isSearchable
                                 options={allLifts && allLifts.map((lift) => {
-                                    return {
-                                        id: lift.id,
-                                        value: lift.id,
-                                        label: lift.title
-                                    }
+                                    console.log(lift.stats)
+                                    if (JSON.stringify(lift.stats) === JSON.stringify({})) {
+                                            return {
+                                                id: lift.id,
+                                                value: lift.id,
+                                                label: lift.title,
+                                                isdisabled: true
+                                            }
+                                        } else {
+                                            return {
+                                                id: lift.id,
+                                                value: lift.id,
+                                                label: lift.title
+                                            }
+                                        }
                                 })}
                             />
 
                         </div>
 
-                    </Tippy>
+                    {/* </Tippy> */}
                     <div className="chart-container">
                         <ResponsiveLine
                             data={graphData && graphData.length >= 1 ? graphData : data}
