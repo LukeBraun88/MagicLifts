@@ -7,6 +7,7 @@ import session from './reducers/session';
 import { currentLifts, shownLifts } from './reducers/lifts';
 import graphData from './reducers/graphData'
 import selectedLifts from "./reducers/selected"
+import clickedLiftIds from "./reducers/clicked"
 
 const persistConfig = { // configuration object for redux-persist
     key: 'root',
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
     shownLifts,
     graphData,
     selectedLifts,
+    clickedLiftIds,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer) // create a persisted reducer

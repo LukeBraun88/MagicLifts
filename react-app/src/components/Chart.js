@@ -4,6 +4,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import * as liftActions from "../store/reducers/lifts"
 import * as graphActions from "../store/reducers/graphData"
 import * as selectActions from "../store/reducers/selected"
+import * as clickActions from "../store/reducers/clicked"
 import * as sessionActions from "../store/reducers/session"
 import { ResponsiveLine } from '@nivo/line'
 import Select from 'react-select'
@@ -17,6 +18,7 @@ import 'tippy.js/dist/border.css';
 const Chart = ({ authenticated }) => {
     const user = useSelector((x) => x.session.user)
     const allLifts = useSelector((x) => x.session.user.lifts)
+    const liftIds = useSelector((x) => x.clickedLiftIds)
     const stats = useSelector((x) => (x.shownLifts.stats))
     const lift = useSelector((x) => (x.shownLifts.lift))
     const selectedLifts = useSelector((x) => x.selectedLifts)
@@ -35,14 +37,14 @@ const Chart = ({ authenticated }) => {
     }
 
 
-    const [liftIds, setLiftIds] = useState([])
+    // const [liftIds, setLiftIds] = useState([])
 
     const setSelectedLifts = async (lifts) => {
         let ids = []
         for (let key in lifts) {
             ids.push(lifts[key].id)
         }
-        await setLiftIds(ids)
+        await dispatch(clickActions.setClickedLifts(ids))
         await dispatch(selectActions.setSelected(ids))
         await dispatch(graphActions.setGraphLifts(ids))
 
@@ -58,7 +60,7 @@ const Chart = ({ authenticated }) => {
 
         console.log("selectedIds:", selectedIds)
         console.log("ids:", liftIds)
-        if (liftIds.length != selectedIds.length) {
+        if (liftIds && liftIds.length != selectedIds.length) {
             setVisible(true)
             setTimeout(() => {
                 setVisible(false)
