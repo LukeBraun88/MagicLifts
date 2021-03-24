@@ -83,14 +83,15 @@ def get_lift_for_graph():
     ids = ids.split(",")
 
     lifts = []
-    try:
+    if ids != ['']:
+        print("--------------:",ids)
         for id in ids:
             lift = Lift.query.filter(
                 Lift.id == int(id)).first()
             if lift.stats:
                 lifts.append(lift.to_graph())
-    except (ValueError):
-        return {"message": "no lift id given"}, 500
+    # except (ValueError):
+    #     return {"message": "no lift id given"}, 500
 
     # 3. returns users lifts
     return {"message": "success", "data": lifts}, 200
@@ -104,14 +105,16 @@ def get_lift_for_selected():
     ids = ids.split(",")
 
     lifts = []
-    try:
+    # try:
+    if ids != ['']:
         for id in ids:
             lift = Lift.query.filter(
                 Lift.id == int(id)).first()
             if lift.stats:
                 lifts.append(lift.to_dict())
-    except (ValueError):
-        return {"message": "no lift id given"}, 500
+    # except (ValueError):
+
+        # return {"message": "no lift id given"}, 500
 
     # 3. returns users lifts
     return {"message": "success", "data": lifts}, 200
