@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { logoutSessionUser } from "../../store/reducers/session"
 import Button from '@material-ui/core/Button';
 import * as sessionActions from "../../store/reducers/session"
+import * as graphActions from "../../store/reducers/graphData"
+import * as selectActions from "../../store/reducers/selected"
 const buttonStyle = {
   borderRadius: 10,
   border: 0,
@@ -23,6 +25,8 @@ const LogoutButton = ({ setAuthenticated, setActiveMenu }) => {
     setAuthenticated(false);
     dispatch(logoutSessionUser());
     dispatch(sessionActions.toggleMenu(false))
+    dispatch(selectActions.deleteSelectedLifts())
+    dispatch(graphActions.deleteGraphData())
     return <Redirect to="/" />
   };
 

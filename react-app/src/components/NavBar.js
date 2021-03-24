@@ -15,6 +15,7 @@ import { logoutSessionUser } from "../store/reducers/session"
 import * as liftActions from "../store/reducers/lifts"
 import * as sessionActions from "../store/reducers/session"
 import * as graphActions from "../store/reducers/graphData"
+import * as selectActions from "../store/reducers/selected"
 import deadliftIcon from "../images/icons/deadlift-hollow.png"
 import chartIcon from "../images/icons/chart3.png"
 import deadlift_filled from "../images/icons/deadlift-filled.png"
@@ -84,6 +85,8 @@ const DropDownMenu = ({ authenticated, setAuthenticated }) => {
     await logout();
     dispatch(sessionActions.toggleMenu(false))
     setAuthenticated(false);
+    dispatch(selectActions.deleteSelectedLifts())
+    dispatch(graphActions.deleteGraphData())
     dispatch(logoutSessionUser());
     return <Redirect to="/" />
   };
