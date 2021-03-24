@@ -69,7 +69,7 @@ const Chart = ({ authenticated }) => {
                 setVisible(false)
                 setTimeout(()=>{
                     dispatch(clickActions.setClickedLifts(selectedIds))
-                },300)
+                },150)
             }, 3000)
         } else {
             setVisible(false)
