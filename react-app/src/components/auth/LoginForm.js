@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useHistory } from "react-router-dom";
 import { login } from "../../services/auth";
 import * as sessionActions from "../../store/reducers/session"
+import * as graphActions from "../../store/reducers/graphData"
+import * as selectActions from "../../store/reducers/selected"
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -78,6 +80,8 @@ const LoginForm = ({ authenticated, setAuthenticated, setActiveMenu }) => {
     if (!user.errors) {
       dispatch(sessionActions.toggleMenu(false))
       setAuthenticated(true);
+      dispatch(selectActions.deleteSelectedLifts())
+      dispatch(graphActions.deleteGraphData())
     } else {
       setErrors(user.errors);
     }
