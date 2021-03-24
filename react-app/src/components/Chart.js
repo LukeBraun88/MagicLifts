@@ -37,6 +37,8 @@ const Chart = ({ authenticated }) => {
     }
 
 
+
+
     // const [liftIds, setLiftIds] = useState([])
 
     const setSelectedLifts = async (lifts) => {
@@ -47,6 +49,7 @@ const Chart = ({ authenticated }) => {
         await dispatch(clickActions.setClickedLifts(ids))
         await dispatch(selectActions.setSelected(ids))
         await dispatch(graphActions.setGraphLifts(ids))
+
 
     }
 
@@ -64,6 +67,9 @@ const Chart = ({ authenticated }) => {
             setVisible(true)
             setTimeout(() => {
                 setVisible(false)
+                setTimeout(()=>{
+                    dispatch(clickActions.setClickedLifts(selectedIds))
+                },300)
             }, 3000)
         } else {
             setVisible(false)
