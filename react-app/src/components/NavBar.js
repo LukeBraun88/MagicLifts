@@ -23,7 +23,9 @@ import bodyIcon from "../images/icons/body.png"
 import logoutIcon from "../images/icons/logout.png"
 import { CSSTransition } from 'react-transition-group'
 import SignUpForm from './auth/SignUpForm';
-import planet from "../images/icons/planet.png"
+// import planet from "../images/icons/planet.png"
+import planet from "../images/icons/title_planet.png"
+// import planet from "../images/icons/title_planet_shadow.png"
 
 // props.children is where the props will show up (navItems)
 // took out {authenticated, isAuthenticated} might need later

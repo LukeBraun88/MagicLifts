@@ -207,9 +207,10 @@ a {
     z-index: 4;
     position: relative;
     cursor: pointer;
-    width: 60px;
-    height: 60px;
-    left: 5px;
+    width: 55px;
+    height: 40px;
+    left: 9px;
+    top: 8px;
     fill: white;
     color: white;
 }
