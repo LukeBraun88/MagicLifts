@@ -225,7 +225,7 @@ const Chart = ({ authenticated }) => {
     return (
         <div className="body" onClick={() => closeMenu()}>
             <div className="chart-background">
-                <p className="chart-heading">CHARTED DATA</p>
+                <p className="chart-heading">PROGRESS</p>
                 <div className="chart-and-select">
                     {/* <Tippy content={"Lift has no stats!"} maxWidth={600} arrow={roundArrow} visible={visible} theme={'custom'} > */}
                         <div className="graph-select">
