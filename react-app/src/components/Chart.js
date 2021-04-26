@@ -247,6 +247,7 @@ const Chart = ({ authenticated }) => {
                                 theme={customTheme}
                                 isSearchable
                                 options={allLifts && allLifts.map((lift) => {
+                                    console.log(lift.stats)
                                     if (JSON.stringify(lift.stats) === JSON.stringify({})) {
                                             return {
                                                 id: lift.id,

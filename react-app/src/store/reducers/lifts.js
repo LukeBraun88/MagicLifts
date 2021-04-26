@@ -60,6 +60,7 @@ export const setShownLifts = ({ liftId }) => async (dispatch) => {
 };
 
 export const createLift = ({ title, description, bodyPart }) => async (dispatch) => {
+  console.log("bodyPart:", bodyPart)
   const res = await fetch(
     `/api/lifts`,
     {
@@ -78,6 +79,7 @@ export const createLift = ({ title, description, bodyPart }) => async (dispatch)
 };
 
 export const deleteLift = ({ liftId }) => async (dispatch) => {
+  console.log("deleting lift:", liftId)
   const res = await fetch(
     `/api/lifts/${liftId}`,
     {
@@ -85,6 +87,7 @@ export const deleteLift = ({ liftId }) => async (dispatch) => {
     }
   );
   let { data } = res.data;
+  console.log("deleted----heres id:", data)
   dispatch(deleteShownLiftsCreator(data));
   return data;
 };
