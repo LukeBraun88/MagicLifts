@@ -81,6 +81,7 @@ const SignUpForm = ({ authenticated, setAuthenticated, setActiveMenu }) => {
       if (!user.errors) {
         setAuthenticated(true);
         setActiveMenu('main')
+        
       } else {
         setErrors(user.errors);
       }

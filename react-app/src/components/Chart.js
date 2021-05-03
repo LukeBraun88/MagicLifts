@@ -36,11 +36,6 @@ const Chart = ({ authenticated }) => {
         window.history.back()
     }
 
-
-
-
-    // const [liftIds, setLiftIds] = useState([])
-
     const setSelectedLifts = async (lifts) => {
         let ids = []
         for (let key in lifts) {
@@ -54,45 +49,6 @@ const Chart = ({ authenticated }) => {
     }
 
     const [visible, setVisible] = useState(false);
-
-    // useEffect(() => {
-    //     let selectedIds = []
-    //     for (let key in selectedLifts) {
-    //         selectedIds.push(selectedLifts[key].id)
-    //     }
-
-    //     console.log("selectedIds:", selectedIds)
-    //     console.log("ids:", liftIds)
-    //     if (liftIds && liftIds.length != selectedIds.length) {
-    //         setVisible(true)
-    //         setTimeout(() => {
-    //             setVisible(false)
-    //             setTimeout(()=>{
-    //                 dispatch(clickActions.setClickedLifts(selectedIds))
-    //             },150)
-    //         }, 3000)
-    //     } else {
-    //         setVisible(false)
-    //     }
-    // }, [selectedLifts])
-
-    // const findIds = async () => {
-    //     let ids = []
-    //     for (let option in selected) {
-    //         ids.push(option.id)
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     let ids = []
-    //     for (let key in selected) {
-    //         ids.push(selected[key].id)
-    //     }
-    //     dispatch(graphActions.setGraphLifts(ids))
-
-    // }, [selected])
-
-
 
 
     const data = [
@@ -227,46 +183,52 @@ const Chart = ({ authenticated }) => {
             <div className="chart-background">
                 <p className="chart-heading">PROGRESS</p>
                 <div className="chart-and-select">
-                    {/* <Tippy content={"Lift has no stats!"} maxWidth={600} arrow={roundArrow} visible={visible} theme={'custom'} > */}
-                        <div className="graph-select">
-                            <Select
-                                className="graph-select-dropdown"
-                                isMulti={true}
-                                placeholder="Select Lifts"
-                                noOptionsMessage="no lifts"
-                                autoFocus
-                                value={selectedLifts && selectedLifts.map((lift) => {
-                                    return {
-                                        id: lift.id,
-                                        value: lift.id,
-                                        label: lift.title
-                                    }
-                                })}
-                                isOptionDisabled={(option) => option.isdisabled}
-                                onChange={setSelectedLifts}
-                                theme={customTheme}
-                                isSearchable
-                                options={allLifts && allLifts.map((lift) => {
+                    <div className="graph-select">
+                        <Select
+                            className="graph-select-dropdown"
+                            isMulti={true}
+                            placeholder="Select Lifts"
+                            noOptionsMessage={() => "No Lift"}
+                            autoFocus
+                            value={selectedLifts && selectedLifts.map((lift) => {
+                                return {
+                                    id: lift.id,
+                                    value: lift.id,
+                                    label: lift.title
+                                }
+                            })}
+                            isOptionDisabled={(option) => option.isdisabled}
+                            onChange={setSelectedLifts}
+                            theme={customTheme}
+                            isSearchable
+                            options={allLifts ?
+                                allLifts.map((lift) => {
                                     if (JSON.stringify(lift.stats) === JSON.stringify({})) {
-                                            return {
-                                                id: lift.id,
-                                                value: lift.id,
-                                                label: lift.title,
+                                        return {
+                                            id: lift.id,
+                                            value: lift.id,
+                                            label: lift.title,
+                                            isdisabled: true
+                                        }
+                                    } else {
+                                        return {
+                                            id: lift.id,
+                                            value: lift.id,
+                                            label: lift.title
+                                        }
+                                    }
+                                })
+                                :
+                                {
+                                                id: 1,
+                                                value: undefined,
+                                                label: "NO LIFTS",
                                                 isdisabled: true
                                             }
-                                        } else {
-                                            return {
-                                                id: lift.id,
-                                                value: lift.id,
-                                                label: lift.title
-                                            }
                                         }
-                                })}
                             />
 
                         </div>
-
-                    {/* </Tippy> */}
                     <div className="chart-container">
                         <ResponsiveLine
                             data={graphData && graphData.length >= 1 ? graphData : data}
