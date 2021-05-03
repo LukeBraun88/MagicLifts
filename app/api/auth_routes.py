@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, bodyPart, db, Lift, BodyPart
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -72,6 +72,33 @@ def sign_up():
         )
         db.session.add(user)
         db.session.commit()
+
+        bodyPart1 = BodyPart(title='Shoulders', user_id=user.id)
+        bodyPart2 = BodyPart(title='Back', user_id=user.id)
+        bodyPart3 = BodyPart(title='Arms', user_id=user.id)
+        bodyPart4 = BodyPart(title='Chest', user_id=user.id)
+        bodyPart5 = BodyPart(title='Legs', user_id=user.id)
+        bodyPart6 = BodyPart(title='Abs', user_id=user.id)
+        db.session.add_all(
+            [bodyPart1, bodyPart2, bodyPart3, bodyPart4, bodyPart5, bodyPart6])
+        db.session.commit()
+
+        lift1 = Lift(title="Shoulder Press",
+                     description="Sit on upright bench with dumbbells at shoulder height. Press weights upwards", body_part_id=bodyPart1.id)
+        lift2 = Lift(title="Deadlift",
+                     description="Stand with mid-foot under barbell. Grab bar, bend knees, straighten back and stand up with weight", body_part_id=bodyPart2.id)
+        lift3 = Lift(title="Seated Bicep Curls",
+                     description="Sit in incline bench with dumbbells at your sides. Contract biceps and bend your elbows to bring the weights shoulder height", body_part_id=bodyPart3.id)
+        lift4 = Lift(title="Bench Press",
+                     description="Lie on flat bench. Straighten you arms to un-rack bar. Bring bar down to mid-chest and press upwards", body_part_id=bodyPart4.id)
+        lift5 = Lift(title="Leg Press",
+                     description="Sit back in bench with head supported and feet shoulder-width apart. Press footplate forward", body_part_id=bodyPart5.id)
+        lift6 = Lift(title="Sit-Ups",
+                     description="Lie down on back with knees bent. Contract abs and sit up", body_part_id=bodyPart6.id)
+        db.session.add_all(
+            [lift1, lift2, lift3, lift4, lift5, lift6])
+        db.session.commit()
+
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
